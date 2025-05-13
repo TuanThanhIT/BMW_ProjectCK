@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/layout-admin.html}">
+<head>
+<title>Danh sách Shipper</title>
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
+	rel="stylesheet">
+<style>
+body {
+	background-color: #f8f9fa;
+}
+
+.table th, .table td {
+	text-align: center;
+}
+
+.alert {
+	margin-top: 20px;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+}
+
+/* Thu hẹp thông báo và cho nó xuống header */
+.alert {
+	margin-top: 20px; /* Khoảng cách từ header xuống */
+	position: fixed; /* Dính vào màn hình */
+	top: 70px; /* Vị trí từ trên cùng màn hình */
+	left: 50%; /* Canh giữa theo chiều ngang */
+	transform: translateX(-50%);
+	z-index: 1050;
+	width: auto;
+	max-width: 80%;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+}
+</style>
+<link rel="stylesheet" href="/css/headerAdmin.css">
+</head>
+<body>
+	<div layout:fragment="content">
+		<!-- Thông báo nếu có -->
+		<div th:if="${message != null}" class="alert alert-primary"
+			role="alert">
+			<i th:text="${message}"></i>
+		</div>
+		<br>
+		<div class="container mt-5">
+			<h1 class="text-center mb-4">Danh sách Shipper</h1>
+
+
+			<!-- Hiển thị danh sách -->
+			<div th:if="${shippers != null}">
+				<table class="table table-bordered table-striped table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th>STT</th>
+							<!-- Cột STT -->
+							<th>ID Shipper</th>
+							<th>Người vận chuyển</th>
+							<th>Nhà vận chuyển</th>
+							<th>Đánh giá</th>
+							<th>Chi nhánh</th>
+							<th>Hành động</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="shipper, stat : ${shippers}">
+							<td th:text="${stat.index + 1}"></td>
+							<!-- Hiển thị STT bắt đầu từ 1 -->
+							<td th:text="${shipper.shipID}"></td>
+							<td
+								th:text="${shipper.user != null && shipper.user.role.roleID == 4 ? shipper.user.userName : 'Chưa có người vận chuyển'}"></td>
+							<td
+								th:text="${shipper.delivery != null ? shipper.delivery.deliveryName : 'Chưa có đơn vị vẫn chuyển'}"></td>
+							<!-- <td
+								th:text="${shipper.rate != null ? shipper.rate.rateValue : 'Chưa có đơn vị vẫn chuyển'}"></td> -->
+							<td>
+								<!-- Hiển thị số sao đầy nếu có giá trị rateValue, nếu không mặc định là 3 -->
+								<i
+								th:each="star : ${#numbers.sequence(1, shipper.rate != null && shipper.rate.rateValue != null ? shipper.rate.rateValue : 3)}"
+								class="bi bi-star-fill text-warning"></i> <!-- Hiển thị số sao rỗng từ giá trị rateValue đến 5 -->
+								<i
+								th:each="emptyStar : ${#numbers.sequence(shipper.rate != null && shipper.rate.rateValue != null ? shipper.rate.rateValue + 1 : 4, 5)}"
+								class="bi bi-star"></i>
+							</td>
+
+
+							<td
+								th:text="${shipper.branch != null ? shipper.branch.address : 'Chưa có chi nhánh'}"></td>
+							<td>
+								<!-- Icon sửa --> <a
+								th:href="@{'/admin/shipper/edit/' + ${shipper.shipID}}"
+								class="btn btn-outline-warning btn-sm"> <i
+									class="bi bi-pencil-square"></i>
+							</a> <!-- Icon xóa --> <a href="#"
+								th:href="@{'/admin/shipper/delete/' + ${shipper.shipID}}"
+								class="btn btn-outline-danger btn-sm"
+								onclick="return confirmDelete(this);"> <i
+									class="bi bi-trash"></i>
+							</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<!-- Phân trang -->
+				<nav aria-label="Page navigation">
+					<ul class="pagination">
+						<li class="page-item"
+							th:classappend="${currentPage == 0} ? 'disabled'"><a
+							class="page-link" href="#"
+							th:href="@{'/admin/shipper?page=' + ${currentPage - 1}}">Previous</a>
+						</li>
+						<li class="page-item"
+							th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+							th:classappend="${i == currentPage} ? 'active'"><a
+							class="page-link" th:href="@{'/admin/shipper?page=' + ${i}}"
+							th:text="${i + 1}"></a></li>
+						<li class="page-item"
+							th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+							<a class="page-link" href="#"
+							th:href="@{'/admin/shipper?page=' + ${currentPage + 1}}">Next</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<script>
+            function confirmDelete(element) {
+                const confirmation = confirm("Bạn có chắc chắn muốn xóa Shipper này không?");
+                if (confirmation) {
+                    return true;
+                }
+                return false;
+            }
+        </script>
+		<script>
+            window.onload = function () {
+                const alertMessage = document.querySelector('.alert');
+                if (alertMessage) {
+                    // Sau 3 giây, bắt đầu mờ dần
+                    setTimeout(() => {
+                        alertMessage.style.transition = "opacity 0.6s ease-out";
+                        alertMessage.style.opacity = "0";
+
+                        // Sau khi mờ hoàn toàn, ẩn luôn thông báo khỏi DOM
+                        setTimeout(() => {
+                            alertMessage.style.display = "none";
+                        }, 600); // Đồng bộ với thời gian transition
+                    }, 3000); // Hiển thị trong 3 giây trước khi mờ dần
+                }
+            };
+        </script>
+
+		<!-- Bootstrap JS -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	</div>
+</body>
+</html>

@@ -1,0 +1,868 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/*BEGIN HEADER*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root{
+    /* ===== Colors ===== */
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color: #695CFE;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+
+    /* ====== Transition ====== */
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+
+body{
+    min-height: 100vh;
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+}
+
+::selection{
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+body.dark{
+    --body-color: #18191a;
+    --sidebar-color: #242526;
+    --primary-color: #3a3b3c;
+    --primary-color-light: #3a3b3c;
+    --toggle-color: #fff;
+    --text-color: #ccc;
+}
+
+/* ===== Sidebar ===== */
+ .sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background: var(--sidebar-color);
+    transition: var(--tran-05);
+    z-index: 100;  
+}
+.sidebar.close{
+    width: 88px;
+}
+
+/* ===== Reusable code - Here ===== */
+.sidebar li{
+    height: 50px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.sidebar header .image,
+.sidebar .icon{
+    min-width: 60px;
+    border-radius: 6px;
+}
+
+.sidebar .icon{
+    min-width: 60px;
+    border-radius: 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.sidebar .text,
+.sidebar .icon{
+    color: var(--text-color);
+    transition: var(--tran-03);
+}
+
+.sidebar .text{
+    font-size: 17px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 1;
+}
+.sidebar.close .text{
+    opacity: 0;
+}
+/* =========================== */
+
+.sidebar header{
+    position: relative;
+}
+
+.sidebar header .image-text{
+    display: flex;
+    align-items: center;
+}
+.sidebar header .logo-text{
+    display: flex;
+    flex-direction: column;
+}
+header .image-text .name {
+    margin-top: 2px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+header .image-text .profession{
+    font-size: 16px;
+    margin-top: -2px;
+    display: block;
+}
+
+.sidebar header .image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar header .image img{
+    width: 40px;
+    border-radius: 6px;
+}
+
+.sidebar header .toggle{
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%) rotate(180deg);
+    height: 25px;
+    width: 25px;
+    background-color: var(--primary-color);
+    color: var(--sidebar-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+
+body.dark .sidebar header .toggle{
+    color: var(--text-color);
+}
+
+.sidebar.close .toggle{
+    transform: translateY(-50%) rotate(0deg);
+}
+
+.sidebar .menu{
+    margin-top: 20px;
+}
+
+.sidebar li.search-box{
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+
+.sidebar li.search-box input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: var(--primary-color-light);
+    color: var(--text-color);
+    border-radius: 6px;
+    font-size: 17px;
+    font-weight: 500;
+    transition: var(--tran-05);
+}
+.sidebar li a{
+    list-style: none;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--tran-03);
+}
+
+.sidebar li a:hover{
+    background-color: var(--primary-color);
+}
+.sidebar li a:hover .icon,
+.sidebar li a:hover .text{
+    color: var(--sidebar-color);
+}
+body.dark .sidebar li a:hover .icon,
+body.dark .sidebar li a:hover .text{
+    color: var(--text-color);
+}
+
+.sidebar .menu-bar{
+    height: calc(100% - 55px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+}
+.menu-bar::-webkit-scrollbar{
+    display: none;
+}
+.sidebar .menu-bar .mode{
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    position: relative;
+    transition: var(--tran-05);
+}
+
+.menu-bar .mode .sun-moon{
+    height: 50px;
+    width: 60px;
+}
+
+.mode .sun-moon i{
+    position: absolute;
+}
+.mode .sun-moon i.sun{
+    opacity: 0;
+}
+body.dark .mode .sun-moon i.sun{
+    opacity: 1;
+}
+body.dark .mode .sun-moon i.moon{
+    opacity: 0;
+}
+
+.menu-bar .bottom-content .toggle-switch{
+    position: absolute;
+    right: 0;
+    height: 100%;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.toggle-switch .switch{
+    position: relative;
+    height: 22px;
+    width: 40px;
+    border-radius: 25px;
+    background-color: var(--toggle-color);
+    transition: var(--tran-05);
+}
+
+.switch::before{
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background-color: var(--sidebar-color);
+    transition: var(--tran-04);
+}
+
+body.dark .switch::before{
+    left: 20px;
+}
+
+.home{
+    position: absolute;
+    top: 0;
+    top: 0;
+    left: 250px;
+    height: 100vh;
+    width: calc(100% - 250px);
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+}
+.home .text{
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 12px 60px;
+}
+
+.sidebar.close ~ .home{
+    left: 78px;
+    height: 100vh;
+    width: calc(100% - 78px);
+}
+body.dark .home .text{
+    color: var(--text-color);
+}
+/*END SIDE BAR*/
+
+/*BEGIN HEADER*/
+.custom-header {
+	display: flex; /* Flexbox for alignment */
+	align-items: center; /* Align items vertically in center */
+	justify-content: space-between; /* Distribute space evenly */
+	height: 60px;
+	background-color: rgba(0, 0, 0, 0.8); /* Black background */
+	color: white;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+/*END HEADER*/
+
+/*BEGIN FOOTER*/
+.footer {
+	background-color: black;
+	color: white;
+	padding: 20px;
+	text-align: center;
+}
+
+.footer a {
+	color: white;
+	text-decoration: none;
+}
+
+.footer a:hover {
+	text-decoration: underline;
+}
+
+/*END FOOTER*/
+
+/* BEGIN CONTENT */
+main {
+	display: flex;
+	justify-content: center; /* Căn giữa nội dung */
+	align-items: center; /* Căn giữa theo chiều dọc */
+	min-height: calc(100vh - 120px); /* Trừ chiều cao header và footer */
+	background-color: white;
+	/* Tương ứng: padding-top, padding-right, padding-bottom, padding-left */
+	padding: 80px 0px 40px 0px;
+	height: 100%;
+	margin: 0;
+	background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+	min-height: 800px;
+	
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 15px; /* Khoảng cách giữa các phần tử */
+}
+
+.background {
+	background: rgba(255, 255, 255, 0.9); /* Nền trắng mờ */
+	border-radius: 10px; /* Bo góc */
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+	padding: 30px;
+	width: 100%;
+	max-width: 1300px; /* Độ rộng tối đa */
+}
+
+h2 {
+	font-size: 1.5rem;
+	text-align: center;
+	color: #333;
+	margin-bottom: 20px;
+}
+
+label {
+	font-weight: bold;
+	color: #555;
+}
+
+input, textarea {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 1rem;
+	background: #f9f9f9;
+	outline: none;
+	transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+	border-color: #007bff;
+}
+
+button {
+	padding: 10px 20px;
+	font-size: 1rem;
+	font-weight: bold;
+	color: white;
+	background: #007bff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background 0.3s ease;
+	max-width: 200px;
+}
+
+button:hover {
+	background: #0056b3;
+}
+/* END CONTENT */
+
+
+
+/* Tổng thể phân trang */
+.pagination {
+	display: flex;
+	justify-content: center;
+	padding: 10px 0;
+	list-style: none;
+	margin: 0;
+}
+
+/* Các mục trong phân trang */
+.pagination li {
+	margin: 0 5px;
+}
+
+/* Liên kết trong các mục */
+.pagination li a {
+	display: block;
+	padding: 8px 12px;
+	text-decoration: none;
+	background-color: #f1f1f1;
+	color: #007bff;
+	border-radius: 4px;
+	transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hiệu ứng hover */
+.pagination li a:hover {
+	background-color: #007bff;
+	color: #fff;
+}
+
+/* Mục đang được chọn */
+.pagination li.active a {
+	background-color: #007bff;
+	color: #fff;
+	font-weight: bold;
+}
+
+
+/*BEGIN BRANCH*/
+/* Thiết lập chung */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px; /* Tăng kích thước tổng */
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    color: #333;
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+/* Main Content Layout */
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* Info Section */
+.info-section {
+    flex: 3;
+}
+
+.card-container {
+    display: flex; /* Flexbox xếp ngang */
+    gap: 20px; /* Khoảng cách giữa các thẻ */
+    margin-bottom: 20px;
+}
+
+.card {
+    flex: 1; /* Kích thước thẻ bằng nhau */
+    border: none;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.card.full-width {
+    flex: 0 0 100%;
+}
+
+.card h5 {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.card p {
+    font-size: 1rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Image Section */
+.image-section {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    height: 100%; /* Chiều cao bằng info-section */
+}
+
+.branch-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+/* Thiết kế nút */
+.btn-primary {
+    background-color: #695cfe;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    text-align: center;
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #5746db;
+    text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column; /* Xếp dọc trên màn hình nhỏ */
+    }
+    .image-section {
+        height: auto;
+    }
+}
+
+/*END BRANCH*/
+
+/*BEGIN REVENUE*/
+.dashboard {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Thông tin tổng quan */
+.overview {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.info-card {
+    flex: 1;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    margin: 0 15px;
+}
+
+.info-card h5 {
+    font-size: 1.4rem;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.info-card p {
+    font-size: 1.6rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.info-card i {
+    font-size: 2.5rem;
+    color: #695cfe;
+    margin-bottom: 15px;
+}
+
+/* Biểu đồ */
+.charts {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.chart-card {
+    flex: 1;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-height: 400px; /* Tăng chiều cao thẻ */
+}
+
+.chart-card canvas {
+    max-width: 100%;
+    height: 320px; /* Tăng chiều cao biểu đồ */
+}
+
+/*END REVENUE*/
+
+/*BEGIN ADD BRANCH*/
+.add-branch__background {
+    max-width: 800px;
+    margin: 50px auto;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-branch__title {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+}
+
+.add-branch__divider {
+    margin: 20px 0;
+    border: none;
+    border-top: 2px solid #eaeaea;
+}
+
+.add-branch__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.add-branch__col {
+    flex: 1;
+    min-width: 45%;
+}
+
+.add-branch__form-group {
+    margin-bottom: 20px;
+}
+
+.add-branch__form-select,
+.add-branch__input,
+.add-branch__textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.add-branch__textarea {
+    resize: none;
+}
+
+.add-branch__file-input {
+    width: 100%;
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.add-branch__button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.add-branch__button:hover {
+    background: #0056b3;
+}
+/*END ADD BRANCH*/
+/*BEGIN LIST MILKTEA*/
+.page-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.actions {
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.btn-add {
+    padding: 10px 15px;
+    background-color: #695cfe;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.btn-add:hover {
+    background-color: #0056b3;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    margin: 10px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.styled-table th {
+    background-color: #695cfe;
+    color: white;
+    font-weight: bold;
+}
+
+.styled-table tr:nth-child(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.image-cell {
+    text-align: center;
+}
+
+.product-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn-update {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-update:hover {
+    background-color: #138496;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+.pagination-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    list-style: none;
+    padding: 0;
+    display: inline-flex;
+    gap: 5px;
+}
+
+.page-link {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.page-link:hover {
+    background-color: #746BD7;
+}
+
+.pagination .active .page-link {
+    background-color: #343a40;
+    pointer-events: none;
+}
+/*END LIST MILKTEA*/
+
+
+
+
+
+
+
+
+
+
+

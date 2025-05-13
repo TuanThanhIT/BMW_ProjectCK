@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{user/layout-user.html}">
+
+<body>
+	<section layout:fragment="content">
+		<div class="profile-page">
+			<div class="container">
+				<!-- Tiêu đề Hồ sơ -->
+				<div class="profile-header">
+					<h2>Hồ Sơ Của Tôi</h2>
+					<p>Quản lý thông tin hồ sơ của bạn để bảo mật tài khoản</p>
+				</div>
+				<div class="alert-content">
+					<span th:text="${message}"></span>
+				</div>
+				<!-- Form Hồ sơ -->
+				<!-- Cột bên trái - Thông tin cá nhân -->
+				<div class="row">
+					<!-- Cột bên trái - Các trường thông tin -->
+					<div class="col-md-8">
+						<form method="POST"
+							th:action="@{/user/account/{id}(id=${user.userID})}">
+							<!-- Họ và Tên -->
+							<div class="mb-3">
+								<label for="fullName" class="form-label">Họ và Tên</label> <input
+									type="text" class="form-control" id="fullName" name="fullName"
+									th:value="${user.fullName}" required />
+							</div>
+							<!-- Địa chỉ -->
+							<div class="mb-3">
+								<label for="address" class="form-label">Địa Chỉ</label> <input
+									type="text" class="form-control" id="address" name="address"
+									th:value="${user.address}" required />
+							</div>
+							<!-- Số điện thoại -->
+							<div class="mb-3">
+								<label for="phone" class="form-label">Số Điện Thoại</label> <input
+									type="text" class="form-control" id="phone" name="phone"
+									th:value="${user.phone}" required />
+							</div>
+							<!-- Email -->
+							<div class="mb-3">
+								<label for="email" class="form-label">Email</label> <input
+									type="email" class="form-control" id="email"
+									th:value="${user.email}" disabled />
+							</div>
+							<!-- Tên tài khoản -->
+							<div class="mb-3">
+								<label for="userName" class="form-label">Tên Tài Khoản</label> <input
+									type="text" class="form-control" id="userName"
+									th:value="${user.userName}" disabled />
+							</div>
+
+							<!-- Chức vụ -->
+							<div class="mb-3">
+								<label for="role" class="form-label">Chức Vụ</label> <input
+									type="text" class="form-control" id="role"
+									th:value="${user.roleID == 1 ? 'Admin' : 
+                              (user.roleID == 2 ? 'Seller' : 
+                              (user.roleID == 3 ? 'User' : 
+                              (user.roleID == 4 ? 'Shipper' : 'Không xác định')))}"
+									disabled />
+							</div>
+							<button type="submit" class="btn btn-primary">Cập nhật
+								hồ sơ</button>
+						</form>
+					</div>
+
+					<div class="col-md-4 text-center">
+						<div class="profile-image">
+							<img th:src="${'/uploads/' + user.image}" alt="Avatar"
+								style="width: 100%; height: 100%; object-fit: cover;" />
+						</div>
+						<label for="profileImage" class="image-label mt-2">Ảnh đại
+							diện</label>
+					</div>
+
+
+				</div>
+
+
+
+			</div>
+		</div>
+
+	</section>
+
+
+
+
+</body>
+</html>

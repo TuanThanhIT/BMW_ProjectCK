@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{seller/layout-seller.html}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MilkTeas</title>
+<link rel="stylesheet" href="/css/seller.css">
+<link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
+    rel="stylesheet">
+<script src="/script/seller.js" defer></script>
+</head>
+<body>
+    <div layout:fragment="content">
+        <form class="background">
+            <h1 class="page-title">Danh sách hóa đơn:</h1>
+            <hr>
+            <div class="table-responsive">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Địa chỉ</th>
+                            <th>Tổng sản phẩm</th>
+                            <th>Thành tiền</th>
+                            <th>Phương thức TT</th>
+                            <th>Người nhận</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="order : ${listOrder}">
+                            <td th:text="${order.shipAddress}"></td>
+                            <td th:text="${order.cart.totalProduct}"></td>
+                            <td th:text="${order.cart.totalCost}"></td>
+                            <td th:text="${order.payment.payMethod}"></td>
+                            <td th:text="${order.user.fullName}"></td>
+                            
+                            <td th:text="${order.status}"></td>
+                            <td th:if="${order.status != 'COMPLETED'}">
+                                <a href="#" th:attr="data-order-id=${order.orderID}" class="btn btn-info btn-update">
+                                    <i class="bx bx-edit"></i> Xác nhận
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Phân trang--> 
+            <div class="pagination-container">
+                <ul class="pagination">
+                    <li th:if="${currentPage > 1}">
+                        <a th:href="@{/seller/orders(pageNo=${currentPage-1})}" class="page-link">&laquo;</a>
+                    </li>
+                    <li th:each="i : ${#numbers.sequence(1, totalPage)}" th:classappend="${currentPage == i ? 'active' : ''}">
+                        <a th:href="@{/seller/orders(pageNo=${i})}" th:text="${i}" class="page-link"></a>
+                    </li>
+                    <li th:if="${currentPage < totalPage}">
+                        <a th:href="@{/seller/orders(pageNo=${currentPage+1})}" class="page-link">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+@charset "UTF-8";
+
+/* Button Styles */
+.btn-red {
+    background-color: #e74c3c; /* Red color */
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.btn-red:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+/* Old Price Styling */
+.old-price {
+    text-decoration: line-through;
+    color: #888; /* Adjusted color for better consistency */
+}
+
+/* Rating Stars */
+.rating-stars {
+    font-size: 1.5rem;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.rating-stars.selected {
+    color: #ffcc00; /* Yellow for selected stars */
+}
+
+/* Header Title Styling */
+.header-title {
+    font-family: "Arial", sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000; /* Đổi thành màu đen */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: none; /* Bỏ hiệu ứng bóng nếu không cần thiết */
+    transition: transform 0.3s ease-in-out;
+}
+
+.header-title:hover {
+    transform: scale(1.05); /* Slight hover effect */
+}
+
+/* Header Background */
+.bg-header {
+    background: linear-gradient(90deg, rgba(255, 126, 95, 0.8), rgba(254, 180, 123, 0.8)), url("/img/header-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    padding: 40px 0; /* Reduced padding */
+}
+
+.bg-header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+}
+
+.bg-header .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Product Card Styles */
+.product-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added shadow for hover effect */
+    transition: box-shadow 0.3s ease;
+}
+
+.form-select.w-50 {
+    width: 150px !important; /* Điều chỉnh chiều rộng */
+    font-size: 14px; /* Kích thước chữ nhỏ hơn */
+    padding: 5px; /* Điều chỉnh khoảng cách bên trong */
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title>Seller Layout</title>
+</head>
+<body>
+
+    <header>
+        <div th:replace="~{seller/fragments/header :: header}"></div>
+    </header>
+
+    <main>
+        <div layout:fragment="content">
+            <!-- Nội dung trang sẽ được chèn vào đây -->
+        </div>
+    </main>
+
+    <footer>
+        <div th:replace="~{seller/fragments/footer :: footer}"></div>
+    </footer>
+
+</body>
+</html>

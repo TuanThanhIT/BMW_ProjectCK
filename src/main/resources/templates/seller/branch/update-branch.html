@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{seller/layout-seller.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add-Branch</title>
+    <link rel="stylesheet" href="/css/seller.css">
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="/script/seller.js" defer></script> <!-- Sử dụng defer để đảm bảo script chạy sau khi DOM được load -->
+</head>
+<body>
+    <div layout:fragment="content">
+        <form class="add-branch__background" th:action="@{/seller/saveBranch}" th:object="${branch}" method="POST" enctype="multipart/form-data">
+            <h1 class="add-branch__title">Nhập thông tin chi nhánh</h1>
+            <hr class="add-branch__divider">
+            <div class="add-branch__row">
+                <!-- Khối bên trái -->
+                <div class="add-branch__col">
+                    <label for="address">Địa chỉ chi nhánh:</label>
+                    <select class="add-branch__form-select" id="city" aria-label="Chọn tỉnh thành">
+                        <option value="" selected>Chọn tỉnh thành</option>
+                    </select>
+                    <select class="add-branch__form-select" id="district" aria-label="Chọn quận huyện">
+                        <option value="" selected>Chọn quận huyện</option>
+                    </select>
+                    <select class="add-branch__form-select" id="ward" aria-label="Chọn phường xã">
+                        <option value="" selected>Chọn phường xã</option>
+                    </select>
+                    <input type="hidden" id="address" th:field="*{address}" />
+                </div>
+                <!-- Khối bên phải -->
+                <div class="add-branch__col">
+                    <label for="open-time">Thời gian mở cửa:</label>
+                    <input type="time" id="open-time" th:field="*{openTime}" class="add-branch__input">
+                    <label for="close-time">Thời gian đóng cửa:</label>
+                    <input type="time" id="close-time" th:field="*{closeTime}" class="add-branch__input">
+                </div>
+            </div>
+            <div class="add-branch__form-group">
+				<label for="branchname">Tên chi nhánh:</label> <input type="text"
+					id="branchname" placeholder="Nhập tên chi nhánh"
+					th:field="*{branchName}" class="add-branch__input">
+			</div>
+            <div class="add-branch__form-group">
+                <label for="introduction">Giới thiệu:</label>
+                <input type="text" id="introduction" placeholder="Nhập giới thiệu chi nhánh" th:field="*{introduction}" class="add-branch__input">
+            </div>
+            <div class="add-branch__form-group">
+                <label for="description">Mô tả:</label>
+                <textarea id="description" rows="4" placeholder="Nhập mô tả chi nhánh" th:field="*{description}" class="add-branch__textarea"></textarea>
+            </div>
+            <input type="hidden" th:field="*{branchID}" />
+            <div class="add-branch__form-group">
+                <label for="images" class="form-label">Ảnh:</label>
+                <input type="file" id="images" class="add-branch__file-input" name="images" multiple>
+            </div>
+            <button type="submit" class="btn-primary">Hoàn thành</button>
+        </form>
+    </div>
+</body>
+</html>

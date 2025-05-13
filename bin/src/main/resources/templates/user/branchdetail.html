@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{user/layout-user.html}">
+
+<body>
+	<section layout:fragment="content">
+		<!-- Header -->
+		<header class="bg-white text-dark py-3 mb-4 border-bottom">
+			<div class="container">
+				<h2 class="header-title text-center">Chi Tiết Cửa Hàng</h2>
+			</div>
+		</header>
+
+		<!-- Nội dung chi tiết cửa hàng -->
+		<div class="container">
+			<div class="row mb-5">
+				<!-- Hình ảnh cửa hàng -->
+				<div class="col-lg-6 mb-4">
+					<div id="branchImageCarousel" class="carousel slide"
+						data-bs-ride="carousel">
+						<!-- Vùng chứa các ảnh -->
+						<div class="carousel-inner">
+							<div
+								th:each="image, stat : ${#strings.arraySplit(branch.images ?: '', ',')}"
+								th:classappend="${stat.index == 0} ? 'active'"
+								class="carousel-item">
+								<img th:src="'/uploads/' + ${image.trim()}" alt="Cửa Hàng"
+									class="d-block w-100 rounded"
+									style="width: 100%; height: 400px; object-fit: cover;" />
+							</div>
+						</div>
+
+						<!-- Nút chuyển ảnh trước -->
+						<button class="carousel-control-prev" type="button"
+							data-bs-target="#branchImageCarousel" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+
+						<!-- Nút chuyển ảnh tiếp theo -->
+						<button class="carousel-control-next" type="button"
+							data-bs-target="#branchImageCarousel" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+				</div>
+
+				<!-- Thông tin cửa hàng -->
+				<div class="col-lg-6">
+					<div class="card border-0 shadow-sm">
+						<div class="card-body">
+							<h3 class="card-title text-primary mb-4"
+								th:text="${branch.branchName}">Tên Cửa Hàng</h3>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item"><strong>Giới thiệu cửa
+										hàng:</strong> <span th:text="${branch.introduction}">Giới thiệu
+										cửa hàng</span></li>
+								<li class="list-group-item"><strong>Địa chỉ:</strong> <span
+									th:text="${branch.address}">Địa chỉ cửa hàng</span></li>
+								<li class="list-group-item"><strong>Giờ mở cửa:</strong> <span
+									th:text="${branch.openTime}">8:00 AM</span></li>
+								<li class="list-group-item"><strong>Giờ đóng cửa:</strong>
+									<span th:text="${branch.closeTime}">10:00 PM</span></li>
+								<li class="list-group-item"><strong>Tình trạng:</strong> <span
+									th:text="${branch.active == 1 ? 'Đang hoạt động' : 'Không hoạt động'}">Đang
+										hoạt động</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Mô tả thêm cửa hàng -->
+			<div class="mb-5">
+				<div class="card border-0 shadow-sm">
+					<div class="card-body">
+						<h4 class="card-title text-secondary">Mô Tả Cửa Hàng</h4>
+						<p class="card-text" th:text="${branch.description}">Mô tả chi
+							tiết cửa hàng</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Thông tin quản lý -->
+			<div class="mb-5">
+				<div class="card border-0 shadow-sm">
+					<div class="card-body">
+						<h4 class="card-title text-secondary">Thông Tin Quản Lý</h4>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item"><strong>Quản Lý:</strong> <span
+								th:text="${branch.user.fullName}">Tên Quản Lý</span></li>
+							<li class="list-group-item"><strong>Số Điện Thoại:</strong>
+								<span th:text="${branch.user.phone}">Số Điện Thoại</span></li>
+							<li class="list-group-item"><strong>Email:</strong> <span
+								th:text="${branch.user.email}">Email</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- Sản phẩm của cửa hàng -->
+			<div class="mt-5">
+				<h4 class="card-title text-secondary">Sản Phẩm Của Cửa Hàng</h4>
+				<hr>
+				<div class="row">
+					<div th:each="milkTea : ${listMilkTeaOfBranch}"
+						class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+						<div class="store-item position-relative text-center">
+							<div class="product-item">
+								<!-- Hình ảnh sản phẩm -->
+								<img th:src="'/uploads/' + ${milkTea.image.split(',')[0]}"
+									alt="Milk Tea" width="240" height="150" />
+
+								<div class="p-4">
+									<!-- Tên và mô tả sản phẩm -->
+									<h5 class="mb-3" th:text="${milkTea.milkTeaName}">Tên trà
+										sữa</h5>
+									<p th:text="${milkTea.introduction}">Giới thiệu sản phẩm</p>
+									<!-- Giá sản phẩm -->
+									<h5 class="text-primary"
+										th:text="${milkTea.discountPrice.intValue()} +đ"></h5>
+
+								</div>
+
+								<div class="store-overlay">
+									<a
+										th:href="@{/user/product/detail/{id}(id=${milkTea.milkTeaID})}"
+										class="btn btn-primary rounded-pill py-2 px-4 m-2"> Xem
+										Chi Tiết <i class="fa fa-arrow-right ms-2"></i>
+									</a> <a href="#" class="btn btn-dark rounded-pill py-2 px-4 m-2">
+										Thêm vào giỏ <i class="fa fa-cart-plus ms-2"></i>
+									</a> <input type="hidden" class="milkTeaID"
+										th:value="${milkTea.milkTeaID}" /> <input type="hidden"
+										class="userID" th:value="${user.userID}" />
+
+									<!-- Nút yêu thích -->
+									<button class="btn rounded-pill py-2 px-4 m-2 favorite-button"
+										th:classappend="${milkTea.isFavorited ? 'btn-outline-danger active' : 'btn-outline-danger'}"
+										th:data-favorite="${milkTea.isFavorited ? 'true' : 'false'}"
+										data-milktea-id="${milkTea.milkTeaID}"
+										data-user-id="${user.userID}">
+										<i class="fa fa-heart me-2"></i> <span
+											th:text="${milkTea.isFavorited ? 'Đã yêu thích' : 'Yêu thích'}">Yêu
+											thích</span>
+									</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{user/layout-user.html}">
+
+<body>
+	<section layout:fragment="content">
+		<div class="container-xxl py-5">
+			<div class="container">
+				<div class="navbar-container">
+					<!-- Dropdown cho sản phẩm -->
+					<div class="product-filter">
+						<form method="GET" th:action="@{/user/product}">
+							<select class="form-select" id="typeMilkTea" name="typeMilkTeaID"
+								required onchange="this.form.submit()">
+								<option value="">Tất cả</option>
+								<option th:each="type : ${listType}"
+									th:value="${type.milkTeaTypeID}"
+									th:text="${type.milkTeaTypeName}"
+									th:selected="${type.milkTeaTypeID == typeMilkTeaID}"></option>
+							</select> <input type="hidden" name="keyword" th:value="${keyword}" /> <input
+								type="hidden" name="pageNo" th:value="${currentPage}" />
+						</form>
+						<!-- Nút Yêu thích -->
+						<form
+							th:action="@{/user/product/favorite/{id}(id=${user.userID})}"
+							method="GET">
+							<button type="submit" class="btn-favorite">
+								<i class="fa fa-heart"></i> Yêu thích của bạn
+							</button>
+						</form>
+					</div>
+
+					<div class="search-sort-container">
+
+						<form method="GET" th:action="@{/user/product}">
+							<div class="search-bar-container">
+								<input type="text" name="keyword" class="search-bar"
+									placeholder="Tìm kiếm..." th:value="${keyword}" /> <input
+									type="hidden" name="typeMilkTeaID" th:value="${typeMilkTeaID}" />
+								<button class="search-submit" type="submit">
+									<i class="fa fa-search"></i>
+								</button>
+							</div>
+						</form>
+					</div>
+
+				</div>
+
+
+				<div class="section-title text-center mx-auto wow fadeInUp"
+					data-wow-delay="0.1s" style="max-width: 500px">
+					<h1 class="display-6">Menu sản phẩm dành cho bạn</h1>
+				</div>
+
+				<!-- Vòng lặp sản phẩm -->
+				<div class="row g-4">
+					<div th:each="milkTea : ${listMilkTea}"
+						class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+						<div class="store-item position-relative text-center">
+							<div class="product-item">
+								<!-- Hình ảnh sản phẩm -->
+								<img th:src="'/uploads/' + ${milkTea.image.split(',')[0]}"
+									alt="Milk Tea" width="240" height="150" />
+
+								<div class="p-4">
+									<!-- Tên và mô tả sản phẩm -->
+									<h5 class="mb-3" th:text="${milkTea.milkTeaName}">Tên trà
+										sữa</h5>
+									<p th:text="${milkTea.introduction}">Giới thiệu sản phẩm</p>
+									<!-- Giá sản phẩm -->
+									<h5 class="text-primary"
+										th:text="${milkTea.discountPrice.intValue()} +đ"></h5>
+
+								</div>
+
+								<div class="store-overlay">
+									<a
+										th:href="@{/user/product/detail/{id}(id=${milkTea.milkTeaID})}"
+										class="btn btn-primary rounded-pill py-2 px-4 m-2"> Xem
+										Chi Tiết <i class="fa fa-arrow-right ms-2"></i>
+									</a> <a
+										th:href="@{/user/cart/addToCart(id=${milkTea.milkTeaID}, quantity=1, size='M')}"
+										class="btn btn-dark rounded-pill py-2 px-4 m-2"> Thêm vào
+										giỏ <i class="fa fa-cart-plus ms-2"></i>
+									</a> <input type="hidden" class="milkTeaID"
+										th:value="${milkTea.milkTeaID}" /> <input type="hidden"
+										class="userID" th:value="${user.userID}" />
+
+									<!-- Nút yêu thích -->
+									<button class="btn rounded-pill py-2 px-4 m-2 favorite-button"
+										th:classappend="${milkTea.isFavorited ? 'btn-outline-danger active' : 'btn-outline-danger'}"
+										th:data-favorite="${milkTea.isFavorited ? 'true' : 'false'}"
+										data-milktea-id="${milkTea.milkTeaID}"
+										data-user-id="${user.userID}">
+										<i class="fa fa-heart me-2"></i> <span
+											th:text="${milkTea.isFavorited ? 'Đã yêu thích' : 'Yêu thích'}">Yêu
+											thích</span>
+									</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Kết thúc vòng lặp sản phẩm -->
+				<!-- Phân trang -->
+				<div class="box-footer clearfix"
+					th:if="${!#lists.isEmpty(listMilkTea) and totalPage > 0}">
+					<ul class="pagination pagination-sm no-margin pull-right">
+						<li th:if="${currentPage > 1}"><a
+							th:href="@{/user/product(pageNo=${currentPage-1}, keyword=${keyword}, typeMilkTeaID=${typeMilkTeaID})}">&#8592;</a>
+						</li>
+						<li th:each="i : ${#numbers.sequence(1, totalPage)}"
+							th:classappend="${currentPage == i ? 'active' : ''}"><a
+							th:href="@{/user/product(pageNo=${i}, keyword=${keyword}, typeMilkTeaID=${typeMilkTeaID})}"
+							th:text="${i}"></a></li>
+						<li th:if="${currentPage < totalPage}"><a
+							th:href="@{/user/product(pageNo=${currentPage+1}, keyword=${keyword}, typeMilkTeaID=${typeMilkTeaID})}">&#8594;</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</section>
+</body>
+</html>

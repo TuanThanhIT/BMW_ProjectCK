@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đăng Nhập - AloTra</title>
+<!-- Link file CSS -->
+<link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+	<div class="login-container">
+		<!-- Thông báo thành công -->
+		<div id="successAlertBox" th:if="${successMessage != null}"
+			class="custom-alert-success position-fixed top-0 end-0 m-3"
+			style="min-width: 300px;">
+			<div class="alert-content">
+				<span th:text="${successMessage}"></span>
+			</div>
+			<div class="progress-bar-wrapper">
+				<div class="progress-bar"></div>
+			</div>
+		</div>
+
+		<!-- Thông báo lỗi -->
+		<div id="alertBox" th:if="${alert != null}"
+			class="custom-alert position-fixed top-0 end-0 m-3"
+			style="min-width: 300px;">
+			<div class="alert-content">
+				<span th:text="${alert}"></span>
+			</div>
+			<div class="progress-bar-wrapper">
+				<div class="progress-bar"></div>
+			</div>
+		</div>
+
+		<!-- Logo và tiêu đề -->
+		<img src="/img/logo-milktea.avif" alt="Logo" class="logo">
+		<h2>Đăng Nhập</h2>
+
+		<!-- Form đăng nhập -->
+		<form action="/login" method="POST">
+			<input type="text" name="username" placeholder="Tên đăng nhập"
+				th:value="${username}" required> <input type="password"
+				name="password" placeholder="Mật khẩu" th:value="${password}"
+				required>
+
+			<!-- Nhớ mật khẩu và quên mật khẩu -->
+			<div class="remember-forgot">
+				<label> <input type="checkbox" name="remember"
+					th:checked="${rememberMe}"> Nhớ mật khẩu
+				</label> <a href="/login/forgot-password" class="forgot-link">Quên mật
+					khẩu?</a>
+			</div>
+
+			<!-- Nút Đăng nhập -->
+			<button type="submit">Đăng Nhập</button>
+		</form>
+		<!-- Nút Thoát -->
+		<form action="/web/home" method="GET">
+			<button type="submit" class="exit-button">Thoát</button>
+		</form>
+		<!-- Đăng ký -->
+		<div class="register">
+			Chưa có tài khoản? <a href="/register">Đăng ký ngay</a>
+		</div>
+
+	</div>
+
+	<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const alertBox = document.getElementById("alertBox");
+            if (alertBox) {
+                setTimeout(() => {
+                    alertBox.remove();
+                }, 5000);
+            }
+
+            const successAlertBox = document.getElementById("successAlertBox");
+            if (successAlertBox) {
+                setTimeout(() => {
+                    successAlertBox.remove();
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+
+</html>

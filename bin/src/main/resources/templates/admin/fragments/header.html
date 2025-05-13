@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/layout-admin.html}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revenue</title>
+<!-- Thêm link tới Font Awesome -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+	rel="stylesheet">
+	
+	
+	<!-- Thêm link tới Bootstrap Icons -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+	
+	
+</head>
+<body>
+
+	<div th:fragment="header" class="custom-header">
+		<!-- BEGIN HEADER -->
+		<div class="header-container">
+			<!-- Thông tin người dùng căn phải -->
+			<!-- Tooltip cho biểu tượng -->
+<i class="fas fa-bell fa-fw notification-icon" title="Thông báo"></i>
+<i class="fas fa-envelope fa-fw message-icon" title="Tin nhắn"></i>
+
+			<!-- Hình đại diện và tên -->
+			<div class="user-info">
+		<!-- Biểu tượng chuông -->
+		<i class="bi bi-bell" style="font-size: 20px; color: #007bff;"></i>
+		<!-- Biểu tượng thư -->
+		<i class="bi bi-envelope" style="font-size: 20px; color: #007bff;"></i>
+		<!-- Hình đại diện và tên -->
+		<div class="user-avatar">
+			<img src="https://cdn2.fptshop.com.vn/unsafe/Uploads/images/tin-tuc/175099/Originals/avatar%20lanh%20lung%20(1).jpg" alt="Avatar">
+		</div>
+		<div class="user-name">
+			<span>Lý Hùng</span>
+		</div>
+	</div>
+		</div>
+		<!-- END HEADER -->
+
+		<!-- BEGIN SIDE BAR -->
+<div id="sidebar" class="sidebar">
+	<a href="#" class="closebtn" onclick="closeSidebar()">&equiv;</a>
+<a href="/admin">
+    <i class="bi bi-bar-chart"></i> Thống kê
+</a>	
+	<a href="/admin/user"><i class="bi bi-people"></i> Quản lí tài khoản</a>
+	<a href="/admin/branch"><i class="bi bi-diagram-3"></i> Quản lí chi nhánh</a>
+	<a href="/admin/milkTea"><i class="bi bi-cup-hot"></i> Quản lí sản phẩm</a>
+	<a href="/admin/milkTeaType"><i class="bi bi-tags"></i> Quản lí loại sản phẩm</a>
+	<a href="/admin/delivery"><i class="bi bi-truck"></i> Quản lí dịch vụ vận chuyển</a>
+	<a href="/admin/order"><i class="bi bi-box-seam"></i> Quản lí đơn hàng</a>
+	<a href="/admin/shipper"><i class="bi bi-send"></i> Quản lí đơn vận</a>
+	<a href="/user/home"><i class="bi bi-box-arrow-right"></i> Thoát</a>
+</div>
+
+		<!-- Màn đen mờ (overlay) -->
+		<div id="overlay" class="overlay" onclick="closeSidebar()"></div>
+
+		<button class="floating-btn" onclick="openSidebar()">&equiv;</button>
+
+		<script src="/script/headerAdmin.js"></script>
+		<!-- END SIDE BAR -->
+	</div>
+<script>
+function openSidebar() {
+    document.getElementById("sidebar").style.width = "250px";
+    document.getElementById("overlay").style.display = "block";
+}
+
+function closeSidebar() {
+    document.getElementById("sidebar").style.width = "0";
+    document.getElementById("overlay").style.display = "none";
+}
+
+</script>
+</body>
+</html>

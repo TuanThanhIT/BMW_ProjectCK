@@ -1,0 +1,190 @@
+@charset "UTF-8";
+
+.favorite-button {
+	background-color: #f8d7da; /* Màu nền nhạt khi chưa yêu thích */
+	color: #d9534f; /* Màu chữ nhạt */
+	border: none; /* Không có viền */
+	transition: background-color 0.3s, color 0.3s;
+}
+
+.favorite-button.active {
+	background-color: #d9534f; /* Màu nền đỏ khi yêu thích */
+	color: white; /* Màu chữ trắng */
+}
+
+.favorite-button:hover {
+	background-color: #f5c6cb; /* Màu nền nhạt khi hover */
+	color: #c82333; /* Màu chữ khi hover */
+}
+
+.store-item {
+	border: 2px solid #28a745;
+	border-radius: 15px;
+	padding: 15px;
+	background-color: #ffffff;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* Container chính chứa thanh tìm kiếm và dropdown loại sản phẩm */
+.navbar-container {
+	display: flex;
+	justify-content: space-between;
+	/* Đặt khoảng cách đều giữa thanh tìm kiếm và dropdown sản phẩm */
+	align-items: center;
+	width: 100%;
+	padding: 15px;
+	background-color: #fff;
+}
+
+/* Cấu trúc thanh tìm kiếm và bộ lọc */
+.search-sort-container {
+    display: flex; /* Căn ngang các phần tử con */
+    align-items: center; /* Căn chỉnh giữa các phần tử theo chiều dọc */
+    gap: 20px; /* Khoảng cách giữa các phần tử */
+}
+/* Nút tìm kiếm */
+.search-submit {
+    padding: 10px 20px; /* Điều chỉnh padding để nút vừa phải */
+    background-color: #f0f0f0; /* Màu nền xám nhạt */
+    color: #333; /* Màu chữ tối */
+    font-size: 16px;
+    border: 1px solid #ccc; /* Viền nhẹ xung quanh nút */
+    border-radius: 4px; /* Bo góc nhẹ */
+    cursor: pointer; /* Hiển thị con trỏ khi hover */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+/* Hiệu ứng hover cho nút tìm kiếm */
+.search-submit:hover {
+    background-color: #e0e0e0; /* Màu nền sáng hơn khi hover */
+}
+
+/* Biểu tượng tìm kiếm trong nút */
+.search-submit i {
+    font-size: 18px; /* Kích thước biểu tượng */
+    margin-right: 8px; /* Khoảng cách giữa biểu tượng và chữ */
+}
+.search-bar-container,
+.sort-dropdown,
+.favorite-button-container {
+    display: flex;
+    align-items: center;
+    height: 40px; /* Đảm bảo chiều cao đồng đều */
+}
+
+/* Cấu trúc bộ lọc */
+.sort-dropdown {
+	flex-shrink: 0;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+	background-color: #fff;
+}
+
+/* Container bao quanh thanh tìm kiếm */
+.search-bar-container {
+	position: relative;
+	width: 350px;
+}
+
+/* Thanh tìm kiếm */
+.search-bar {
+    width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng container */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    height: 100%; /* Đảm bảo chiều cao đồng đều */
+}
+
+/* Biểu tượng tìm kiếm */
+.search-icon {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 18px;
+	color: #888;
+}
+
+/* Dropdown cho sản phẩm */
+.product-filter {
+	flex-shrink: 0;
+}
+
+.product-select {
+	padding: 8px 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.favorite-button-container {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+.btn-favorite {
+     width: 100%; /* Để nút chiếm toàn bộ chiều rộng của container */
+    padding: 8px; /* Đảm bảo chiều cao giống với combobox */
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+     margin-top: 10px
+}
+.btn-favorite:hover {
+    background-color: #e65a50;
+}
+
+.box-footer {
+    display: flex;
+    justify-content: center; /* Căn giữa phần tử phân trang */
+    padding: 15px;
+    margin-top: 50px; /* Đảm bảo không có khoảng cách trên */
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    background-color: transparent;
+}
+
+.pagination li {
+    margin: 0 0px; /* Khoảng cách giữa các trang */
+}
+
+.pagination a {
+    color: #000000; /* Màu chữ đen */
+    text-decoration: none;
+    padding: 10px 20px; /* Tăng padding để các nút phân trang rộng hơn */
+    border: 1px solid #ddd; /* Viền mỏng xung quanh mỗi trang */
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #000000; /* Màu nền khi hover */
+    color: #ffffff; /* Màu chữ trắng khi hover */
+}
+
+.pagination .active a {
+    background-color: #000000; /* Màu nền đen cho trang đang hoạt động */
+    color: #ffffff; /* Màu chữ trắng */
+}
+
+.pagination .disabled a {
+    color: #ccc; /* Màu chữ xám cho trang bị vô hiệu hóa */
+    pointer-events: none;
+    cursor: not-allowed;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+	<div th:fragment="header">
+		<!-- Spinner Start -->
+		<div id="spinner"
+			class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+			<div class="spinner-border text-primary" role="status"
+				style="width: 3rem; height: 3rem"></div>
+		</div>
+		<!-- Spinner End -->
+		<!-- Thêm phần Đăng nhập, Đăng ký và Giỏ hàng lên trên Navbar -->
+		<div class="container-fluid bg-success py-1">
+			<div class="container">
+				<div class="d-flex justify-content-end">
+					<!-- Giỏ Hàng với biểu tượng -->
+					<a href="/user/cart" class="text-white me-3 small"> <i
+						class="fa fa-shopping-cart"></i> Giỏ Hàng
+					</a>
+					<!-- Đơn Mua với biểu tượng hộp -->
+					<a href="/user/packages" class="text-white me-3 small fw-bold"> <i
+						class="fa fa-box"></i> Đơn Mua
+					</a>
+					<!-- Thông tin tài khoản với biểu tượng người dùng -->
+					<a href="/user/account" class="text-white me-3 small fw-bold">
+						<i class="fa fa-user"></i> <span th:text="${user.fullName}"></span>
+					</a>
+					<!-- Đăng Xuất với biểu tượng đăng xuất -->
+					<a href="/logout" class="text-white me-3 small fw-bold"> <i
+						class="fa fa-sign-out-alt"></i> Đăng Xuất
+					</a>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<div class="container-fluid bg-white sticky-top">
+			<div class="container">
+				<nav
+					class="navbar navbar-expand-lg bg-white navbar-light py-2 py-lg-0">
+					<a href="/user/home" class="navbar-brand"> <img
+						class="img-fluid" src="/img/logoo.jpg" alt="Logo" />
+					</a>
+					<button type="button" class="navbar-toggler ms-auto me-0"
+						data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarCollapse">
+						<div class="navbar-nav ms-auto">
+							<a href="/user/home" class="nav-item nav-link active">Trang
+								Chủ</a> <a href="/user/product" class="nav-item nav-link">Sản
+								Phẩm</a> <a href="/user/branch" class="nav-item nav-link">Cửa
+								Hàng</a> <a href="/user/contact" class="nav-item nav-link">Liên
+								Hệ</a>
+								<a href="/admin" class="nav-item nav-link">Trang Quản Trị</a>
+								<a href="/seller/revenue" class="nav-item nav-link">Trang Bán Hàng</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

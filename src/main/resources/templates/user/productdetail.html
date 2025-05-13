@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{user/layout-user.html}">
+
+<body>
+	<section layout:fragment="content">
+		<!-- Header -->
+		<header class="bg-white text-dark py-3 mb-4 border-bottom">
+			<div class="container">
+				<h2 class="header-title text-center">Chi Tiết Sản Phẩm</h2>
+			</div>
+		</header>
+
+		<!-- Nội dung chi tiết sản phẩm -->
+		<div class="container">
+			<div class="row mb-5">
+				<!-- Hình ảnh sản phẩm -->
+				<div class="col-lg-6 mb-4">
+					<div id="imageCarousel" class="carousel slide"
+						data-bs-ride="carousel">
+						<!-- Vùng chứa các ảnh -->
+						<div class="carousel-inner">
+							<div
+								th:each="image, stat : ${#strings.arraySplit(milkTea.image, ',')}"
+								th:classappend="${stat.index == 0} ? 'active'"
+								class="carousel-item">
+								<!-- Hiển thị từng ảnh -->
+								<img th:src="'/uploads/' + ${image.trim()}" alt="Milk Tea"
+									class="d-block w-100 rounded"
+									style="width: 300px; height: 400px; object-fit: cover; margin: 0 auto;" />
+							</div>
+						</div>
+
+						<!-- Nút chuyển ảnh trước -->
+						<button class="carousel-control-prev" type="button"
+							data-bs-target="#imageCarousel" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+
+						<!-- Nút chuyển ảnh tiếp theo -->
+						<button class="carousel-control-next" type="button"
+							data-bs-target="#imageCarousel" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+				</div>
+
+				<!-- Thông tin sản phẩm -->
+				<div class="col-lg-6">
+					<h3 th:text="${milkTea.milkTeaName}">Trà Sữa Trân Châu Đường
+						Đen</h3>
+					<div class="d-flex align-items-center mb-3">
+						<div class="text-warning me-3">
+							<i class="fas fa-star"></i> <span th:text="${saotb}"></span>
+						</div>
+						<span class="text-muted"> <span th:text="${numberOfRates}"></span>
+							đánh giá
+						</span>
+					</div>
+					<p>
+						<strong>Đã bán: </strong> <span
+							style="color: red; font-weight: bold;" th:text="${sellQuantity}"></span>
+						<strong> sản phẩm</strong>
+					</p>
+					<div class="d-flex align-items-baseline mb-4">
+						<span class="old-price me-3"
+							th:text="${milkTea.price.intValue()}+đ">₫60,000</span>
+						<h3 class="text-danger mb-0"
+							th:text="${milkTea.discountPrice.intValue()}+đ">₫50,000</h3>
+					</div>
+					<p th:text="${milkTea.introduction}">Giới thiệu</p>
+					<!-- Form để thêm sản phẩm vào giỏ hàng -->
+					<form th:action="@{/user/cart/addToCart}" method="get">
+						<!-- Hidden input để truyền ID của sản phẩm -->
+						<input type="hidden" name="id" th:value="${milkTea.milkTeaID}" />
+						<!-- Số lượng -->
+						<div class="d-flex align-items-center mb-4">
+							<label for="quantity" class="me-3">Số lượng:</label> <input
+								type="number" id="quantity" name="quantity" min="1" value="1"
+								class="form-control w-25" />
+						</div>
+
+						<!-- Size -->
+						<div class="d-flex align-items-center mb-4">
+							<label for="size" class="me-3">Chọn size:</label> <select
+								id="size" name="size" class="form-select w-50">
+								<option value="S">Size S</option>
+								<option value="M" selected>Size M</option>
+								<option value="L">Size L</option>
+							</select>
+						</div>
+
+						<!-- Nút submit -->
+						<button type="submit" class="btn btn-red btn-lg">
+							<i class="fas fa-cart-plus me-2"></i>Thêm vào giỏ hàng
+						</button>
+					</form>
+				</div>
+			</div>
+
+			<!-- Mô tả sản phẩm -->
+			<div class="mb-5">
+				<h4>Mô tả sản phẩm</h4>
+				<p th:text="${milkTea.description}">Mô tả</p>
+			</div>
+
+			<div class="mb-5">
+				<h4>Đánh giá sản phẩm</h4>
+				<form th:action="@{/user/product/rate}" method="POST">
+					<div class="mb-3">
+						<div id="rating" class="mb-3">
+							<i class="fas fa-star rating-stars" data-value="1"></i> <i
+								class="fas fa-star rating-stars" data-value="2"></i> <i
+								class="fas fa-star rating-stars" data-value="3"></i> <i
+								class="fas fa-star rating-stars" data-value="4"></i> <i
+								class="fas fa-star rating-stars" data-value="5"></i>
+						</div>
+						<textarea class="form-control" rows="3"
+							placeholder="Viết đánh giá của bạn..." name="comment"></textarea>
+					</div>
+					<!-- Hidden fields to store rating, milkTeaID, and userID -->
+					<input type="hidden" id="selected-rating" name="rating" value="0" />
+					<input type="hidden" id="milkTeaID" name="milkTeaID"
+						th:value="${milkTea.milkTeaID}" /> <input type="hidden"
+						id="userID" name="userID" th:value="${user.userID}" />
+
+					<button type="submit" class="btn btn-success mb-4">Gửi
+						đánh giá</button>
+				</form>
+			</div>
+			<!-- Hiển thị đánh giá -->
+			<div>
+				<h5>Đánh giá của khách hàng</h5>
+				<hr />
+				<div th:each="rate : ${listRate}" class="mb-4">
+					<div class="d-flex align-items-center">
+						<div class="text-warning me-2">
+							<!-- Hiển thị số sao từ đánh giá -->
+							<div class="text-warning me-3">
+								<i class="fas fa-star"></i> <span
+									th:text="${rate.rateValue.intValue()}"></span>
+							</div>
+						</div>
+						<!-- Hiển thị tên người đánh giá -->
+						<span class="fw-bold" th:text="${rate.user.fullName}">Người
+							đánh giá</span>
+					</div>
+					<!-- Hiển thị nội dung đánh giá -->
+					<p th:text="${rate.comment}">Nội dung đánh giá</p>
+				</div>
+				<hr />
+			</div>
+
+
+			<!-- Sản phẩm liên quan -->
+			<div class="mt-5">
+				<h4>Sản phẩm liên quan</h4>
+				<hr>
+				<div class="row">
+					<div th:each="milkTea : ${listMilkTeaRelateTo}"
+						class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+						<div class="store-item position-relative text-center">
+							<div class="product-item">
+								<!-- Hình ảnh sản phẩm -->
+								<img th:src="'/uploads/' + ${milkTea.image.split(',')[0]}"
+									alt="Milk Tea" width="240" height="150" />
+
+								<div class="p-4">
+									<!-- Tên và mô tả sản phẩm -->
+									<h5 class="mb-3" th:text="${milkTea.milkTeaName}">Tên trà
+										sữa</h5>
+									<p th:text="${milkTea.introduction}">Giới thiệu sản phẩm</p>
+									<!-- Giá sản phẩm -->
+									<h5 class="text-primary"
+										th:text="${milkTea.discountPrice.intValue()} +đ"></h5>
+
+								</div>
+
+								<div class="store-overlay">
+									<a
+										th:href="@{/user/product/detail/{id}(id=${milkTea.milkTeaID})}"
+										class="btn btn-primary rounded-pill py-2 px-4 m-2"> Xem
+										Chi Tiết <i class="fa fa-arrow-right ms-2"></i>
+									</a> <a href="#" class="btn btn-dark rounded-pill py-2 px-4 m-2">
+										Thêm vào giỏ <i class="fa fa-cart-plus ms-2"></i>
+									</a> <input type="hidden" class="milkTeaID"
+										th:value="${milkTea.milkTeaID}" /> <input type="hidden"
+										class="userID" th:value="${user.userID}" />
+
+									<!-- Nút yêu thích -->
+									<button class="btn rounded-pill py-2 px-4 m-2 favorite-button"
+										th:classappend="${milkTea.isFavorited ? 'btn-outline-danger active' : 'btn-outline-danger'}"
+										th:data-favorite="${milkTea.isFavorited ? 'true' : 'false'}"
+										data-milktea-id="${milkTea.milkTeaID}"
+										data-user-id="${user.userID}">
+										<i class="fa fa-heart me-2"></i> <span
+											th:text="${milkTea.isFavorited ? 'Đã yêu thích' : 'Yêu thích'}">Yêu
+											thích</span>
+									</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>

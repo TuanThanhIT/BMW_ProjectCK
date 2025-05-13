@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Tea House - Tea Shop Website Template</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta content="" name="keywords" />
+<meta content="" name="description" />
+
+<!-- Favicon -->
+<link href="img/favicon.ico" rel="icon" />
+
+<!-- Google Web Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+	href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700;900&display=swap"
+	rel="stylesheet" />
+
+<!-- Icon Font Stylesheet -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+	rel="stylesheet" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+	rel="stylesheet" />
+
+<!-- Libraries Stylesheet -->
+<link href="/lib/animate/animate.min.css" rel="stylesheet" />
+<link href="/lib/owlcarousel/assets/owl.carousel.min.css"
+	rel="stylesheet" />
+
+<!-- Customized Bootstrap Stylesheet -->
+<link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Template Stylesheet -->
+<link href="/css/style.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+	<!-- Spinner Start -->
+	<div id="spinner"
+		class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+		<div class="spinner-border text-primary" role="status"
+			style="width: 3rem; height: 3rem"></div>
+	</div>
+	<!-- Spinner End -->
+
+	<!-- Thêm phần Đăng nhập, Đăng ký và Giỏ hàng lên trên Navbar -->
+	<div class="container-fluid bg-success py-1">
+		<div class="container">
+			<div class="d-flex justify-content-end">
+				<!-- Giỏ hàng với biểu tượng -->
+				<a href="#" class="text-white me-3 small"> <i
+					class="fa fa-shopping-cart"></i> Giỏ Hàng
+				</a>
+				<!-- Đơn mua với biểu tượng -->
+				<a href="#" class="text-white me-3 small"> <i class="fa fa-box"></i>
+					Đơn mua
+				</a>
+				<!-- Đăng ký với biểu tượng -->
+				<a href="/register" class="text-white me-3 small fw-bold"> <i
+					class="fa fa-user-plus"></i> Đăng Ký
+				</a>
+				<!-- Đăng nhập với biểu tượng -->
+				<a href="/login" class="text-white me-3 small fw-bold"> <i
+					class="fa fa-sign-in-alt"></i> Đăng Nhập
+				</a>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Navbar chính -->
+	<div class="container-fluid bg-white sticky-top">
+		<div class="container">
+			<nav
+				class="navbar navbar-expand-lg bg-white navbar-light py-2 py-lg-0">
+				<a href="index.html" class="navbar-brand"> <img
+					class="img-fluid" src="/img/logoo.jpg" alt="Logo" />
+				</a>
+				<button type="button" class="navbar-toggler ms-auto me-0"
+					data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<div class="navbar-nav ms-auto">
+						<a href="index.html" class="nav-item nav-link active">Trang
+							Chủ</a> <a href="#" class="nav-item nav-link">Sản Phẩm</a> <a
+							href="#" class="nav-item nav-link">Cửa Hàng</a> <a href="#"
+							class="nav-item nav-link">Liên Hệ</a>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+
+	<!-- Carousel Start -->
+	<div class="container-fluid px-0 mb-5">
+		<div id="header-carousel" class="carousel slide carousel-fade"
+			data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<!-- Slide 1 -->
+				<div class="carousel-item active">
+					<img class="w-100" src="/img/coursel1-milktea.jpg"
+						alt="Hình ảnh trà sữa" />
+					<div class="carousel-caption overlay">
+						<div class="container">
+							<div class="row justify-content-center">
+								<div class="col-lg-7 text-center">
+									<p class="fs-2 text-white animated zoomIn">
+										Chào mừng đến với <strong class="text-dark">AloTra
+											Milk Tea</strong>
+									</p>
+									<h1 class="display-3 text-dark mb-4 animated zoomIn">Trà
+										sữa tự nhiên & chất lượng</h1>
+									<a href="#"
+										class="btn btn-light rounded-pill py-3 px-5 animated zoomIn">Khám
+										phá thêm</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Slide 2 -->
+				<div class="carousel-item">
+					<img class="w-100" src="/img/coursel2-milktea.jpg"
+						alt="Hình ảnh trà sữa" />
+					<div class="carousel-caption overlay">
+						<div class="container">
+							<div class="row justify-content-center">
+								<div class="col-lg-7 text-center">
+									<p class="fs-2 text-white animated zoomIn">
+										Khám phá sự khác biệt tại <strong class="text-dark">AloTra
+											Milk Tea</strong>
+									</p>
+									<h1 class="display-3 text-dark mb-4 animated zoomIn">Tận
+										hưởng ly trà sữa tuyệt vời nhất</h1>
+									<a href="#"
+										class="btn btn-light rounded-pill py-3 px-5 animated zoomIn">Tìm
+										hiểu thêm</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Carousel Controls -->
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#header-carousel" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Trước</span>
+			</button>
+			<button class="carousel-control-next" type="button"
+				data-bs-target="#header-carousel" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Tiếp theo</span>
+			</button>
+		</div>
+	</div>
+	<!-- Carousel End -->
+
+	<!-- About Start -->
+	<div class="container-xxl py-5">
+		<div class="container">
+			<div class="row g-5">
+				<!-- Cột bên trái với hình ảnh -->
+				<div class="col-lg-6">
+					<div class="row g-3">
+						<div class="col-6 text-end">
+							<img class="img-fluid bg-white w-100 mb-3 wow fadeIn"
+								data-wow-delay="0.1s" src="/img/about1.jpg" alt="Trà sữa" /> <img
+								class="img-fluid bg-white w-50 wow fadeIn" data-wow-delay="0.2s"
+								src="/img/about3.jpg" alt="Trà sữa nổi bật" />
+						</div>
+						<div class="col-6">
+							<img class="img-fluid bg-white w-50 mb-3 wow fadeIn"
+								data-wow-delay="0.3s" src="/img/about4.jpg"
+								alt="Trà sữa thơm ngon" /> <img
+								class="img-fluid bg-white w-100 wow fadeIn"
+								data-wow-delay="0.4s" src="/img/about2.jpg"
+								alt="Trà sữa tự nhiên" />
+						</div>
+					</div>
+				</div>
+
+				<!-- Cột bên phải với văn bản -->
+				<div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+					<div class="section-title">
+						<p class="fs-5 fw-medium fst-italic text-primary">Về Chúng Tôi</p>
+						<h1 class="display-6">
+							Lịch sử thành công của <strong>AloTra Milk Tea</strong> trong
+							những năm qua
+						</h1>
+					</div>
+					<div class="row g-3 mb-4">
+						<div class="col-sm-4">
+							<img class="img-fluid bg-white w-100" src="/img/about5.jpg"
+								alt="Trà sữa với sữa tươi" />
+						</div>
+						<div class="col-sm-8">
+							<h5>Trà của chúng tôi là một trong những thức uống phổ biến
+								đối với mọi người</h5>
+							<p class="mb-0">Trà sữa của chúng tôi được chế tác từ những
+								nguyên liệu tươi ngon, mang đến một hương vị tự nhiên, thơm mát
+								và đặc biệt. Mỗi ly trà sữa không chỉ là sự kết hợp hoàn hảo
+								giữa trà thanh mát và sữa ngọt ngào, mà còn là trải nghiệm tinh
+								tế mà bạn không thể tìm thấy ở bất kỳ đâu. Hãy để AloTra Milk
+								Tea dẫn bạn vào thế giới của những ly trà sữa tuyệt vời, đang
+								làm say đắm lòng người.</p>
+						</div>
+					</div>
+					<div class="border-top mb-4"></div>
+					<div class="row g-3">
+						<div class="col-sm-8">
+							<h5>Trà sữa – Hương vị tuyệt vời cho mỗi ngày</h5>
+							<p class="mb-0">Một cốc trà sữa mỗi ngày không chỉ mang lại
+								cảm giác thư giãn mà còn giúp cung cấp năng lượng, giảm căng
+								thẳng và cải thiện tâm trạng. Trà sữa của chúng tôi được chế
+								biến từ nguyên liệu tươi ngon, đảm bảo chất lượng và sự tinh tế
+								trong từng ngụm.</p>
+						</div>
+						<div class="col-sm-4">
+							<img class="img-fluid bg-white w-100" src="/img/about6.jpg"
+								alt="Trà sữa sức khỏe" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- About End -->
+
+	<!-- Sản Phẩm Bắt Đầu -->
+	<div class="container-fluid product py-5 my-5">
+		<div class="container py-5">
+			<div class="section-title text-center mx-auto wow fadeInUp"
+				data-wow-delay="0.1s" style="max-width: 500px">
+				<p class="fs-5 fw-medium fst-italic text-primary">Sản Phẩm Của
+					Chúng Tôi</p>
+				<h1 class="display-6">Trà sữa - Hương vị hoàn hảo mang đến niềm
+					vui cho bạn</h1>
+			</div>
+			<div class="owl-carousel product-carousel wow fadeInUp"
+				data-wow-delay="0.5s">
+				<a href="" class="d-block product-item rounded"> <img
+					src="/img/product10.jpg" alt="Trà Sữa Truyền Thống" />
+					<div
+						class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
+						<h4 class="text-primary">Trà Sữa Truyền Thống</h4>
+						<span class="text-body">Vị ngọt thanh, đậm đà, hòa quyện
+							giữa trà đen và sữa tươi.</span>
+					</div>
+				</a> <a href="" class="d-block product-item rounded"> <img
+					src="/img/product2.jpg" alt="Trà Sữa Matcha" />
+					<div
+						class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
+						<h4 class="text-primary">Trà Sữa Matcha</h4>
+						<span class="text-body">Hương vị trà xanh Nhật Bản thơm
+							ngát, kết hợp hoàn hảo với sữa.</span>
+					</div>
+				</a> <a href="" class="d-block product-item rounded"> <img
+					src="/img/tra-sua-socola.jpg" alt="Trà Sữa Socola" />
+					<div
+						class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
+						<h4 class="text-primary">Trà Sữa Socola</h4>
+						<span class="text-body">Socola ngọt ngào và đậm đà, mang
+							đến cảm giác ngây ngất.</span>
+					</div>
+				</a> <a href="" class="d-block product-item rounded"> <img
+					src="/img/tra-sua-trai-cay.webp" alt="Trà Sữa Trái Cây" />
+					<div
+						class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
+						<h4 class="text-primary">Trà Sữa Trái Cây</h4>
+						<span class="text-body">Sự kết hợp độc đáo giữa trà sữa và
+							các loại trái cây tươi ngon.</span>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- Sản Phẩm Kết Thúc -->
+
+	<!-- Article Start -->
+	<div class="container-xxl py-5">
+		<div class="container">
+			<div class="row g-5">
+				<div class="col-lg-5 wow fadeIn" data-wow-delay="0.1s">
+					<img class="img-fluid" src="/img/artical.jpg" alt="Trà sữa" />
+				</div>
+				<div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+					<div class="section-title">
+						<p class="fs-5 fw-medium fst-italic text-primary">Thức Uống
+							Yêu Thích</p>
+						<h1 class="display-6">Câu Chuyện Của Trà Sữa - Hương Vị Thời
+							Đại</h1>
+					</div>
+					<p class="mb-4">Trà sữa, xuất phát từ Đài Loan những năm 1980,
+						đã trở thành một biểu tượng văn hóa không thể thiếu của giới trẻ
+						trên toàn thế giới. Với sự kết hợp hoàn hảo giữa vị đậm đà của
+						trà, vị ngọt ngào của sữa, và sự dai giòn của trân châu, trà sữa
+						chinh phục mọi trái tim ngay từ ngụm đầu tiên.</p>
+					<p class="mb-4">Thức uống này đã phát triển với vô số hương vị
+						và topping, từ trân châu đen truyền thống, thạch phô mai, pudding
+						trứng cho đến những biến tấu hiện đại như kem cheese, matcha, hay
+						socola. Trà sữa không chỉ là một món đồ uống, mà còn là cách để
+						kết nối bạn bè, chia sẻ niềm vui trong những cuộc trò chuyện.</p>
+					<p class="mb-4">Không chỉ ngon, trà sữa còn mang lại nhiều sự
+						lựa chọn cho mọi người. Bạn có thể tùy chỉnh độ ngọt, lượng đá,
+						hay thậm chí là chọn trà xanh, trà đen hoặc trà ô long để phù hợp
+						với khẩu vị của mình.</p>
+					<a href="https://oola.vn/lich-su-phat-trien-cua-tra-sua/"
+						class="btn btn-primary rounded-pill py-3 px-5" target="_blank">Khám
+						Phá Thêm</a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Article End -->
+
+	<!-- Video Bắt Đầu -->
+	<div class="container-fluid video my-5">
+		<div class="container">
+			<div class="row g-0">
+				<div class="col-lg-6 py-5 wow fadeIn" data-wow-delay="0.1s">
+					<div class="py-5">
+						<h1 class="display-6 mb-4">
+							Trà sữa - Thức uống của <span class="text-white">niềm vui</span>
+							và <span class="text-white">kết nối</span>
+						</h1>
+						<h5 class="fw-normal lh-base fst-italic text-white mb-5">Trà
+							sữa không chỉ là một món uống, mà còn là biểu tượng của sự giao
+							thoa văn hóa và sự sáng tạo. Hãy cùng khám phá sự độc đáo trong
+							mỗi ly trà sữa!</h5>
+						<div class="row g-4 mb-5">
+							<div class="col-sm-6">
+								<div class="d-flex align-items-center">
+									<div
+										class="flex-shrink-0 btn-lg-square bg-white text-primary rounded-circle me-3">
+										<i class="fa fa-check"></i>
+									</div>
+									<span class="text-dark">Nguyên liệu tươi ngon</span>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="d-flex align-items-center">
+									<div
+										class="flex-shrink-0 btn-lg-square bg-white text-primary rounded-circle me-3">
+										<i class="fa fa-check"></i>
+									</div>
+									<span class="text-dark">Hương vị đa dạng</span>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="d-flex align-items-center">
+									<div
+										class="flex-shrink-0 btn-lg-square bg-white text-primary rounded-circle me-3">
+										<i class="fa fa-check"></i>
+									</div>
+									<span class="text-dark">Toping phong phú</span>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="d-flex align-items-center">
+									<div
+										class="flex-shrink-0 btn-lg-square bg-white text-primary rounded-circle me-3">
+										<i class="fa fa-check"></i>
+									</div>
+									<span class="text-dark">Tốt cho sức khỏe và tinh thần</span>
+								</div>
+							</div>
+						</div>
+						<a class="btn btn-light rounded-pill py-3 px-5" href="">Khám
+							Phá Thêm</a>
+					</div>
+				</div>
+				<div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+					<div class="h-100 d-flex align-items-center justify-content-center"
+						style="min-height: 300px">
+						<button type="button" class="btn-play" data-bs-toggle="modal"
+							data-src="https://www.youtube.com/watch?v=X3813uxhVWM"
+							data-bs-target="#videoModal">
+							<span></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Video Kết Thúc -->
+
+	<!-- Video Modal Start -->
+	<div class="modal modal-video fade" id="videoModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content rounded-0">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel">Youtube Video</h3>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<!-- 16:9 aspect ratio -->
+					<div class="ratio ratio-16x9">
+						<iframe class="embed-responsive-item" src="" id="video"
+							allowfullscreen allowscriptaccess="always" allow="autoplay"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Video Modal End -->
+
+	<!-- Sản phẩm bán chạy Start -->
+	<div class="container-xxl py-5">
+		<div class="container">
+			<div class="section-title text-center mx-auto wow fadeInUp"
+				data-wow-delay="0.1s" style="max-width: 500px">
+				<p class="fs-5 fw-medium fst-italic text-primary">Sản phẩm bán
+					chạy</p>
+				<h1 class="display-6">Trà sữa bán chạy nhất</h1>
+			</div>
+			<div class="row g-5">
+				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s"
+					th:each="milkTea : ${listMilkTea}">
+					<div class="store-item position-relative text-center">
+						<img th:src="'/uploads/' + ${milkTea.image.split(',')[0]}"
+							alt="Milk Tea" class="img-fluid" />
+						<div class="p-4">
+							<h4 class="mb-3" th:text="${milkTea.milkTeaName}">Tên trà
+								sữa</h4>
+							<p th:text="${milkTea.introduction}">Giới thiệu sản phẩm</p>
+							<h4 class="text-primary"
+								th:text="${milkTea.discountPrice.intValue()} + '₫'">Giá</h4>
+						</div>
+						<div class="store-overlay">
+							<a
+								th:href="@{/user/product/detail/{id}(id=${milkTea.milkTeaID})}"
+								class="btn btn-primary rounded-pill py-2 px-4 m-2"> Xem Chi
+								Tiết <i class="fa fa-arrow-right ms-2"></i>
+							</a> <a
+								th:href="@{/user/cart/addToCart(id=${milkTea.milkTeaID}, quantity=1, size='M')}"
+								class="btn btn-dark rounded-pill py-2 px-4 m-2"> Thêm vào
+								giỏ <i class="fa fa-cart-plus ms-2"></i>
+							</a>
+							<!-- Nút yêu thích -->
+							<button class="btn rounded-pill py-2 px-4 m-2 favorite-button"
+								th:classappend="${milkTea.isFavorited ? 'btn-outline-danger active' : 'btn-outline-danger'}"
+								th:data-favorite="${milkTea.isFavorited ? 'true' : 'false'}"
+								data-milktea-id="${milkTea.milkTeaID}"
+								data-user-id="${user.userID}">
+								<i class="fa fa-heart me-2"></i> <span
+									th:text="${milkTea.isFavorited ? 'Đã yêu thích' : 'Yêu thích'}">Yêu
+									thích</span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<!-- Kết thúc vòng lặp -->
+				<!-- Nút Xem thêm -->
+				<div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+					<a href="user/product" class="btn btn-primary rounded-pill py-3 px-5">Xem
+						thêm sản phẩm</a>
+				</div>
+			</div>
+		</div>
+		<!-- Sản phẩm bán chạy End -->
+
+		<!-- Cửa Hàng Nổi Bật Bắt Đầu -->
+		<div class="container-xxl py-5">
+			<div class="container">
+				<div class="section-title text-center mx-auto wow fadeInUp"
+					data-wow-delay="0.1s" style="max-width: 500px">
+					<p class="fs-5 fw-medium fst-italic text-primary">Cửa Hàng Nổi
+						Bật</p>
+					<h1 class="display-6">Điểm đến lý tưởng cho những tín đồ yêu
+						trà sữa</h1>
+				</div>
+				<div class="row g-4">
+					<!-- Lặp qua danh sách chi nhánh -->
+					<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s"
+						th:each="branch : ${listBranch}">
+						<div class="store-item position-relative text-center">
+							<img th:src="'/uploads/' + ${branch.images.split(',')[0]}"
+								alt="BranchMilkTea" class="img-fluid" width="240" height="150" />
+							<div class="p-4">
+								<h4 class="mb-3" th:text="${branch.branchName}"></h4>
+								<p th:text="${branch.introduction}"></p>
+							</div>
+							<div class="store-overlay">
+								<a th:href="@{/user/branch/detail/{id}(id=${branch.branchID})}"
+									class="btn btn-primary rounded-pill py-2 px-4 m-2"> Xem Chi
+									Tiết <i class="fa fa-arrow-right ms-2"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Button Xem thêm cửa hàng -->
+				<div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+					<a href="/login" class="btn btn-primary rounded-pill py-3 px-5">
+						Xem thêm cửa hàng </a>
+				</div>
+			</div>
+		</div>
+		<!-- Cửa Hàng Nổi Bật Kết Thúc -->
+
+		<!-- Liên hệ Start -->
+		<div class="container-xxl contact py-5">
+			<div class="container">
+				<div class="section-title text-center mx-auto wow fadeInUp"
+					data-wow-delay="0.1s" style="max-width: 500px">
+					<p class="fs-5 fw-medium fst-italic text-primary">Liên hệ với
+						chúng tôi</p>
+					<h1 class="display-6">Liên hệ ngay với chúng tôi</h1>
+				</div>
+				<div class="row justify-content-center wow fadeInUp"
+					data-wow-delay="0.1s">
+					<div class="col-lg-8">
+						<p class="text-center mb-5">Chúng tôi luôn sẵn sàng hỗ trợ
+							bạn. Nếu bạn có bất kỳ câu hỏi nào hoặc cần hỗ trợ thêm, đừng
+							ngần ngại liên hệ với chúng tôi. Chúng tôi cam kết mang đến dịch
+							vụ tốt nhất cho bạn.</p>
+						<div class="row g-5">
+							<div class="col-md-4 text-center wow fadeInUp"
+								data-wow-delay="0.3s">
+								<div class="btn-square mx-auto mb-3">
+									<i class="fa fa-envelope fa-2x text-white"></i>
+								</div>
+								<p class="mb-2">info@alotra.com</p>
+								<p class="mb-0">support@alotra.com</p>
+							</div>
+							<div class="col-md-4 text-center wow fadeInUp"
+								data-wow-delay="0.4s">
+								<div class="btn-square mx-auto mb-3">
+									<i class="fa fa-phone fa-2x text-white"></i>
+								</div>
+								<p class="mb-2">+012 345 67890</p>
+								<p class="mb-0">+012 345 67890</p>
+							</div>
+							<div class="col-md-4 text-center wow fadeInUp"
+								data-wow-delay="0.5s">
+								<div class="btn-square mx-auto mb-3">
+									<i class="fa fa-map-marker-alt fa-2x text-white"></i>
+								</div>
+								<p class="mb-2">Số 1 Võ Văn Ngân</p>
+								<p class="mb-0">Linh Chiểu, Thủ Đức, TP. Hồ Chí Minh</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Liên hệ End -->
+
+		<!-- Footer Start -->
+		<div class="container-fluid bg-dark footer mt-5 py-5 wow fadeIn"
+			data-wow-delay="0.1s">
+			<div class="container py-5">
+				<div class="row g-5">
+					<div class="col-lg-3 col-md-6">
+						<h4 class="text-primary mb-4">Our Office</h4>
+						<p class="mb-2">
+							<i class="fa fa-map-marker-alt text-primary me-3"></i>Số 1 Võ Văn
+							Ngân, Linh Chiểu, Thủ Đức, TP. Hồ Chí Minh
+						</p>
+						<p class="mb-2">
+							<i class="fa fa-phone-alt text-primary me-3"></i>+012 345 67890
+						</p>
+						<p class="mb-2">
+							<i class="fa fa-envelope text-primary me-3"></i>info@example.com
+						</p>
+						<div class="d-flex pt-3">
+							<a class="btn btn-square btn-primary rounded-circle me-2" href=""><i
+								class="fab fa-twitter"></i></a> <a
+								class="btn btn-square btn-primary rounded-circle me-2" href=""><i
+								class="fab fa-facebook-f"></i></a> <a
+								class="btn btn-square btn-primary rounded-circle me-2" href=""><i
+								class="fab fa-youtube"></i></a> <a
+								class="btn btn-square btn-primary rounded-circle me-2" href=""><i
+								class="fab fa-linkedin-in"></i></a>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<h4 class="text-primary mb-4">Quick Links</h4>
+						<a class="btn btn-link" href="">About Us</a> <a
+							class="btn btn-link" href="">Contact Us</a> <a
+							class="btn btn-link" href="">Our Services</a> <a
+							class="btn btn-link" href="">Terms & Condition</a> <a
+							class="btn btn-link" href="">Support</a>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<h4 class="text-primary mb-4">Business Hours</h4>
+						<p class="mb-1">Monday - Friday</p>
+						<h6 class="text-light">09:00 am - 07:00 pm</h6>
+						<p class="mb-1">Saturday</p>
+						<h6 class="text-light">09:00 am - 12:00 pm</h6>
+						<p class="mb-1">Sunday</p>
+						<h6 class="text-light">Closed</h6>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<h4 class="text-primary mb-4">Newsletter</h4>
+						<p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+						<div class="position-relative w-100">
+							<input class="form-control bg-transparent w-100 py-3 ps-4 pe-5"
+								type="text" placeholder="Your email" />
+							<button type="button"
+								class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">
+								SignUp</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer End -->
+
+		<!-- Back to Top -->
+		<a href="/web/home"
+			class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
+			class="bi bi-arrow-up"></i></a>
+
+		<!-- JavaScript Libraries -->
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="/lib/wow/wow.min.js"></script>
+		<script src="/lib/easing/easing.min.js"></script>
+		<script src="/lib/waypoints/waypoints.min.js"></script>
+		<script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+
+		<!-- Template Javascript -->
+		<script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/layout-admin.html}">
+
+<head>
+<link rel="stylesheet" href="/css/headerAdmin.css">
+
+<title>Delivery List</title>
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+	
+	<!-- Bootstrap Icons -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
+	rel="stylesheet">
+<style>
+body {
+	background-color: #f8f9fa;
+}
+
+.table th, .table td {
+	text-align: center;
+}
+
+.alert {
+	margin-top: 20px;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+}
+/* Thu hẹp thông báo và cho nó xuống header */
+.alert {
+	margin-top: 20px; /* Khoảng cách từ header xuống */
+	position: fixed; /* Dính vào màn hình */
+	top: 70px; /* Vị trí từ trên cùng màn hình */
+	left: 50%; /* Canh giữa theo chiều ngang */
+	transform: translateX(-50%);
+	z-index: 1050;
+	width: auto;
+	max-width: 80%;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+}
+</style>
+</head>
+<body>
+	<div layout:fragment="content">
+		<!-- Thông báo nếu có -->
+		<div th:if="${message != null}" class="alert alert-primary"
+			role="alert">
+			<i th:text="${message}"></i>
+		</div>
+		<br>
+
+		<div class="container mt-5">
+			<h1 class="text-center mb-4">Delivery List</h1>
+
+			<!-- Hiển thị danh sách -->
+			<div th:if="${deliveries != null}">
+				<table class="table table-bordered table-striped table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Extra Cost</th>
+							<th>Shipper Count</th>
+							<th>Action</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="delivery : ${deliveries}">
+							<td th:text="${delivery.deliveryID}"></td>
+							<td th:text="${delivery.deliveryName}"></td>
+							<td th:text="${delivery.deliveryType}"></td>
+							<td th:text="${#numbers.formatDecimal(delivery.extraCost, 1, 2)}"></td>
+							<td th:text="${#lists.size(delivery.shippers)}"></td>
+							<td>
+							<!-- Icon sửa --> <a
+							th:href="@{'/admin/delivery/edit/' + ${delivery.deliveryID}}"
+							class="btn btn-outline-warning btn-sm"> <i
+								class="bi bi-pencil-square"></i>
+						</a> <!-- Icon xóa --> <a href="#"
+							th:href="@{'/admin/delivery/delete/' + ${delivery.deliveryID}}"
+							class="btn btn-outline-danger btn-sm"
+							onclick="return confirmDelete(this);"> <i class="bi bi-trash"></i>
+						</a>
+						</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<!-- Phân trang -->
+				<nav aria-label="Page navigation">
+					<ul class="pagination">
+						<li class="page-item"
+							th:classappend="${currentPage == 0} ? 'disabled'"><a
+							class="page-link" href="#"
+							th:href="@{'/admin/delivery?page=' + ${currentPage - 1}}">Previous</a>
+						</li>
+						<li class="page-item"
+							th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+							th:classappend="${i == currentPage} ? 'active'"><a
+							class="page-link" th:href="@{'/admin/delivery?page=' + ${i}}"
+							th:text="${i + 1}"></a></li>
+						<li class="page-item"
+							th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+							<a class="page-link" href="#"
+							th:href="@{'/admin/delivery?page=' + ${currentPage + 1}}">Next</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function confirmDelete(element) {
+			const confirmation = confirm("Bạn có chắc chắn muốn xóa đối tượng này không?");
+			if (confirmation) {
+				return true;
+			}
+			return false;
+		}
+	</script>
+
+	<!-- Bootstrap JS -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

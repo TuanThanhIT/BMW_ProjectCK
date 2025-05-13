@@ -1,0 +1,162 @@
+/* BEGIN SIDE BAR */
+.sidebar {
+    height: 100%;
+    width: 0; /* Mặc định ẩn */
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #2c3e50; /* Xám xanh đậm */
+    overflow-x: hidden;
+    transition: 0.3s ease-in-out;
+    padding-top: 60px;
+    color: white;
+    z-index: 10000;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2); /* Đổ bóng nhẹ */
+}
+
+.sidebar a {
+    padding: 12px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px; /* Bo góc nhẹ */
+    margin: 8px 15px;
+    transition: all 0.2s ease;
+}
+
+.sidebar a:hover {
+    background-color: #5dade2; /* Xanh lam nhạt */
+    color: white;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Floating Button */
+.floating-btn {
+    position: fixed;
+    top: 10px;
+    left: 20px;
+    background-color: #5dade2; /* Xanh lam nhạt */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px; /* Canh giữa nội dung */
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    z-index: 1;
+}
+
+.floating-btn:hover {
+    background-color: #3498db; /* Xanh lam nhạt hơn khi hover */
+}
+
+/* Overlay (màn đen mờ) */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Đen trong suốt */
+    z-index: 9;
+}
+/* END SIDE BAR */
+
+/* BEGIN HEADER */
+.custom-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    background: linear-gradient(to right, #ecf0f1, #5dade2); /* Tông sáng + Xanh nhạt */
+    color: #2c3e50;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 20px;
+    z-index: 999;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-header .notification-icon, 
+.custom-header .message-icon {
+    font-size: 18px;
+    margin: 0 10px;
+    color: #3498db; /* Xanh lam nhạt */
+    cursor: pointer;
+}
+
+.custom-header .notification-icon:hover, 
+.custom-header .message-icon:hover {
+    color: #1abc9c; /* Xanh ngọc nhạt */
+}
+
+/* User Info */
+.user-info {
+    position: fixed; /* Cố định vị trí */
+    top: -3px; /* Khoảng cách từ trên cùng */
+    right: 90px; /* Khoảng cách từ bên phải */
+    display: flex; /* Căn ngang các thành phần */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    gap: 10px; /* Khoảng cách giữa avatar, biểu tượng và tên */
+    padding: 8px 12px; /* Khoảng cách trong hộp */
+    border-radius: 20px; /* Bo góc tròn */
+    z-index: 1000; /* Đảm bảo luôn trên các thành phần khác */
+}
+
+.user-avatar img {
+    width: 50px; /* Kích thước ảnh đại diện */
+    height: 50px; 
+    border-radius: 50%; /* Ảnh tròn */
+    object-fit: cover; /* Đảm bảo ảnh không bị méo */
+    border: 2px solid #007bff; /* Viền xanh lam */
+}
+
+.user-name span {
+    font-size: 14px; /* Kích thước chữ */
+    font-weight: bold; /* In đậm tên người dùng */
+    color: #2c3e50; /* Màu chữ xám đậm */
+}
+
+/* Biểu tượng chuông và thư */
+.user-info i {
+    font-size: 20px; /* Kích thước biểu tượng */
+    color: #007bff; /* Màu xanh lam */
+    cursor: pointer; /* Hiệu ứng trỏ tay */
+}
+
+.user-info i:hover {
+    color: #f39c12; /* Màu cam ánh kim nổi bật khi hover */
+}
+
+#wrapper {
+	margin-left: 6cm;
+}
+
+body {
+	padding-top: 5px;
+	/* Điều chỉnh giá trị để tạo khoảng cách giữa header và nội dung */
+}
+
+#wrapper {
+	margin-top: 80px;
+	/* Điều chỉnh giá trị tùy theo chiều cao của header */
+}
+/* END HEADER */

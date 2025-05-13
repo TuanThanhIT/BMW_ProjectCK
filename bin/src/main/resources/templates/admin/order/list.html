@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/layout-admin.html}">
+<head>
+<link rel="stylesheet" href="/css/headerAdmin.css">
+
+<title>Order List</title>
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
+	rel="stylesheet">
+<style>
+body {
+	background-color: #f8f9fa;
+}
+
+.table th, .table td {
+	text-align: center;
+}
+
+.alert {
+	margin-top: 20px;
+	opacity: 0;
+	transform: translateY(30px);
+	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.alert.show {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.alert.hide {
+	opacity: 0;
+	transform: translateY(30px);
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+}
+/* Thu hẹp thông báo và cho nó xuống header */
+.alert {
+	margin-top: 20px; /* Khoảng cách từ header xuống */
+	position: fixed; /* Dính vào màn hình */
+	top: 70px; /* Vị trí từ trên cùng màn hình */
+	left: 50%; /* Canh giữa theo chiều ngang */
+	transform: translateX(-50%);
+	z-index: 1050;
+	width: auto;
+	max-width: 80%;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+}
+</style>
+</head>
+<body>
+	<div layout:fragment="content">
+
+	<!-- Thông báo nếu có -->
+	<div th:if="${message != null}" class="alert alert-primary"
+		role="alert">
+		<i th:text="${message}"></i>
+	</div>
+		<br>
+
+	<div class="container mt-5">
+		<h1 class="text-center mb-4">Order List</h1>
+
+		<!-- Hiển thị danh sách Orders -->
+		<div th:if="${orders != null}">
+			<table class="table table-bordered table-striped table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th>Order ID</th>
+						<th>User</th>
+						<th>Cart</th>
+						 <th>Status</th>
+ 					<th>Payment Method</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="order : ${orders}">
+						<td th:text="${order.orderID}"></td>
+						<td th:text="${order.user != null ? order.user.fullName : 'N/A'}"></td>
+						<td th:text="${order.cart != null ? order.cart.cartID : 'N/A'}"></td>
+
+						 <td
+							th:text="${order.status}"></td> 
+ <td th:text="${order.payment != null ? order.payment.payMethod : 'N/A'}"></td>
+ 						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<script>
+        // Hàm xác nhận xóa
+        function confirmDelete(element) {
+            const confirmation = confirm("Bạn có chắc chắn muốn xóa đơn hàng này không?");
+            if (confirmation) {
+                return true;
+            }
+            return false;
+        }
+
+        // Hiệu ứng mờ dần cho thông báo
+        window.onload = function() {
+            const alertMessage = document.querySelector('.alert');
+            if (alertMessage) {
+                alertMessage.classList.add('show');
+                setTimeout(() => {
+                    alertMessage.classList.add('hide');
+                }, 2000); // Hiển thị trong 2 giây
+            }
+        };
+    </script>
+
+	<!-- Bootstrap JS -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<title>Xác Thực OTP</title>
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet" href="/css/verify-otp-pass.css">
+</head>
+
+<body>
+	<div class="container">
+		<h1>Xác Thực OTP</h1>
+
+		<div th:if="${alert != null}" class="alert">
+			<span class="icon">&#9888;</span> <span th:text="${alert}"></span>
+		</div>
+		<form method="POST" action="/login/verify-otp-pass">
+			<div class="mb-3">
+				<input type="hidden" name="email" th:value="${email}" />
+			</div>
+			<div class="mb-3">
+				<label for="otp" class="form-label">Nhập Mã OTP Gửi Tới
+					Email</label> <input type="text" class="form-control" id="otp" name="otp"
+					required />
+			</div>
+			<div class="mb-3">
+				<label for="newPassword" class="form-label">Nhập Mật Khẩu
+					Mới</label> <input type="password" class="form-control" id="newPassword"
+					name="newPassword" required />
+			</div>
+			<div class="btn-container">
+				<button type="submit" class="btn btn-primary">Xác Nhận</button>
+				<a href="/login" class="btn btn-secondary">Thoát</a>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

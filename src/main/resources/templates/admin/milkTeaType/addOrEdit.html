@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>QUẢN LÝ LOẠI TRÀ SỮA</title>
+
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="@{/templates/admin/css/styles.css}" rel="stylesheet" />
+<link href="@{/templates/admin/css/my-style.css}" rel="stylesheet" />
+
+<!-- Font Awesome for icons -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+	crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed">
+
+	<section class="row">
+		<div class="col-6 offset-3 mt-4">
+			<!-- Form cho milkTeaType -->
+			<form th:action="@{/admin/milkTeaType/saveOrUpdate}" method="POST">
+				<div class="card">
+					<div class="card-header">
+						<h2
+							th:text="${milkTeaType.isEdit ? 'Edit Milk Tea Type' : 'Add New Milk Tea Type'}"></h2>
+					</div>
+					<div class="card-body">
+						<!-- ID Type -->
+						<div class="mb-3">
+							<label for="idType" class="form-label">ID Type:</label> <input
+								type="text" class="form-control" id="idType"
+								name="milkTeaTypeID" th:value="${milkTeaType.milkTeaTypeID}"
+								readonly="readonly" placeholder="Type ID">
+						</div>
+
+						<!-- Milk Tea Type Name -->
+						<div class="mb-3">
+							<label for="name" class="form-label">Milk Tea Type Name:</label>
+							<input type="text" class="form-control" id="name"
+								name="milkTeaTypeName" th:value="${milkTeaType.milkTeaTypeName}"
+								placeholder="Milk Tea Type Name" required>
+						</div>
+					</div>
+
+					<div class="card-footer text-muted">
+						<a href="#" th:href="@{/admin/milkTeaType/add}"
+							class="btn btn-secondary"> <i class="fas fa-plus"></i> New
+						</a> 
+						<a href="#" th:href="@{/admin/milkTeaType}"
+							class="btn btn-success"> <i class="fas fa-bars"></i> List
+							Milk Tea Types
+						</a>
+						<button type="submit" class="btn btn-primary">
+							<i class="fas fa-save"></i> <span
+								th:text="${milkTeaType.isEdit ? 'Update' : 'Save'}"></span>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+
+	<!-- Bootstrap JS and dependencies -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

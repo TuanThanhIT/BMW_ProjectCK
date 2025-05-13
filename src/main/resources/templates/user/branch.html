@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{user/layout-user.html}">
+<body>
+	<section layout:fragment="content">
+		<div class="container-xxl py-5">
+			<div class="container">
+				<div class="navbar-container">
+					<div class="product-filter">
+						<form method="GET" action="/user/branch"
+							class="d-flex align-items-center">
+							<div class="sort-dropdown me-3">
+								<select class="form-select form-select-sm mb-3" id="city"
+									name="city">
+									<option value="" selected>Chọn tỉnh thành</option>
+									<!-- Các tỉnh thành khác sẽ được thêm vào đây -->
+								</select> <input type="hidden" name="keyword" th:value="${keyword}" /> <input
+									type="hidden" name="pageNo" th:value="${currentPage}" />
+							</div>
+							<!-- Nút "Tất cả" nằm bên cạnh combobox -->
+							<div>
+								<button class="btn btn-secondary" id="allBranchesBtn">Tất
+									cả</button>
+							</div>
+						</form>
+					</div>
+
+					<!-- Phần tìm kiếm và sắp xếp bên trái -->
+					<div class="search-sort-container d-flex align-items-center">
+						<form action="/user/branch" method="get">
+							<div class="search-bar-container">
+								<input type="text" name="keyword" class="search-bar"
+									placeholder="Tìm kiếm..." th:value="${keyword}" /> <input
+									type="hidden" name="cityId" th:value="${cityId}" /> <input
+									type="hidden" name="cityName" th:value="${cityName}" />
+								<button class="search-submit" type="submit">
+									<i class="fa fa-search"></i>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="section-title text-center mx-auto wow fadeInUp"
+				data-wow-delay="0.1s" style="max-width: 500px">
+				<h1 class="display-6">Cửa hàng của tôi</h1>
+			</div>
+
+			<!-- Hiển thị danh sách chi nhánh nếu có -->
+			<div class="row g-4" th:if="${!#lists.isEmpty(listBranch)}">
+				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s"
+					th:each="branch : ${listBranch}">
+					<div class="store-item position-relative text-center">
+						<img th:src="'/uploads/' + ${branch.images.split(',')[0]}"
+							alt="BranchMilkTea" width="240" height="150" />
+						<div class="p-4">
+							<h4 class="mb-3" th:text="${branch.branchName}"></h4>
+							<p th:text="${branch.introduction}"></p>
+						</div>
+						<div class="store-overlay">
+							<a th:href="@{/user/branch/detail/{id}(id=${branch.branchID})}"
+								class="btn btn-primary rounded-pill py-2 px-4 m-2"> Xem Chi
+								Tiết <i class="fa fa-arrow-right ms-2"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Phần phân trang -->
+			<div th:if="${!#lists.isEmpty(listBranch) and totalPage > 0}"
+				class="box-footer clearfix">
+				<ul class="pagination pagination-sm no-margin pull-right">
+					<li th:if="${currentPage > 1}"><a
+						th:href="@{/user/branch(pageNo=${currentPage-1}, keyword=${keyword}, cityId=${cityId}, cityName=${cityName})}">&#8592;</a>
+					</li>
+					<li th:each="i : ${#numbers.sequence(1, totalPage)}"
+						th:classappend="${currentPage == i ? 'active' : ''}"><a
+						th:href="@{/user/branch(pageNo=${i}, keyword=${keyword}, cityId=${cityId}, cityName=${cityName})}"
+						th:text="${i}"></a></li>
+					<li th:if="${currentPage < totalPage}"><a
+						th:href="@{/user/branch(pageNo=${currentPage+1}, keyword=${keyword}, cityId=${cityId}, cityName=${cityName})}">&#8594;</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

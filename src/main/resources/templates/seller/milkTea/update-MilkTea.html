@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{seller/layout-seller.html}">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Update MilkTea</title>
+<link rel="stylesheet" href="/css/seller.css">
+<link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
+	rel="stylesheet">
+<script src="/script/seller.js"></script>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container mt-5">
+			<h2 class="text-center mb-4">Cập nhật thông tin Trà Sữa</h2>
+			<form th:action="@{/seller/milktea/save}" th:object="${milkTea}"
+				method="post" enctype="multipart/form-data" class="background">
+				<!-- MilkTea Name -->
+				<div class="alert-content">
+					<span th:text="${alert}"></span>
+				</div>
+				<div class="col-md-6">
+					<label for="milkTeaName" class="form-label">Tên Trà Sữa</label> <input
+						type="text" th:field="*{milkTeaName}" class="form-control"
+						id="milkTeaName" placeholder="Nhập tên trà sữa" required />
+				</div>
+
+				<!-- MilkTea Type -->
+				<div class="col-md-6">
+					<label for="typeMilkTea" class="form-label">Loại Trà Sữa</label> <select
+						th:field="*{milkTeaType.milkTeaTypeID}" class="form-select"
+						id="typeMilkTea" required>
+						<option th:each="type : ${listType}"
+							th:value="${type.milkTeaTypeID}"
+							th:text="${type.milkTeaTypeName}"></option>
+					</select>
+				</div>
+
+				<!-- Price -->
+				<div class="col-md-6">
+					<label for="price" class="form-label">Giá</label> <input
+						type="number" th:field="*{price}" class="form-control" id="price"
+						placeholder="Nhập giá" required />
+				</div>
+
+				<!-- Discount Price -->
+				<div class="col-md-6">
+					<label for="discountPrice" class="form-label">Giá Khuyến
+						Mãi</label> <input type="number" th:field="*{discountPrice}"
+						class="form-control" id="discountPrice"
+						placeholder="Nhập giá khuyến mãi" />
+				</div>
+				
+				<div class="col-md-6">
+					<label for="stockQuantity" class="form-label">Hàng tồn kho</label> 
+					    <input type="number" name="stockQuantity" class="form-control" id="stockQuantity" placeholder="Nhập số hàng tồn kho" />
+
+				</div>
+
+				<!-- Description -->
+				<div class="col-12">
+					<label for="description" class="form-label">Mô Tả</label>
+					<textarea th:field="*{description}" class="form-control"
+						id="description" rows="3" placeholder="Nhập mô tả"></textarea>
+				</div>
+
+				<!-- Introduction -->
+				<div class="col-12">
+					<label for="introduction" class="form-label">Giới Thiệu</label>
+					<textarea th:field="*{introduction}" class="form-control"
+						id="introduction" rows="2" placeholder="Nhập giới thiệu"></textarea>
+				</div>
+
+				<!-- Images Upload -->
+				<div class="col-12">
+					<label for="images" class="form-label">Ảnh</label> <input
+						type="file" name="images" id="images" class="form-control"
+						multiple />
+				</div>
+				<input type="hidden" th:field="*{milkTeaID}" />
+				<!-- Submit Button -->
+				<div class="col-12 text-center">
+					<button type="submit" class="btn btn-primary">Lưu</button>
+				</div>
+				
+			</form>
+		</div>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	</div>
+</body>
+</html>

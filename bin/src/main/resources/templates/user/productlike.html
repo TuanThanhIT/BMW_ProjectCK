@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{user/layout-user.html}">
+
+<body>
+	<section layout:fragment="content">
+		<div class="container-xxl py-5">
+			<div class="container">
+				<div class="navbar-container">
+					<!-- Tiêu đề trang -->
+					<div class="section-title text-center mx-auto wow fadeInUp"
+						data-wow-delay="0.1s" style="max-width: 500px">
+						<h1 class="display-6">Sản phẩm yêu thích</h1>
+					</div>
+				</div>
+
+				<!-- Nếu không có sản phẩm yêu thích -->
+				<div th:if="${#lists.isEmpty(favoriteProducts)}" class="text-center">
+					<p>Chưa có sản phẩm yêu thích nào.</p>
+				</div>
+
+				<!-- Vòng lặp hiển thị các sản phẩm yêu thích -->
+				<div class="row g-4">
+					<div th:each="milkTea : ${favoriteProducts}"
+						class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+						<div class="store-item position-relative text-center">
+							<div class="product-item">
+								<!-- Hình ảnh sản phẩm -->
+								<img th:src="'/uploads/' + ${milkTea.image.split(',')[0]}"
+									alt="Milk Tea" width="240" height="150" />
+
+								<div class="p-4">
+									<!-- Đánh giá sản phẩm -->
+									<!-- Tên và mô tả sản phẩm -->
+									<h5 class="mb-3" th:text="${milkTea.milkTeaName}">Tên trà
+										sữa</h5>
+									<p th:text="${milkTea.introduction}">Giới thiệu sản phẩm</p>
+									<!-- Giá sản phẩm -->
+									<h5 class="text-primary" th:text="${milkTea.discountPrice} +đ"></h5>
+								</div>
+
+								<div class="store-overlay">
+									<a
+										th:href="@{/user/product/detail/{id}(id=${milkTea.milkTeaID})}"
+										class="btn btn-primary rounded-pill py-2 px-4 m-2"> Xem
+										Chi Tiết <i class="fa fa-arrow-right ms-2"></i>
+									</a> <a href="#" class="btn btn-dark rounded-pill py-2 px-4 m-2">
+										Thêm vào giỏ <i class="fa fa-cart-plus ms-2"></i>
+									</a> <input type="hidden" class="milkTeaID"
+										th:value="${milkTea.milkTeaID}" /> <input type="hidden"
+										class="userID" th:value="${user.userID}" />
+
+									<!-- Nút yêu thích -->
+									<button class="btn rounded-pill py-2 px-4 m-2 favorite-button"
+										th:classappend="${milkTea.isFavorited ? 'btn-outline-danger active' : 'btn-outline-danger'}"
+										th:data-favorite="${milkTea.isFavorited ? 'true' : 'false'}"
+										data-milktea-id="${milkTea.milkTeaID}"
+										data-user-id="${user.userID}">
+										<i class="fa fa-heart me-2"></i> <span
+											th:text="${milkTea.isFavorited ? 'Đã yêu thích' : 'Yêu thích'}">Yêu
+											thích</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Kết thúc vòng lặp sản phẩm -->
+			</div>
+		</div>
+	</section>
+</body>
+</html>

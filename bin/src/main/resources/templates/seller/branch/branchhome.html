@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{seller/layout-seller.html}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Branch Management</title>
+<link rel="stylesheet" href="/css/seller.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/boxicons@2.1.1/css/boxicons.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script src="/script/seller.js" defer></script>
+</head>
+<body>
+
+	<div layout:fragment="content" class="container">
+		<h3>Quản lý chi nhánh cửa hàng</h3>
+		<div class="main-content">
+			<div class="info-section">
+
+				<div class="card-container">
+					<div class="card">
+						<h5>Người quản lý:</h5>
+						<p th:text="${user.fullName}"></p>
+					</div>
+					<div class="card">
+						<h5>Địa chỉ chi nhánh:</h5>
+						<p th:text="${branch.address}"></p>
+					</div>
+				</div>
+				<div class="card-container">
+					<div class="card">
+						<h5>Tên chi nhánh:</h5>
+						<p th:text="${branch.branchName}"></p>
+					</div>
+					<div class="card">
+						<h5>Giới thiệu:</h5>
+						<p th:text="${branch.introduction}"></p>
+					</div>
+				</div>
+				<div class="card-container">
+					<div class="card">
+						<h5>Thời gian mở cửa:</h5>
+						<p th:text="${branch.openTime}"></p>
+					</div>
+					<div class="card">
+						<h5>Thời gian đóng cửa:</h5>
+						<p th:text="${branch.closeTime}"></p>
+					</div>
+				</div>
+
+				<div class="card-container">
+					<div class="card full-width">
+						<h5>Mô tả:</h5>
+						<p th:text="${branch.description}"></p>
+					</div>
+				</div>
+				<div class="text-center">
+					<a th:href="@{/seller/update-branch/{id}(id=${branch.branchID})}"
+						class="btn-primary">Cập nhật thông tin</a>
+				</div>
+			</div>
+			<div class="image-section">
+				<!-- Hình ảnh đặt trong đây -->
+				<img th:src="'/uploads/' + ${branch.images.split(',')[0]}" alt="Branch Image" class="branch-image">
+				
+			</div>
+
+
+		</div>
+	</div>
+</body>
+</html>

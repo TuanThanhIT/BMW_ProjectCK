@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>QUẢN LÝ SHIPPER</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="@{/templates/admin/css/styles.css}" rel="stylesheet" />
+    <link href="@{/templates/admin/css/my-style.css}" rel="stylesheet" />
+
+    <!-- Font Awesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed">
+
+    <section class="row">
+        <div class="col-6 offset-3 mt-4">
+            <!-- Form cho shipper -->
+            <form th:action="@{/admin/shipper/saveOrUpdate}" method="POST">
+    <div class="card">
+        <div class="card-header">
+            <h2 th:text="${shipper.isEdit ? 'Add New Shipper' : 'Add New Shipper'}"></h2>
+        </div>
+        <div class="card-body">
+            <!-- ID Shipper -->
+            <div class="mb-3">
+                <label for="shipID" class="form-label">ID Shipper:</label>
+                <input type="text" class="form-control" id="shipID" name="shipID" th:value="${shipper.shipID}" readonly="readonly" placeholder="Shipper ID">
+            </div>
+
+            <!-- Chọn chi nhánh -->
+            <div class="mb-3">
+                <label for="branchID" class="form-label">Chi nhánh:</label>
+                <select name="branchID" id="branchID" class="form-control">
+                    <option th:each="branch : ${branches}" 
+                            th:value="${branch.branchID}" 
+                            th:text="${branch.address}" 
+                            th:selected="${shipper.branchID == branch.branchID}">
+                    </option>
+                </select>
+            </div>
+
+            <!-- Chọn nhà vận chuyển -->
+            <div class="mb-3">
+                <label for="deliveryID" class="form-label">Nhà vận chuyển:</label>
+                <select name="deliveryID" id="deliveryID" class="form-control">
+                    <option th:each="delivery : ${deliveries}" 
+                            th:value="${delivery.deliveryID}" 
+                            th:text="${delivery.deliveryName}" 
+                            th:selected="${shipper.deliveryID == delivery.deliveryID}">
+                    </option>
+                </select>
+            </div>
+
+           <!-- Người vận chuyển -->
+<div class="mb-3">
+    <label for="userId" class="form-label">Người vận chuyển:</label>
+    <select name="userId" id="userId" class="form-control">
+        <option th:each="user : ${users}" 
+                th:value="${user.userID}" 	
+                th:text="${user.userName}" 
+                th:selected="${shipper.userId == user.userID}">
+        </option>
+    </select>
+</div>
+
+
+           <!--   Đánh giá 
+            <div class="mb-3">
+                <label for="rateValue" class="form-label">Đánh giá:</label>
+                <div id="rateValue" class="form-control" readonly>
+                    Hiển thị sao đầy
+                    <i th:each="star : ${#numbers.sequence(1, shipper.rateValue != null ? shipper.rateValue : 3)}" 
+                       class="bi bi-star-fill text-warning"></i>
+                    Hiển thị sao rỗng
+                    <i th:each="emptyStar : ${#numbers.sequence(shipper.rateValue != null ? shipper.rateValue + 1 : 4, 5)}" 
+                       class="bi bi-star"></i>
+                </div>
+            </div> -->
+        </div>
+
+        <div class="card-footer text-muted">
+            <a href="#" th:href="@{/admin/shipper/add}" class="btn btn-secondary">New</a>
+            <a href="#" th:href="@{/admin/shipper}" class="btn btn-success">List Shippers</a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i>
+                <span th:text="${shipper.isEdit ? 'Save' : 'Save'}"></span>
+            </button>
+        </div>
+    </div>
+</form>
+
+        </div>
+    </section>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

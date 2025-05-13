@@ -1,0 +1,178 @@
+@charset "UTF-8";
+/* Phong cách chính cho trang đăng ký */
+body {
+	background-color: #ffe4e1; /* Hồng nhạt */
+	font-family: "Arial", sans-serif;
+}
+
+.container {
+	max-width: 600px;
+	margin-top: 50px;
+	background-color: #ffffff;
+	padding: 30px;
+	border-radius: 15px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Tạo bóng đổ cho form */
+}
+
+.logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.logo img {
+	max-height: 80px;
+}
+
+h1 {
+	color: #28a745; /* Màu xanh lá đặc trưng */
+	font-weight: bold;
+	text-align: center;
+	font-size: 1.5rem; /* Kích thước nhỏ lại */
+	margin-bottom: 20px;
+}
+
+.form-label {
+	font-weight: bold;
+	color: #555;
+}
+
+.form-control {
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	padding: 10px;
+	transition: all 0.3s;
+}
+
+.form-control:focus {
+	border-color: #28a745; /* Màu viền khi focus */
+	box-shadow: 0px 0px 5px rgba(40, 167, 69, 0.5);
+}
+
+.form-select {
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	padding: 10px;
+	background-color: #f1f1f1;
+}
+
+.btn-primary {
+	background-color: #28a745;
+	border-color: #28a745;
+	font-weight: bold;
+	padding: 10px 20px;
+	border-radius: 5px;
+	width: 100%;
+	transition: all 0.3s;
+}
+
+.btn-primary:hover {
+	background-color: #218838;
+	border-color: #218838;
+}
+
+.image-preview {
+	width: 150px;
+	height: 150px;
+	border: 2px dashed #28a745; /* Viền khung ảnh */
+	border-radius: 10px;
+	margin: 0 auto 15px; /* Căn giữa */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #f9f9f9;
+	overflow: hidden;
+}
+
+.image-preview img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover; /* Đảm bảo ảnh luôn khớp khung */
+}
+
+.form-check-inline {
+	display: inline-block; /* Đảm bảo các radio button nằm ngang */
+	margin-right: 20px; /* Khoảng cách giữa các radio button */
+}
+
+.alert {
+	border-radius: 5px;
+	padding: 15px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.alert .icon {
+	font-size: 1.5rem;
+	margin-right: 15px;
+}
+
+.alert-danger {
+	background-color: #f8d7da;
+	color: #721c24;
+	border-color: #f5c6cb;
+}
+
+.alert-success {
+	background-color: #d4edda;
+	color: #155724;
+	border-color: #c3e6cb;
+}
+
+.alert-warning {
+	background-color: #fff3cd;
+	color: #856404;
+	border-color: #ffeeba;
+}
+
+.alert-info {
+	background-color: #d1ecf1;
+	color: #0c5460;
+	border-color: #bee5eb;
+}
+
+.alert .icon-error {
+	color: #e74c3c;
+}
+
+.alert .icon-success {
+	color: #28a745;
+}
+
+.alert .icon-warning {
+	color: #ffc107;
+}
+
+.alert .icon-info {
+	color: #17a2b8;
+}
+
+.form-label {
+	font-weight: bold;
+	color: #495057;
+}
+
+input {
+	border-radius: 8px;
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	padding: 10px;
+	font-size: 1rem;
+	border: 1px solid #ced4da;
+}
+
+button {
+	width: 100%;
+	padding: 12px;
+	background-color: #007bff;
+	border: none;
+	color: white;
+	font-size: 1.1rem;
+	border-radius: 8px;
+	transition: background-color 0.3s;
+}
+
+button:hover {
+	background-color: #0056b3;
+}
