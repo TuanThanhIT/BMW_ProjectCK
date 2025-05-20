@@ -44,6 +44,6 @@ public interface IUserService {
 
 	User findByEmail(String email);
 
-
+	boolean checkEmailPattern(String email);
 
 }

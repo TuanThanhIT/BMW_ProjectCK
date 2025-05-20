@@ -3,6 +3,8 @@ package vn.iotstar.services.impl;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -132,6 +134,19 @@ public class UserServiceImpl implements IUserService {
 	public List<User> findByRoleID(int roleID) {
 		return userRepository.findByRoleID(roleID);
 	}
-	
+
+	@Override
+	public boolean checkEmailPattern(String email){
+		String regex = "^(?=.{1,254}$)(?=.{1,64}@)"
+				+ "(?:[A-Za-z0-9](?:[A-Za-z0-9_+'\\-]*[A-Za-z0-9])?)"
+				+ "(?:\\.(?:[A-Za-z0-9](?:[A-Za-z0-9_+'\\-]*[A-Za-z0-9])?))*"
+				+ "@"
+				+ "[A-Za-z0-9\\-]+(?:\\.[A-Za-z0-9\\-]+)*"
+				+ "(?:\\.[A-Za-z]{2,})$";
+		Pattern emailPattern = Pattern.compile(regex);
+		if (email == null) return false;
+		Matcher matcher = emailPattern.matcher(email.trim());
+		return matcher.matches();
+	}
 }
 

@@ -89,6 +89,8 @@ public class RegisterController {
 			model.addAttribute("listRole", list);
 			return "register";
 		}
+
+
 		
 		String message2 = "";
 		if (!isPasswordStrong(userDto.getPassword())) {
@@ -163,7 +165,12 @@ public class RegisterController {
 		user.setRoleID(userDto.getRoleID());
 
 		if (userService.existsByEmail(user.getEmail())) {
-			message = "Email đã tồn tại, vui lòng đăng kí email khác";
+			if(userService.checkEmailPattern(user.getEmail())) {
+				message = "Email không hợp lệ";
+			}
+			else{
+				message = "Email đã tồn tại, vui lòng đăng kí email khác";
+			}
 			model.addAttribute("recaptchaError", "Vui lòng xác thực reCAPTCHA");
 			model.addAttribute("userDto", userDto);
 			model.addAttribute("recaptchaSiteKey", recaptchaSiteKey);
