@@ -166,7 +166,7 @@ public class ShipperController {
 
 	        // Gán thông tin bổ sung
 	        if (entity.getUser() != null) {
-	            shipperModel.setUserName(entity.getUser().getUserName());
+	            shipperModel.setUserName(entity.getUser().getUsername());
 	        }
 	        if (entity.getBranch() != null) {
 	            shipperModel.setBranchID(entity.getBranch().getBranchID());

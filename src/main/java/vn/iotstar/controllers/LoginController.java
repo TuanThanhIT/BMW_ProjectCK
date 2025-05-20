@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +17,12 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.iotstar.configs.JwtTokenProvider;
 import vn.iotstar.entity.User;
 import vn.iotstar.services.IEmailService;
 import vn.iotstar.services.ILoginAttemptService;
 import vn.iotstar.services.IOtpService;
+import vn.iotstar.services.IRefreshTokenService;
 import vn.iotstar.services.IRememberMeService;
 import vn.iotstar.services.IUserService;
 
@@ -43,7 +46,19 @@ public class LoginController {
 	
 	@Autowired
 	private ILoginAttemptService loginAttemptService;
+	
+	@Autowired
+	private JwtTokenProvider jwtTokenProvider;
+	
+	@Autowired
+	private IRefreshTokenService refreshTokenService;
 
+	@Value("${jwt.expiration}")
+    private long accessTokenExpiration;
+    
+    @Value("${jwt.refreshExpiration}")
+    private long refreshTokenExpiration;
+	
 	@GetMapping
 	public String showLoginPage(HttpServletRequest request, HttpServletResponse response, Model model) {
 	    // Kiểm tra xem người dùng đã đăng nhập chưa qua session
@@ -102,12 +117,33 @@ public class LoginController {
 	    }
 
 	    // Kiểm tra thông tin đăng nhập
-	    User user = userService.login(username, password);
-	    if (user != null) {
+	    User user = userService.loadUserByUsername(username);
+	    if (user != null && passwordEncoder.matches(password, user.getPassword())) {
 	        if (user.isActive()) { // Kiểm tra tài khoản có bị khóa không
 	        	loginAttemptService.loginSucceeded(clientIP); // reset lại nếu đúng
 	            HttpSession session = request.getSession(true);
 	            session.setAttribute("account", user);
+	            
+	            // Tạo Access Token
+                String accessToken = jwtTokenProvider.generateAccessToken(username);
+                Cookie jwtCookie = new Cookie("JWT_TOKEN", accessToken);
+                jwtCookie.setHttpOnly(true);
+                jwtCookie.setSecure(request.isSecure());
+                jwtCookie.setPath("/");
+                jwtCookie.setMaxAge((int)(accessTokenExpiration / 1000)); 
+                jwtCookie.setAttribute("SameSite", "Strict");
+                response.addCookie(jwtCookie);
+	            
+                // Tạo và lưu Refresh Token
+                String refreshToken = jwtTokenProvider.generateRefreshToken(username);
+                refreshTokenService.createRefreshToken(username, refreshToken);
+                Cookie refreshCookie = new Cookie("REFRESH_TOKEN", refreshToken);
+                refreshCookie.setHttpOnly(true);
+                refreshCookie.setSecure(request.isSecure());
+                refreshCookie.setPath("/");
+                refreshCookie.setMaxAge((int)(refreshTokenExpiration / 1000)); 
+                refreshCookie.setAttribute("SameSite", "Strict");
+                response.addCookie(refreshCookie);
 
 	            // Nếu chọn nhớ mật khẩu thì lưu cookie
 	            if (isRememberMe) {
