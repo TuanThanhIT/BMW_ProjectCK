@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,11 +26,7 @@ import jakarta.validation.Valid;
 import vn.iotstar.entity.Role;
 import vn.iotstar.entity.User;
 import vn.iotstar.model.UserDto;
-import vn.iotstar.services.IEmailService;
-import vn.iotstar.services.IOtpService;
-import vn.iotstar.services.IRateLimiterService;
-import vn.iotstar.services.IRoleService;
-import vn.iotstar.services.IUserService;
+import vn.iotstar.services.*;
 import vn.iotstar.utils.PathConstants;
 
 @Controller
@@ -57,6 +54,12 @@ public class RegisterController {
 	@Autowired
 	private HttpServletRequest request;
 
+	@Autowired
+	private IRecaptchaService recaptchaService;
+
+	@Value("${recaptcha.key}")
+	private String recaptchaSiteKey;
+
 	// Hiển thị trang đăng ký
 	@GetMapping
 	public String showRegisterPage(Model model) {
@@ -65,11 +68,26 @@ public class RegisterController {
 		model.addAttribute("listRole", list);
 		UserDto userDto = new UserDto();
 		model.addAttribute("userDto", userDto);
+		model.addAttribute("recaptchaSiteKey", recaptchaSiteKey);
 		return "register";
 	}
 
 	@PostMapping
-	public String createUser(@Valid @ModelAttribute UserDto userDto, Model model) {
+	public String createUser(@Valid @ModelAttribute UserDto userDto,
+							 @RequestParam("g-recaptcha-response") String captchaResponse,
+							 Model model) {
+
+		String clientIp = request.getRemoteAddr();
+
+		// 1) Kiểm tra reCAPTCHA
+		if (!recaptchaService.verify(captchaResponse, clientIp)) {
+			model.addAttribute("recaptchaError", "Vui lòng xác thực reCAPTCHA");
+			model.addAttribute("userDto", userDto);
+			model.addAttribute("recaptchaSiteKey", recaptchaSiteKey);
+			List<Role> list = roleService.findByRoleNameNot("Admin");
+			model.addAttribute("listRole", list);
+			return "register";
+		}
 		
 		String message2 = "";
 		if (!isPasswordStrong(userDto.getPassword())) {
