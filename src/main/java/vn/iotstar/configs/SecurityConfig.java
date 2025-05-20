@@ -30,7 +30,7 @@ public class SecurityConfig {
             .requiresChannel(channel -> channel
                 .anyRequest().requiresSecure()) // Ép buộc HTTPS
             .authorizeHttpRequests(auth -> auth
-            	.requestMatchers("/", "/login/**", "/register/**", "/refresh-token", "/css/**", "/js/**", "/img/**", "/lib/**", "/script/**", "/scss/**").permitAll()// Cho phép đăng nhập/đăng ký
+            	.requestMatchers("/", "/login/**", "/register/**", "/css/**", "/js/**", "/img/**", "/lib/**", "/script/**", "/scss/**").permitAll()// Cho phép đăng nhập/đăng ký
             	.requestMatchers("/admin/**").hasRole("ADMIN")
             	.requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/seller/**").hasRole("SELLER")

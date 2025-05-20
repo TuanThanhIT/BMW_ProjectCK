@@ -52,14 +52,16 @@ public class JwtTokenProvider {
     public boolean validateToken(String token) {
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+            System.out.println("Token validated successfully: " + token);
             return true;
         } catch (ExpiredJwtException e) {
-            // Token hết hạn
+            System.err.println("JWT token expired: " + e.getMessage());
             return false;
         } catch (SignatureException | MalformedJwtException e) {
-            // Token không hợp lệ
+            System.err.println("Invalid JWT token: " + e.getMessage());
             return false;
         } catch (Exception e) {
+            System.err.println("Token validation error: " + e.getMessage());
             return false;
         }
     }
