@@ -12,6 +12,7 @@ import vn.iotstar.entity.Cart;
 @Repository
 public interface CartRepository extends JpaRepository<Cart,Integer>{
 	Optional<Cart> findByUserUserID(int userID);
+	
 	@Query("SELECT SUM(c.sellQuantity) FROM BranchMilkTea c")
     Long getTotalProductCount();
 	
