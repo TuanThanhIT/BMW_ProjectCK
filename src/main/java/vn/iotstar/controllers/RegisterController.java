@@ -90,8 +90,6 @@ public class RegisterController {
 			return "register";
 		}
 
-
-		
 		String message2 = "";
 		if (!isPasswordStrong(userDto.getPassword())) {
 		    message2 = "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt.";
