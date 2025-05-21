@@ -171,15 +171,19 @@ public class LoginController {
 	    cookie.setHttpOnly(true); // Chỉ có thể truy cập cookie từ server, không từ JavaScript
 	    cookie.setSecure(true);   // Cookie chỉ được gửi qua kết nối HTTPS
 	    cookie.setMaxAge(7 * 24 * 60 * 60); // Cookie sống 7 ngày
+	    cookie.setAttribute("SameSite", "Strict"); // Nếu có
 	    cookie.setPath("/"); // Áp dụng cho toàn bộ các URL trong domain
 	    response.addCookie(cookie);
 	}
 
 	// Xóa cookie khi không chọn "Nhớ mật khẩu"
 	private void deleteRememberMeCookie(HttpServletResponse response) {
-	    Cookie cookie = new Cookie("REMEMBER_ME_TOKEN", ""); // Xóa cookie nhớ mật khẩu
+		Cookie cookie = new Cookie("REMEMBER_ME_TOKEN", "");
 	    cookie.setMaxAge(0); // Xóa cookie ngay lập tức
-	    cookie.setPath("/"); // Áp dụng cho toàn bộ các URL trong domain
+	    cookie.setPath("/");
+	    cookie.setHttpOnly(true); // Bổ sung!
+	    cookie.setSecure(true);   // Bổ sung nếu dùng HTTPS!
+	    cookie.setAttribute("SameSite", "Strict"); // Nếu có
 	    response.addCookie(cookie);
 	}
 

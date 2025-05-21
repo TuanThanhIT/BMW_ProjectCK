@@ -42,7 +42,21 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/login")
                 .deleteCookies("JSESSIONID", "JWT_TOKEN", "REFRESH_TOKEN")
                 .permitAll())
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+	        .headers(headers -> headers
+	                .contentSecurityPolicy(csp -> csp
+	                    .policyDirectives(
+	                        "default-src 'self'; " +
+	                        "script-src 'self' https://code.jquery.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://ajax.googleapis.com https://static.elfsight.com https://cdn2.fptshop.com.vn https://www.youtube.com https://unpkg.com https://stackpath.bootstrapcdn.com; " +
+	                        "style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://stackpath.bootstrapcdn.com https://use.fontawesome.com https://unpkg.com; " +
+	                        "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://use.fontawesome.com https://unpkg.com; " +
+	                        "img-src 'self' data: https://cdn2.fptshop.com.vn https://source.unsplash.com https://www.youtube.com https://oola.vn https://www.facebook.com https://www.twitter.com https://www.instagram.com https://undraw.co; " +
+	                        "object-src 'none'; " +
+	                        "frame-ancestors 'none'; " +
+	                        "base-uri 'self';"
+	                    )
+	                )
+	            );
 
         return http.build();
     }
