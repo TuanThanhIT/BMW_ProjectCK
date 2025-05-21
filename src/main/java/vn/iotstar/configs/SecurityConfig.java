@@ -34,6 +34,7 @@ public class SecurityConfig {
             	.requestMatchers("/admin/**").hasRole("ADMIN")
             	.requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/seller/**").hasRole("SELLER")
+                .requestMatchers("/shipper/**").hasRole("SHIPPER")
                 .anyRequest().authenticated()
             )
             .logout(logout -> logout
