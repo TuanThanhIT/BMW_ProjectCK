@@ -61,12 +61,7 @@ public class LoginController {
 	
 	@GetMapping
 	public String showLoginPage(HttpServletRequest request, HttpServletResponse response, Model model) {
-//	    // Kiểm tra xem người dùng đã đăng nhập chưa qua session
-//	    HttpSession session = request.getSession(false);
-//	    if (session != null && session.getAttribute("account") != null) {
-//	        return "redirect:/user/home"; // Nếu đã đăng nhập thì chuyển hướng tới trang đích
-//	    }
-
+		
 	    Cookie[] cookies = request.getCookies();
 		
 	    // Kiểm tra cookie nhớ mật khẩu
@@ -122,8 +117,6 @@ public class LoginController {
 	    if (user != null && passwordEncoder.matches(password, user.getPassword())) {
 	        if (user.isActive()) { // Kiểm tra tài khoản có bị khóa không
 	        	loginAttemptService.loginSucceeded(clientIP); // reset lại nếu đúng
-//	            HttpSession session = request.getSession(true);
-//	            session.setAttribute("account", user);
 	            
 	            // Tạo Access Token
                 String accessToken = jwtTokenProvider.generateAccessToken(username);

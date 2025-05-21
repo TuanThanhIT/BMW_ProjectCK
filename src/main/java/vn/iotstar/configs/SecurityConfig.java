@@ -25,8 +25,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable()) // Tắt CSRF vì dùng JWT
-            .sessionManagement(session -> session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Không dùng session
+//            .sessionManagement(session -> session
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Không dùng session
             .requiresChannel(channel -> channel
                 .anyRequest().requiresSecure()) // Ép buộc HTTPS
             .authorizeHttpRequests(auth -> auth
@@ -36,6 +36,11 @@ public class SecurityConfig {
                 .requestMatchers("/seller/**").hasRole("SELLER")
                 .anyRequest().authenticated()
             )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+                .deleteCookies("JSESSIONID", "JWT_TOKEN", "REFRESH_TOKEN")
+                .permitAll())
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

@@ -37,7 +37,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
-
+   	
         String token = null;
         Cookie[] cookies = request.getCookies();
 
@@ -73,6 +73,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 String username = refreshTokenService.findByToken(refreshToken).get().getUsername();
                 String newAccessToken = jwtTokenProvider.generateAccessToken(username);
 
+                // Xoá refresh token cũ
+                refreshTokenService.revokeRefreshToken(refreshToken);
+                // Sinh refresh token mới
+                String newRefreshToken = jwtTokenProvider.generateRefreshToken(username);
+                refreshTokenService.createRefreshToken(username, newRefreshToken);
+
                 // Gửi lại JWT mới cho client
                 Cookie jwtCookie = new Cookie("JWT_TOKEN", newAccessToken);
                 jwtCookie.setHttpOnly(true);
@@ -81,6 +87,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 jwtCookie.setMaxAge((int)(accessTokenExpiration / 1000)); // 15 phút
                 jwtCookie.setAttribute("SameSite", "Strict");
                 response.addCookie(jwtCookie);
+
+                Cookie refreshCookie = new Cookie("REFRESH_TOKEN", newRefreshToken);
+                refreshCookie.setHttpOnly(true);
+                refreshCookie.setSecure(request.isSecure());
+                refreshCookie.setPath("/");
+                refreshCookie.setMaxAge((int)(refreshTokenExpiration / 1000)); 
+                refreshCookie.setAttribute("SameSite", "Strict");
+                response.addCookie(refreshCookie);
 
                 // Tiếp tục filter chain sau khi làm mới token
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);

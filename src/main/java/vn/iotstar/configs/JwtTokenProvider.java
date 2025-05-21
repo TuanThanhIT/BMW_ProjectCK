@@ -34,9 +34,14 @@ public class JwtTokenProvider {
                 .compact();
     }
     
-    // Tạo Refresh Token
+    // Tạo Refresh Token (JWT)
     public String generateRefreshToken(String username) {
-        return UUID.randomUUID().toString(); // Sử dụng UUID làm Refresh Token
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + refreshTokenExpiration))
+                .signWith(SignatureAlgorithm.HS512, secretKey)
+                .compact();
     }
 
     // Lấy username từ JWT
