@@ -142,6 +142,28 @@
 				errorMessage.style.display = 'none';
 			}
 		}
+
+		// Add real-time password validation
+		document.addEventListener('DOMContentLoaded', function() {
+			const password = document.getElementById('password');
+			const confirmPassword = document.getElementById('confirmPassword');
+			const errorMessage = document.getElementById('password-error');
+
+			function checkPasswordMatch() {
+				if (password.value && confirmPassword.value) {
+					if (password.value !== confirmPassword.value) {
+						errorMessage.style.display = 'block';
+					} else {
+						errorMessage.style.display = 'none';
+					}
+				} else {
+					errorMessage.style.display = 'none';
+				}
+			}
+
+			password.addEventListener('input', checkPasswordMatch);
+			confirmPassword.addEventListener('input', checkPasswordMatch);
+		});
 	</script>
 
 	<!-- JavaScript -->
