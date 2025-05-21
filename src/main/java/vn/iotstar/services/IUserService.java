@@ -5,11 +5,11 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import vn.iotstar.entity.User;
-import vn.iotstar.model.UserDto;
 
-public interface IUserService {
+public interface IUserService extends UserDetailsService {
 
 	Optional<User> findById(Integer id);
 
@@ -17,7 +17,7 @@ public interface IUserService {
 
 	User addUser(User user);
 
-	User login(String username, String password);
+//	User login(String username, String password);
 
 	//boolean checkUserNameExists(String username);
 	
@@ -44,6 +44,6 @@ public interface IUserService {
 
 	User findByEmail(String email);
 
-
+	User loadUserByUsername(String username);
 
 }
