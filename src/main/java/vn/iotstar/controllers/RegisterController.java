@@ -32,12 +32,6 @@ import javax.imageio.ImageIO;
 public class RegisterController {
 
 	@Autowired private IRoleService roleService;
-	@Autowired private IUserService userService;
-	@Autowired private IOtpService otpService;
-	@Autowired private IEmailService emailService;
-	@Autowired private PasswordEncoder passwordEncoder;
-	@Autowired private IRateLimiterService rateLimiterService;
-	@Autowired private HttpServletRequest request;
 
 	@Autowired
 	private IUserService userService;
@@ -65,7 +59,6 @@ public class RegisterController {
 
 	// Hiển thị trang đăng ký
 	@GetMapping
-	public String showRegisterPage(Model model) {
 	public String showRegisterForm(Model model) {
 		List<Role> roles = roleService.findByRoleNameNot("Admin");
 		model.addAttribute("listRole", roles);
@@ -94,14 +87,14 @@ public class RegisterController {
 
 		String message2 = "";
 		if (!isPasswordStrong(userDto.getPassword())) {
-			alert = "Mật khẩu cần ít nhất 8 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt.";
-			model.addAttribute("alert", alert);
+			message2 = "Mật khẩu cần ít nhất 8 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt.";
+			model.addAttribute("alert", message2);
 			return "register";
 		}
 
 		// Bước 2: Giới hạn tần suất gửi yêu cầu
-		String clientIp = rateLimiterService.getClientIP(request);
-		Bucket bucket = rateLimiterService.resolveBucket(clientIp);
+		String ip = rateLimiterService.getClientIP(request);
+		Bucket bucket = rateLimiterService.resolveBucket(ip);
 		if (!bucket.tryConsume(1)) {
 			model.addAttribute("alert", "Bạn đã gửi quá nhiều yêu cầu. Vui lòng thử lại sau.");
 			return "register";
@@ -127,6 +120,7 @@ public class RegisterController {
 		}
 
 		// Bước 4: Lưu file tạm và kiểm tra MIME + ảnh thật
+		String message = "";
 		String fileName = System.currentTimeMillis() + "_" + originalFilename;
 		Path uploadPath = Paths.get(PathConstants.UPLOAD_DIRECTORY);
 
