@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +17,12 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.iotstar.configs.JwtTokenProvider;
 import vn.iotstar.entity.User;
 import vn.iotstar.services.IEmailService;
 import vn.iotstar.services.ILoginAttemptService;
 import vn.iotstar.services.IOtpService;
+import vn.iotstar.services.IRefreshTokenService;
 import vn.iotstar.services.IRememberMeService;
 import vn.iotstar.services.IUserService;
 
@@ -43,17 +46,25 @@ public class LoginController {
 	
 	@Autowired
 	private ILoginAttemptService loginAttemptService;
+	
+	@Autowired
+	private JwtTokenProvider jwtTokenProvider;
+	
+	@Autowired
+	private IRefreshTokenService refreshTokenService;
 
+	@Value("${jwt.expiration}")
+    private long accessTokenExpiration;
+    
+    @Value("${jwt.refreshExpiration}")
+    private long refreshTokenExpiration;
+	
 	@GetMapping
 	public String showLoginPage(HttpServletRequest request, HttpServletResponse response, Model model) {
-	    // Kiểm tra xem người dùng đã đăng nhập chưa qua session
-	    HttpSession session = request.getSession(false);
-	    if (session != null && session.getAttribute("account") != null) {
-	        return "redirect:/user/home"; // Nếu đã đăng nhập thì chuyển hướng tới trang đích
-	    }
-
-	    // Kiểm tra cookie nhớ mật khẩu
+		
 	    Cookie[] cookies = request.getCookies();
+		
+	    // Kiểm tra cookie nhớ mật khẩu
 	    String username = "";
 	    boolean rememberMe = false;
 
@@ -102,12 +113,37 @@ public class LoginController {
 	    }
 
 	    // Kiểm tra thông tin đăng nhập
-	    User user = userService.login(username, password);
-	    if (user != null) {
+	    User user = userService.loadUserByUsername(username);
+	    if (user != null && passwordEncoder.matches(password, user.getPassword())) {
 	        if (user.isActive()) { // Kiểm tra tài khoản có bị khóa không
 	        	loginAttemptService.loginSucceeded(clientIP); // reset lại nếu đúng
-	            HttpSession session = request.getSession(true);
-	            session.setAttribute("account", user);
+	            
+	            // Tạo Access Token
+                String accessToken = jwtTokenProvider.generateAccessToken(username);
+                /*Cookie jwtCookie = new Cookie("JWT_TOKEN", accessToken);
+                jwtCookie.setHttpOnly(true);
+                jwtCookie.setSecure(request.isSecure());
+                jwtCookie.setPath("/");
+                jwtCookie.setMaxAge((int)(accessTokenExpiration / 1000)); 
+                jwtCookie.setAttribute("SameSite", "Strict");*/
+				String jwtCookieValue = "JWT_TOKEN=" + accessToken +
+						"; Path=/; HttpOnly; Secure; Max-Age=" + (accessTokenExpiration / 1000) +
+						"; SameSite=Strict";
+				response.addHeader("Set-Cookie", jwtCookieValue);
+	            
+                // Tạo và lưu Refresh Token
+                String refreshToken = jwtTokenProvider.generateRefreshToken(username);
+                refreshTokenService.createRefreshToken(username, refreshToken);
+                /*Cookie refreshCookie = new Cookie("REFRESH_TOKEN", refreshToken);
+                refreshCookie.setHttpOnly(true);
+                refreshCookie.setSecure(request.isSecure());
+                refreshCookie.setPath("/");
+                refreshCookie.setMaxAge((int)(refreshTokenExpiration / 1000)); 
+                refreshCookie.setAttribute("SameSite", "Strict");*/
+				String refreshCookieValue = "REFRESH_TOKEN=" + refreshToken +
+						"; Path=/; HttpOnly; Secure; Max-Age=" + (refreshTokenExpiration / 1000) +
+						"; SameSite=Strict";
+				response.addHeader("Set-Cookie", refreshCookieValue);
 
 	            // Nếu chọn nhớ mật khẩu thì lưu cookie
 	            if (isRememberMe) {
@@ -137,20 +173,29 @@ public class LoginController {
 
 	    rememberMeService.saveToken(username, token, expiryDate); // Lưu vào DB
 
-	    Cookie cookie = new Cookie("REMEMBER_ME_TOKEN", token);
+	    /*Cookie cookie = new Cookie("REMEMBER_ME_TOKEN", token);
 	    cookie.setHttpOnly(true); // Chỉ có thể truy cập cookie từ server, không từ JavaScript
 	    cookie.setSecure(true);   // Cookie chỉ được gửi qua kết nối HTTPS
 	    cookie.setMaxAge(7 * 24 * 60 * 60); // Cookie sống 7 ngày
-	    cookie.setPath("/"); // Áp dụng cho toàn bộ các URL trong domain
-	    response.addCookie(cookie);
+	    cookie.setAttribute("SameSite", "Strict"); // Nếu có
+	    cookie.setPath("/"); // Áp dụng cho toàn bộ các URL trong domain*/
+		String cookieValue = "REMEMBER_ME_TOKEN=" + token +
+				"; Path=/; HttpOnly; Secure; Max-Age=" + (7 * 24 * 60 * 60) +
+				"; SameSite=Strict";
+
+		response.addHeader("Set-Cookie", cookieValue);
 	}
 
 	// Xóa cookie khi không chọn "Nhớ mật khẩu"
 	private void deleteRememberMeCookie(HttpServletResponse response) {
-	    Cookie cookie = new Cookie("REMEMBER_ME_TOKEN", ""); // Xóa cookie nhớ mật khẩu
+		/*Cookie cookie = new Cookie("REMEMBER_ME_TOKEN", "");
 	    cookie.setMaxAge(0); // Xóa cookie ngay lập tức
-	    cookie.setPath("/"); // Áp dụng cho toàn bộ các URL trong domain
-	    response.addCookie(cookie);
+	    cookie.setPath("/");
+	    cookie.setHttpOnly(true); // Bổ sung!
+	    cookie.setSecure(true);   // Bổ sung nếu dùng HTTPS!
+	    cookie.setAttribute("SameSite", "Strict"); // Nếu có*/
+		String cookieValue = "REMEMBER_ME_TOKEN=; Path=/; HttpOnly; Secure; Max-Age=0; SameSite=Strict";
+		response.addHeader("Set-Cookie", cookieValue);
 	}
 
 
