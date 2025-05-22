@@ -37,8 +37,9 @@ public class SecurityConfig {
 				)
 				.logout(logout -> logout
 						.logoutUrl("/logout")
-						.logoutSuccessUrl("/login")
-						.deleteCookies("JSESSIONID", "JWT_TOKEN", "REFRESH_TOKEN")
+						.logoutSuccessHandler(new CustomLogoutSuccessHandler())
+						.invalidateHttpSession(true)
+						.clearAuthentication(true)
 						.permitAll())
 				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 				.headers(headers -> headers
@@ -52,7 +53,8 @@ public class SecurityConfig {
 												"frame-src 'self' https://www.google.com; " + // Thêm frame-src cho iframe reCAPTCHA
 												"connect-src 'self' https://www.google.com; " +
 												"object-src 'none'; " +
-												"base-uri 'self';"
+												"base-uri 'self'; " +
+												"frame-ancestors 'none';"
 								)
 						)
 				);
