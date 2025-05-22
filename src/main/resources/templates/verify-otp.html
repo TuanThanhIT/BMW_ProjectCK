@@ -8,6 +8,8 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet" />
 <link rel="stylesheet" href="/css/verify-otp.css">
+	<!-- Google reCAPTCHA -->
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -26,6 +28,13 @@
 			<div class="form-group">
 				<label for="otp" class="form-label">Mã OTP</label> <input
 					type="text" id="otp" name="otp" class="form-control" required />
+			</div>
+
+			<!--Recaptcha-->
+			<div class="mb-3" th:if="${showRecaptcha}">
+				<div class="g-recaptcha" th:data-sitekey="${recaptchaSiteKey}"></div>
+				<div th:if="${recaptchaError != null}" class="text-danger mt-1"
+					 th:text="${recaptchaError}"></div>
 			</div>
 
 			<button type="submit" class="btn btn-primary">Xác Nhận OTP</button>

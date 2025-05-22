@@ -7,7 +7,9 @@ import java.nio.file.*;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,21 +39,60 @@ public class RegisterController {
 	@Autowired private IRateLimiterService rateLimiterService;
 	@Autowired private HttpServletRequest request;
 
-	// Hiển thị form đăng ký
+	@Autowired
+	private IUserService userService;
+
+	@Autowired
+	private IOtpService otpService; // Inject OtpService
+
+	@Autowired
+	private IEmailService emailService;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private IRateLimiterService rateLimiterService;
+
+	@Autowired
+	private HttpServletRequest request;
+
+	@Autowired
+	private IRecaptchaService recaptchaService;
+
+	@Value("${recaptcha.key}")
+	private String recaptchaSiteKey;
+
+	// Hiển thị trang đăng ký
 	@GetMapping
+	public String showRegisterPage(Model model) {
 	public String showRegisterForm(Model model) {
 		List<Role> roles = roleService.findByRoleNameNot("Admin");
 		model.addAttribute("listRole", roles);
 		model.addAttribute("userDto", new UserDto());
+		model.addAttribute("recaptchaSiteKey", recaptchaSiteKey);
 		return "register";
 	}
 
 	// Xử lý đăng ký
 	@PostMapping
-	public String registerUser(@Valid @ModelAttribute UserDto userDto, Model model) {
-		String alert;
+	public String createUser(@Valid @ModelAttribute UserDto userDto,
+							 @RequestParam("g-recaptcha-response") String captchaResponse,
+							 Model model) {
 
-		// Bước 1: Kiểm tra mật khẩu mạnh
+		String clientIp = request.getRemoteAddr();
+
+		// 1) Kiểm tra reCAPTCHA
+		if (!recaptchaService.verify(captchaResponse, clientIp)) {
+			model.addAttribute("recaptchaError", "Vui lòng xác thực reCAPTCHA");
+			model.addAttribute("userDto", userDto);
+			model.addAttribute("recaptchaSiteKey", recaptchaSiteKey);
+			List<Role> list = roleService.findByRoleNameNot("Admin");
+			model.addAttribute("listRole", list);
+			return "register";
+		}
+
+		String message2 = "";
 		if (!isPasswordStrong(userDto.getPassword())) {
 			alert = "Mật khẩu cần ít nhất 8 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt.";
 			model.addAttribute("alert", alert);
@@ -123,7 +164,13 @@ public class RegisterController {
 
 		// Bước 5: Kiểm tra username và email
 		if (userService.existsByUserName(userDto.getUserName())) {
-			model.addAttribute("alert", "Tên đăng nhập đã tồn tại.");
+			message = "Tên đăng nhập đã tồn tại. Đăng kí không thành công";
+			model.addAttribute("recaptchaError", "Vui lòng xác thực reCAPTCHA");
+			model.addAttribute("userDto", userDto);
+			model.addAttribute("recaptchaSiteKey", recaptchaSiteKey);
+			List<Role> list = roleService.findByRoleNameNot("Admin");
+			model.addAttribute("listRole", list);
+			model.addAttribute("alert", message);
 			return "register";
 		}
 
@@ -145,7 +192,22 @@ public class RegisterController {
 		user.setActive(false);
 		user.setRoleID(userDto.getRoleID());
 
-		userService.addUser(user);
+		if (userService.existsByEmail(user.getEmail())) {
+			if(userService.checkEmailPattern(user.getEmail())) {
+				message = "Email không hợp lệ";
+			}
+			else{
+				message = "Email đã tồn tại, vui lòng đăng kí email khác";
+			}
+			model.addAttribute("recaptchaError", "Vui lòng xác thực reCAPTCHA");
+			model.addAttribute("userDto", userDto);
+			model.addAttribute("recaptchaSiteKey", recaptchaSiteKey);
+			List<Role> list = roleService.findByRoleNameNot("Admin");
+			model.addAttribute("listRole", list);
+			model.addAttribute("alert", message);
+			return "register";
+		} else {
+			userService.addUser(user);
 
 		// Bước 7: Gửi OTP
 		String otp = otpService.generateOtp(user.getEmail());
@@ -153,19 +215,57 @@ public class RegisterController {
 		String body = "Mã OTP của bạn là: " + otp + ". Mã có hiệu lực trong 5 phút.";
 		emailService.sendEmail(user.getEmail(), subject, body);
 
-		model.addAttribute("email", user.getEmail());
-		return "verify-otp";
+			// Chuyển hướng đến trang nhập OTP
+			HttpSession session = request.getSession();
+			session.setAttribute("otpAttempts", 0);     // khởi tạo đếm lần sai OTP
+			model.addAttribute("email", user.getEmail()); // Lưu email vào model để người dùng không phải nhập lại
+			return "verify-otp"; // Chuyển đến trang nhập OTP
+		}
+
 	}
 
 	// Xác minh OTP
 	@PostMapping("/verify-otp")
-	public String verifyOtp(@RequestParam String otp, @RequestParam String email, Model model) {
-		if (!otpService.validateOtp(email, otp)) {
-			model.addAttribute("alert", "Mã OTP không chính xác hoặc đã hết hạn.");
-			model.addAttribute("email", email);
-			return "verify-otp";
+	public String verifyOtp(@RequestParam String otp,
+							@RequestParam String email,
+							@RequestParam(name="g-recaptcha-response", required = false) String captchaResponse,
+							Model model) {
+		HttpSession session = request.getSession();
+		Integer attempts = (Integer) session.getAttribute("otpAttempts");
+		if (attempts == null)
+			attempts = 0;
+
+		// 1) Nếu đã sai >=3 lần, bắt require reCAPTCHA
+		if (attempts >= 3) {
+			model.addAttribute("showRecaptcha", true);
+			model.addAttribute("recaptchaSiteKey", recaptchaSiteKey);
+
+			if (captchaResponse == null || !recaptchaService.verify(captchaResponse, request.getRemoteAddr())) {
+				model.addAttribute("recaptchaError", "Vui lòng xác thực reCAPTCHA");
+				model.addAttribute("email", email);
+				return "verify-otp";
+			}
 		}
 
+		boolean isValidOtp = otpService.validateOtp(email, otp);
+		if (!isValidOtp) {
+			// Tăng biến đếm nếu nhập sai và thêm vào session
+			attempts++;
+			session.setAttribute("otpAttempts", attempts);
+			model.addAttribute("alert", "Mã OTP không chính xác hoặc đã hết hạn.");
+			model.addAttribute("email", email);
+
+			// Nếu mới đạt 3 lần, bật recaptcha
+			if (attempts >= 3) {
+				model.addAttribute("showRecaptcha", true);
+				model.addAttribute("recaptchaSiteKey", recaptchaSiteKey);
+			}
+
+			return "verify-otp"; // Quay lại trang nhập OTP
+		}
+
+		// Sau khi OTP hợp lệ, cập nhật trạng thái người dùng thành "active". Xóa counter và active user
+		session.removeAttribute("otpAttempts");
 		User user = userService.findByEmail(email);
 		if (user != null) {
 			user.setActive(true);

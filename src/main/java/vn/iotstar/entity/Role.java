@@ -23,5 +23,10 @@ public class Role {
     // Mối quan hệ 1:N với User
     @OneToMany(mappedBy = "role")  // mappedBy trỏ đến thuộc tính "role" trong lớp User
     private List<User> users;
+    
+    @Override
+    public String toString() {
+        return "Role{id=" + roleID + ", name='" + roleName + "'}"; // KHÔNG in users
+    }
 
 }

@@ -41,17 +41,13 @@
 
 		<!-- Form đăng nhập -->
 		<form action="/login" method="POST">
-			<input type="text" name="username" placeholder="Tên đăng nhập"
-				th:value="${username}" required> <input type="password"
-				name="password" placeholder="Mật khẩu" th:value="${password}"
-				required>
-
+			<input type="text" name="username" placeholder="Tên đăng nhập" th:value="${username}" required> 
+			<input type="password" name="password" placeholder="Mật khẩu" th:value="${password}" required>
+			
 			<!-- Nhớ mật khẩu và quên mật khẩu -->
 			<div class="remember-forgot">
-				<label> <input type="checkbox" name="remember"
-					th:checked="${rememberMe}"> Nhớ mật khẩu
-				</label> <a href="/login/forgot-password" class="forgot-link">Quên mật
-					khẩu?</a>
+				<label> <input type="checkbox" name="remember" th:checked="${rememberMe}"> Nhớ mật khẩu </label> 
+				<a href="/login/forgot-password" class="forgot-link">Quên mật khẩu?</a>
 			</div>
 
 			<!-- Nút Đăng nhập -->
