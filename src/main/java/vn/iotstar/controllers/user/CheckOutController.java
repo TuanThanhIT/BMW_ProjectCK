@@ -10,6 +10,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,10 +68,19 @@ public class CheckOutController {
 	private IDeliveryService deliServ;
 	@Autowired
 	private IBranchService iBranchService;//Toan
+
+	public static User getCurrentUser() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
+			return null;
+		}
+		return (User) auth.getPrincipal();
+	}
+
 	@GetMapping("/preview")
 	public String getCheckOut(HttpSession session, Model model) {
 		// Lấy thông tin người dùng từ session
-		User user = (User) session.getAttribute("account");
+		User user = getCurrentUser();
 
 		// Tìm giỏ hàng theo User ID
 		Cart cart = cartServ.findByUserId1(user.getUserID()).orElse(null);
@@ -98,7 +109,7 @@ public class CheckOutController {
 
 		System.out.println(deliveryId);
 		// Lấy thông tin người dùng từ session
-		User user = (User) session.getAttribute("account");
+		User user = getCurrentUser();
 		if (user == null) {
 			// Nếu người dùng chưa đăng nhập, chuyển hướng về trang đăng nhập
 			return new ResponseEntity<>("/login", HttpStatus.OK);
@@ -168,7 +179,7 @@ public class CheckOutController {
 			@RequestParam(required = false) Integer deliveryId, HttpServletRequest request) {
 		System.out.println(deliveryId);
 		// Lấy thông tin người dùng từ session
-		User user = (User) session.getAttribute("account");
+		User user = getCurrentUser();
 		if (user == null) {
 			// Nếu người dùng chưa đăng nhập, chuyển hướng về trang đăng nhập
 			return new ResponseEntity<>("/login", HttpStatus.OK);

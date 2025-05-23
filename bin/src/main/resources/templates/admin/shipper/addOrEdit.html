@@ -63,7 +63,7 @@
     <select name="userId" id="userId" class="form-control">
         <option th:each="user : ${users}" 
                 th:value="${user.userID}" 	
-                th:text="${user.userName}" 
+                th:text="${user.username}" 
                 th:selected="${shipper.userId == user.userID}">
         </option>
     </select>

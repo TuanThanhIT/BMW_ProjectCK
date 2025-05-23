@@ -3,6 +3,8 @@ package vn.iotstar.controllers.user;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,14 +22,19 @@ public class PackageController {
 	@Autowired
 	private IOrderService orderServ;
 
+	public static User getCurrentUser() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
+			return null;
+		}
+		return (User) auth.getPrincipal();
+	}
+
 	@GetMapping({ "", "/" })
 	public String getOrder(HttpSession session, Model model)
 	{
-		  // Lấy thông tin người dùng từ session
-	    User user = (User) session.getAttribute("account");
-	    if (user == null) {
-	        return "redirect:/login"; // Chuyển hướng về trang đăng nhập nếu chưa đăng nhập
-	    }
+		User user = getCurrentUser();
+  		if (user == null) return "redirect:/login";
 
 	    // Tìm các đơn hàng theo User ID
 	    List<Order> orders = orderServ.findByUserId(user.getUserID());

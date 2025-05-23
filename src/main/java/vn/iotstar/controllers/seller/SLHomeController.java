@@ -21,6 +21,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -70,6 +72,14 @@ public class SLHomeController {
 	@Autowired
 	private IOrderService iOrderService;
 
+	public static User getCurrentUser() {
+      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+      if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
+          return null;
+      }
+      return (User) auth.getPrincipal();
+  	}
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(MilkTeaType.class, new PropertyEditorSupport() {
@@ -88,9 +98,7 @@ public class SLHomeController {
 
 	@GetMapping("/revenue")
 	public String revenue(HttpServletRequest request) {
-		// Lấy thông tin user từ session trực tiếp
-		HttpSession session = request.getSession(false); // Lấy session nếu có
-		User user = (User) session.getAttribute("account"); // Lấy thông tin user từ session
+		User user = getCurrentUser();
 
 		// Kiểm tra xem user có tồn tại và role của user có phải là admin (roleID == 1)
 		if (user != null && user.getRoleID() == 2) {
@@ -103,8 +111,7 @@ public class SLHomeController {
 
 	@GetMapping("/branch")
 	public String branch(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-	    User user = (User) session.getAttribute("account");
+		User user = getCurrentUser();
 	    
 	    // Kiểm tra nếu BranchID là null
 	    if (iBranhService.getBranchID(user.getUserID()) == null) {
@@ -126,8 +133,7 @@ public class SLHomeController {
 	@GetMapping("/milkTeas")
 	public String listMilkTea(Model model, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
 			@RequestParam(required = false) Integer typeMilkTeaID, HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-	    User user = (User) session.getAttribute("account");
+		User user = getCurrentUser();
 	    
 	    // Kiểm tra nếu BranchID là null
 	    if (iBranhService.getBranchID(user.getUserID()) == null) {
@@ -237,8 +243,8 @@ public class SLHomeController {
 	    branch.setIntroduction(branchDto.getIntroduction());
 	    branch.setDescription(branchDto.getDescription());
 
-	    HttpSession session = request.getSession(false);
-	    User user = (User) session.getAttribute("account");
+  		User user = getCurrentUser();
+  
 	    branch.setUser(user);
 
 	    branch.setImages(String.join(",", storedFileNames));
@@ -339,8 +345,8 @@ public class SLHomeController {
 	    model.addAttribute("success", "Thêm trà sữa thành công!");
 
 	    // Gắn vào chi nhánh
-	    HttpSession session = request.getSession(false);
-	    User user = (User) session.getAttribute("account");
+	    User user = getCurrentUser();
+
 	    Optional<Branch> branchOptional = iBranhService.findById(iBranhService.getBranchID(user.getUserID()));
 	    Branch enBranch = branchOptional.get();
 
