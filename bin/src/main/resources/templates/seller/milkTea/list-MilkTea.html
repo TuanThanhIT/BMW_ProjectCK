@@ -31,6 +31,7 @@
 							<th>Giá khuyến mãi</th>
 							<th>Giới thiệu</th>
 							<th>Mô tả</th>
+							<th>ID</th>
 							<th>Hành động</th>
 						</tr>
 					</thead>
@@ -45,10 +46,11 @@
 							<td th:text="${milkTea.milkTea.discountPrice}"></td>
 							<td th:text="${milkTea.milkTea.introduction}"></td>
 							<td th:text="${milkTea.milkTea.description}"></td>
+							<td th:text="${milkTea.milkTea.milkTeaID}"></td>
 							<td><a
-								th:href="@{/seller/update-milkTea/{id}(id=${milkTea.milkTea.milkTeaID})}"
+								th:href="@{/seller/updateMilkTea/{id}(id=${milkTea.milkTea.milkTeaID})}"
 								class="btn btn-info btn-update"> <i class="bx bx-edit"></i>
-									Cập nhật
+									Cập Nhật
 							</a></td>
 						</tr>
 					</tbody>
