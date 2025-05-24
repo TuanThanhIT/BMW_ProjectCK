@@ -96,8 +96,4 @@ public class User implements UserDetails {
 	public boolean isEnabled() {
 	    return active;
 	}
-//	@Override
-//	public boolean isAccountNonLocked() {
-//	    return !locked;
-//	}
 }
