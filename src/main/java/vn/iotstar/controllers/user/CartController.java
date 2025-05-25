@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,14 +42,20 @@ public class CartController {
 	@Autowired
 	private ISizeService sizeServ;
 
+
+	public static User getCurrentUser() {
+      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+      if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
+          return null;
+      }
+      return (User) auth.getPrincipal();
+  	}
+
 	@GetMapping("/addToCart")
 	public String addToCart(@RequestParam int id, @RequestParam int quantity, @RequestParam String size,
 			HttpSession session, Model model) {
-		// Lấy thông tin người dùng từ session
-		User user = (User) session.getAttribute("account");
-		if (user == null) {
-			return "redirect:/login"; // Chuyển hướng về trang đăng nhập
-		}
+		User user = getCurrentUser();
+  		if (user == null) return "redirect:/login";
 
 		// Tìm giỏ hàng theo User ID
 		Cart cart = cartServ.findByUserId1(user.getUserID()).orElse(null);
@@ -125,7 +133,7 @@ public class CartController {
 		 * cart.setTotalCost(totalPrice); model.addAttribute("total", totalPrice);
 		 */
 
-		User user = (User) session.getAttribute("account");
+		User user = getCurrentUser();
 
 		if (user == null) {
 			// Nếu không có user trong session, chuyển hướng đến trang đăng nhập hoặc xử lý
@@ -189,11 +197,8 @@ public class CartController {
 	@GetMapping("/remove/{id}")
 	public String removeItem(@PathVariable("id") int id, HttpSession session) {
 
-		// Lấy thông tin người dùng từ session
-		User user = (User) session.getAttribute("account");
-		if (user == null) {
-			return "redirect:/login";
-		}
+		User user = getCurrentUser();
+  		if (user == null) return "redirect:/login";
 
 		// Tìm giỏ hàng theo User ID
 		Cart cart = cartServ.findByUserId1(user.getUserID())

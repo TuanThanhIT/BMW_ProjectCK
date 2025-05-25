@@ -1,58 +1,68 @@
 package vn.iotstar.configs;
 
-import java.util.Arrays;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import vn.iotstar.services.IUserService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // Định nghĩa PasswordEncoder sử dụng BCrypt
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Autowired
+	private JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    // Cấu hình bảo mật
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-        .csrf().disable()
-        .authorizeRequests()
-            .anyRequest().permitAll()  // Tất cả các request đều được phép mà không cần xác thực
-        .and()
-        .formLogin().disable()  // Tắt trang login mặc định của Spring Security
-        .httpBasic().disable()  // Tắt xác thực HTTP Basic
-        .logout()
-            .logoutUrl("/logout")  // Đảm bảo đường dẫn logout đúng
-            .logoutSuccessUrl("/")  // Chuyển hướng về trang chủ sau khi đăng xuất
-            .invalidateHttpSession(true)  // Xóa session khi logout
-            .deleteCookies("JSESSIONID");  // Xóa cookie session khi logout
+	@Autowired
+	private IUserService userService;
 
-        return http.build();
-    }
-    
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://localhost:8443"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-        configuration.setAllowCredentials(true);
+	@Autowired
+	private RateLimitFilter rateLimitFilter;
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http
+				.csrf(csrf -> csrf.disable())
+				.requiresChannel(channel -> channel
+						.anyRequest().requiresSecure())
+				.authorizeHttpRequests(auth -> auth
+						.requestMatchers("/", "/login/**", "/register/**", "/forgot-password/**", "/reset-password/**", "/verify-otp/**", "/verify-otp-password/**","/css/**", "/js/**", "/img/**", "/lib/**", "/script/**", "/scss/**").permitAll()
+						.requestMatchers("/admin/**").hasRole("ADMIN")
+						.requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
+						.requestMatchers("/seller/**").hasRole("SELLER")
+						.requestMatchers("/shipper/**").hasRole("SHIPPER")
+						.anyRequest().authenticated()
+				)
+				.logout(logout -> logout
+						.logoutUrl("/logout")
+						.logoutSuccessHandler(new CustomLogoutSuccessHandler())
+						.invalidateHttpSession(true)
+						.clearAuthentication(true)
+						.permitAll())
+				.addFilterBefore(rateLimitFilter, UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+				.headers(headers -> headers
+						.contentSecurityPolicy(csp -> csp
+								.policyDirectives(
+										"default-src 'self'; " +
+												"script-src 'self' 'unsafe-inline' https://code.jquery.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://ajax.googleapis.com https://static.elfsight.com https://cdn2.fptshop.com.vn https://www.youtube.com https://unpkg.com https://stackpath.bootstrapcdn.com https://www.google.com https://www.gstatic.com /js/register.js; " + // Thêm unsafe-inline
+												"style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://stackpath.bootstrapcdn.com https://use.fontawesome.com https://unpkg.com https://www.google.com; " +
+												"font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://use.fontawesome.com https://unpkg.com; " +
+												"img-src 'self' data: https://cdn2.fptshop.com.vn https://source.unsplash.com https://www.youtube.com https://oola.vn https://www.facebook.com https://www.twitter.com https://www.instagram.com https://undraw.co; " +
+												"frame-src 'self' https://www.google.com; " + // Thêm frame-src cho iframe reCAPTCHA
+												"connect-src 'self' https://www.google.com; " +
+												"object-src 'none'; " +
+												"base-uri 'self'; " +
+												"frame-ancestors 'none';"
+								)
+						)
+				);
 
-        return source;
-    }
+		return http.build();
+	}
 }

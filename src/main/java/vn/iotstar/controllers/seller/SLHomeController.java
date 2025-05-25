@@ -1,6 +1,8 @@
 package vn.iotstar.controllers.seller;
 
+import java.awt.image.BufferedImage;
 import java.beans.PropertyEditorSupport;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,11 +14,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.imageio.ImageIO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -66,6 +72,14 @@ public class SLHomeController {
 	@Autowired
 	private IOrderService iOrderService;
 
+	public static User getCurrentUser() {
+      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+      if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
+          return null;
+      }
+      return (User) auth.getPrincipal();
+  	}
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(MilkTeaType.class, new PropertyEditorSupport() {
@@ -84,9 +98,7 @@ public class SLHomeController {
 
 	@GetMapping("/revenue")
 	public String revenue(HttpServletRequest request) {
-		// Lấy thông tin user từ session trực tiếp
-		HttpSession session = request.getSession(false); // Lấy session nếu có
-		User user = (User) session.getAttribute("account"); // Lấy thông tin user từ session
+		User user = getCurrentUser();
 
 		// Kiểm tra xem user có tồn tại và role của user có phải là admin (roleID == 1)
 		if (user != null && user.getRoleID() == 2) {
@@ -99,8 +111,7 @@ public class SLHomeController {
 
 	@GetMapping("/branch")
 	public String branch(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-	    User user = (User) session.getAttribute("account");
+		User user = getCurrentUser();
 	    
 	    // Kiểm tra nếu BranchID là null
 	    if (iBranhService.getBranchID(user.getUserID()) == null) {
@@ -122,8 +133,7 @@ public class SLHomeController {
 	@GetMapping("/milkTeas")
 	public String listMilkTea(Model model, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
 			@RequestParam(required = false) Integer typeMilkTeaID, HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-	    User user = (User) session.getAttribute("account");
+		User user = getCurrentUser();
 	    
 	    // Kiểm tra nếu BranchID là null
 	    if (iBranhService.getBranchID(user.getUserID()) == null) {
@@ -174,23 +184,42 @@ public class SLHomeController {
 	                String originalFileName = image.getOriginalFilename();
 	                String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")).toLowerCase();
 
-	                if (!fileExtension.equals(".jpg") && !fileExtension.equals(".png")
-	                        && !fileExtension.equals(".jpeg")) {
+	                if (!fileExtension.equals(".jpg") && !fileExtension.equals(".png") && !fileExtension.equals(".jpeg")) {
 	                    model.addAttribute("alert", "Chỉ chấp nhận ảnh JPG, PNG, JPEG");
 	                    return "seller/branch/add-Branch";
 	                }
 
 	                String storageFileName = System.currentTimeMillis() + "_" + originalFileName;
-
 	                Path uploadPath = Paths.get(uploadDirectory);
 	                if (!Files.exists(uploadPath)) {
 	                    Files.createDirectories(uploadPath);
 	                }
 
+	                Path filePath = uploadPath.resolve(storageFileName);
+
+	                // Lưu tạm ảnh
 	                try (InputStream inputStream = image.getInputStream()) {
-	                    Files.copy(inputStream, uploadPath.resolve(storageFileName),
-	                            StandardCopyOption.REPLACE_EXISTING);
+	                    Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
 	                }
+
+	                // Kiểm tra MIME type
+	                String mimeType = Files.probeContentType(filePath);
+	                List<String> allowedMimeTypes = List.of("image/jpeg", "image/png");
+	                if (mimeType == null || !allowedMimeTypes.contains(mimeType)) {
+	                    Files.deleteIfExists(filePath);
+	                    model.addAttribute("alert", "Tệp tải lên không phải ảnh hợp lệ.");
+	                    return "seller/branch/add-Branch";
+	                }
+
+	                // Kiểm tra ảnh thật sự
+	                BufferedImage bufferedImage = ImageIO.read(filePath.toFile());
+	                if (bufferedImage == null) {
+	                    Files.deleteIfExists(filePath);
+	                    model.addAttribute("alert", "Tệp tải lên không phải là ảnh.");
+	                    return "seller/branch/add-Branch";
+	                }
+
+	                // Nếu hợp lệ, thêm vào danh sách
 	                storedFileNames.add(storageFileName);
 	            }
 	        }
@@ -202,11 +231,7 @@ public class SLHomeController {
 	    Branch branch;
 	    if (branchDto.getBranchID() != null) {
 	        Optional<Branch> optionalBranch = iBranhService.findById(branchDto.getBranchID());
-	        if (optionalBranch.isPresent()) {
-	            branch = optionalBranch.get();
-	        } else {
-	            branch = new Branch();
-	        }
+	        branch = optionalBranch.orElse(new Branch());
 	    } else {
 	        branch = new Branch();
 	    }
@@ -218,15 +243,14 @@ public class SLHomeController {
 	    branch.setIntroduction(branchDto.getIntroduction());
 	    branch.setDescription(branchDto.getDescription());
 
-	    HttpSession session = request.getSession(false);
-	    User user = (User) session.getAttribute("account");
-
+  		User user = getCurrentUser();
+  
 	    branch.setUser(user);
+
 	    branch.setImages(String.join(",", storedFileNames));
+	    iBranhService.save(branch);
 
-	    iBranhService.save(branch); // Gọi service lưu vào DB
 	    model.addAttribute("success", "Thêm hoặc cập nhật thông tin thành công!");
-
 	    return "redirect:/seller/branch";
 	}
 
@@ -254,95 +278,90 @@ public class SLHomeController {
 
 	@PostMapping("/milktea/save")
 	public String saveMilkTea(@ModelAttribute MilkTeaDto milkTeaDto, Model model, HttpServletRequest request) {
-		String uploadDirectory = PathConstants.UPLOAD_DIRECTORY; // Thư mục lưu ảnh
-		List<String> storedFileNames = new ArrayList<>(); // Danh sách tên ảnh lưu trong DB
+	    String uploadDirectory = PathConstants.UPLOAD_DIRECTORY;
+	    List<String> storedFileNames = new ArrayList<>();
 
-		try {
-			// Duyệt qua từng file trong mảng MultipartFile[]
-			for (MultipartFile image : milkTeaDto.getImages()) {
-				if (!image.isEmpty()) {
-					String originalFileName = image.getOriginalFilename();
-					String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")).toLowerCase();
+	    try {
+	        for (MultipartFile image : milkTeaDto.getImages()) {
+	            if (!image.isEmpty()) {
+	                String originalFilename = image.getOriginalFilename();
+	                String fileExtension = originalFilename.substring(originalFilename.lastIndexOf(".")).toLowerCase();
 
-					// Kiểm tra định dạng ảnh hợp lệ
-					if (!fileExtension.equals(".jpg") && !fileExtension.equals(".png")
-							&& !fileExtension.equals(".jpeg")) {
-						model.addAttribute("alert", "Chỉ chấp nhận ảnh JPG, PNG, JPEG");
-						return "seller/milkTea/add-MilkTea";
-					}
+	                // Tạo tên file lưu trữ duy nhất
+	                String storageFileName = System.currentTimeMillis() + "_" + originalFilename;
+	                Path uploadPath = Paths.get(uploadDirectory);
+	                if (!Files.exists(uploadPath)) Files.createDirectories(uploadPath);
 
-					// Tạo tên file lưu trữ
-					String storageFileName = System.currentTimeMillis() + "_" + originalFileName;
+	                Path filePath = uploadPath.resolve(storageFileName);
 
-					// Lưu file vào thư mục
-					Path uploadPath = Paths.get(uploadDirectory);
-					if (!Files.exists(uploadPath)) {
-						Files.createDirectories(uploadPath); // Tạo thư mục nếu chưa tồn tại
-					}
+	                // Lưu file tạm vào hệ thống
+	                try (InputStream inputStream = image.getInputStream()) {
+	                    Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+	                }
 
-					try (InputStream inputStream = image.getInputStream()) {
-						Files.copy(inputStream, uploadPath.resolve(storageFileName),
-								StandardCopyOption.REPLACE_EXISTING);
-					}
+	                // Bước kiểm tra MIME type
+	                String mimeType = Files.probeContentType(filePath);
+	                List<String> allowedMimeTypes = List.of("image/jpeg", "image/png");
+	                if (mimeType == null || !allowedMimeTypes.contains(mimeType)) {
+	                    Files.deleteIfExists(filePath);
+	                    model.addAttribute("alert", "Tệp tải lên không phải ảnh hợp lệ.");
+	                    return "seller/milkTea/add-MilkTea";
+	                }
 
-					// Thêm tên file vào danh sách
-					storedFileNames.add(storageFileName);
-				}
-			}
-		} catch (Exception ex) {
-			model.addAttribute("alert", "Có lỗi xảy ra khi upload ảnh: " + ex.getMessage());
-			return "seller/milkTea/add-MilkTea";
-		}
+	                // Bước kiểm tra nội dung ảnh thật
+	                BufferedImage bufferedImage = ImageIO.read(filePath.toFile());
+	                if (bufferedImage == null) {
+	                    Files.deleteIfExists(filePath);
+	                    model.addAttribute("alert", "Tệp tải lên không phải là ảnh thực sự.");
+	                    return "seller/milkTea/add-MilkTea";
+	                }
 
-		// Lưu thông tin MilkTea vào cơ sở dữ liệu
-		MilkTea milkTea;
-	    if (milkTeaDto.getMilkTeaID() != null) {
-	        Optional<MilkTea> optionalMilkTea = iMilkTeaService.findById(milkTeaDto.getMilkTeaID());
-	        if (optionalMilkTea.isPresent()) {
-	        	milkTea = optionalMilkTea.get();
-	        } else {
-	        	milkTea = new MilkTea();
+	                // Nếu hợp lệ, thêm vào danh sách lưu DB
+	                storedFileNames.add(storageFileName);
+	            }
 	        }
-	    } else {
-	    	milkTea = new MilkTea();
+	    } catch (IOException ex) {
+	        model.addAttribute("alert", "Có lỗi xảy ra khi xử lý ảnh: " + ex.getMessage());
+	        return "seller/milkTea/add-MilkTea";
 	    }
-	    
-		milkTea.setMilkTeaName(milkTeaDto.getMilkTeaName());
-		milkTea.setPrice(milkTeaDto.getPrice());
-		milkTea.setDiscountPrice(milkTeaDto.getDiscountPrice());
-		milkTea.setDescription(milkTeaDto.getDescription());
-		milkTea.setIntroduction(milkTeaDto.getIntroduction());
-		milkTea.setMilkTeaType(milkTeaDto.getMilkTeaType()); // Gán trực tiếp đối tượng MilkTeaType
-		
-		// Nối danh sách tên file ảnh thành chuỗi, cách nhau bởi dấu phẩy
-		milkTea.setImage(String.join(",", storedFileNames));
 
-		iMilkTeaService.save(milkTea); // Gọi service lưu vào DB
-		model.addAttribute("success", "Thêm trà sữa thành công!");
-		
-		if (milkTeaDto.getMilkTeaID() == null) {
-			HttpSession session = request.getSession(false);
-		    User user = (User) session.getAttribute("account");
-		    
-		    // Lấy branch nếu tồn tại
-		    Optional<Branch> branchOptional = iBranhService.findById(iBranhService.getBranchID(user.getUserID()));
-			Branch enBranch = branchOptional.get();
-			BranchMilkTea branchMilkTea = new BranchMilkTea(enBranch, milkTea, milkTeaDto.getStockQuantity());
-			iBranchMilkTeaService.save(branchMilkTea);
-		}
-		else {
-			HttpSession session = request.getSession(false);
-		    User user = (User) session.getAttribute("account");
-		    
-		    // Lấy branch nếu tồn tại
-		    Optional<Branch> branchOptional = iBranhService.findById(iBranhService.getBranchID(user.getUserID()));
-			Branch enBranch = branchOptional.get();
-			BranchMilkTea branchMilkTea = iBranchMilkTeaService.getBranchMilkTea(enBranch, milkTea);
-			branchMilkTea.setStockQuantity(milkTeaDto.getStockQuantity());
-			iBranchMilkTeaService.save(branchMilkTea);
-		}
-		return "redirect:/seller/milkTeas"; // Chuyển hướng đến danh sách MilkTea
+	    // Tạo hoặc cập nhật MilkTea
+	    MilkTea milkTea;
+	    if (milkTeaDto.getMilkTeaID() != null) {
+	        milkTea = iMilkTeaService.findById(milkTeaDto.getMilkTeaID()).orElse(new MilkTea());
+	    } else {
+	        milkTea = new MilkTea();
+	    }
+
+	    milkTea.setMilkTeaName(milkTeaDto.getMilkTeaName());
+	    milkTea.setPrice(milkTeaDto.getPrice());
+	    milkTea.setDiscountPrice(milkTeaDto.getDiscountPrice());
+	    milkTea.setDescription(milkTeaDto.getDescription());
+	    milkTea.setIntroduction(milkTeaDto.getIntroduction());
+	    milkTea.setMilkTeaType(milkTeaDto.getMilkTeaType());
+	    milkTea.setImage(String.join(",", storedFileNames));
+
+	    iMilkTeaService.save(milkTea);
+	    model.addAttribute("success", "Thêm trà sữa thành công!");
+
+	    // Gắn vào chi nhánh
+	    User user = getCurrentUser();
+
+	    Optional<Branch> branchOptional = iBranhService.findById(iBranhService.getBranchID(user.getUserID()));
+	    Branch enBranch = branchOptional.get();
+
+	    if (milkTeaDto.getMilkTeaID() == null) {
+	        BranchMilkTea branchMilkTea = new BranchMilkTea(enBranch, milkTea, milkTeaDto.getStockQuantity());
+	        iBranchMilkTeaService.save(branchMilkTea);
+	    } else {
+	        BranchMilkTea branchMilkTea = iBranchMilkTeaService.getBranchMilkTea(enBranch, milkTea);
+	        branchMilkTea.setStockQuantity(milkTeaDto.getStockQuantity());
+	        iBranchMilkTeaService.save(branchMilkTea);
+	    }
+
+	    return "redirect:/seller/milkTeas";
 	}
+
 	
 	@GetMapping("/orders")
 	public String listOrder(Model model, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo

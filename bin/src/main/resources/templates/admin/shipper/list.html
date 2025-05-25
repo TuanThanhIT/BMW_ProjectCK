@@ -79,7 +79,7 @@ body {
 							<!-- Hiển thị STT bắt đầu từ 1 -->
 							<td th:text="${shipper.shipID}"></td>
 							<td
-								th:text="${shipper.user != null && shipper.user.role.roleID == 4 ? shipper.user.userName : 'Chưa có người vận chuyển'}"></td>
+								th:text="${shipper.user != null && shipper.user.role.roleID == 4 ? shipper.user.username : 'Chưa có người vận chuyển'}"></td>
 							<td
 								th:text="${shipper.delivery != null ? shipper.delivery.deliveryName : 'Chưa có đơn vị vẫn chuyển'}"></td>
 							<!-- <td

@@ -1,6 +1,8 @@
 package vn.iotstar.controllers.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +27,17 @@ public class VNPayController {
 	@Autowired
 	private ICartService cartService;
 
-
+	public static User getCurrentUser() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
+			return null;
+		}
+		return (User) auth.getPrincipal();
+  	}
 
 	@GetMapping("/vnpay-payment-return")
 	public String paymentCompleted(HttpServletRequest request, Model model, HttpSession session) {
-		User user = (User) session.getAttribute("account");
+		User user = getCurrentUser();
 		int paymentStatus = vnPayService.orderReturn(request);
 		Order order = (Order) session.getAttribute("checkingOutOrder");	
 		
