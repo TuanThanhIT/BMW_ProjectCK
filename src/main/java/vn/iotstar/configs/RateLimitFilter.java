@@ -26,14 +26,6 @@ import java.util.concurrent.TimeUnit;
 public class RateLimitFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(RateLimitFilter.class);
 
-    // Sử dụng Set cho whitelist hiệu quả hơn
-    private static final Set<String> WHITELIST_PATHS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-            "/api/auth/login",
-            "/api/auth/register",
-            "/api/auth/forgot-password",
-            "/api/auth/reset-password",
-            "/api/public"
-    )));
 
     private final Map<String, Bucket> ipBuckets = new ConcurrentHashMap<>();
 
@@ -55,10 +47,6 @@ public class RateLimitFilter extends OncePerRequestFilter {
 
         final String path = request.getRequestURI();
 
-        if (isWhitelisted(path)) {
-            filterChain.doFilter(request, response);
-            return;
-        }
 
         final String ip = getClientIP(request);
         final Bucket bucket = ipBuckets.computeIfAbsent(ip, this::createBucket);
@@ -72,9 +60,6 @@ public class RateLimitFilter extends OncePerRequestFilter {
         }
     }
 
-    private boolean isWhitelisted(String path) {
-        return WHITELIST_PATHS.stream().anyMatch(path::startsWith);
-    }
 
     private Bucket createBucket(String ip) {
         return Bucket.builder()
@@ -88,10 +73,6 @@ public class RateLimitFilter extends OncePerRequestFilter {
             return xfHeader.split(",")[0].trim();
         }
         return request.getRemoteAddr();
-<<<<<<< HEAD
-    }*/
-=======
-    }
 
     private void addRateLimitHeaders(HttpServletResponse response, ConsumptionProbe probe) {
         response.setHeader("X-Rate-Limit-Remaining", String.valueOf(probe.getRemainingTokens()));
@@ -99,7 +80,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
 
     private void handleRateLimitExceeded(HttpServletResponse response, ConsumptionProbe probe, String ip, String path)
             throws IOException {
-        if (logger.isWarnEnabled()) {
+if (logger.isWarnEnabled()) {
             logger.warn("Rate limit exceeded - IP: {}, Path: {}, Retry After: {}s",
                     ip, path, probe.getNanosToWaitForRefill() / 1_000_000_000);
         }
@@ -127,4 +108,4 @@ public class RateLimitFilter extends OncePerRequestFilter {
         super.destroy();
     }
 }
->>>>>>> 91b64db7a67ba3e79e60667632b5e8160dae6c44
+*/

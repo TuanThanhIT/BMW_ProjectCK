@@ -1,7 +1,7 @@
 <configuration>
 
 	<!-- Thư mục chứa log -->
-    <property name="LOG_PATH" value="logs" />
+    <property name="LOG_PATH" value="C:/logs" />
 
 	<!-- Tên file log chính -->
 	<appender name="FILE"
