@@ -1,6 +1,5 @@
 package vn.iotstar.configs;
 
-import org.apache.catalina.filters.RateLimitFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +16,8 @@ public class SecurityConfig {
 	@Autowired
 	private JwtAuthenticationFilter jwtAuthenticationFilter;
 
-	@Autowired
-	private RateLimitFilter rateLimitFilter;
+	/*@Autowired
+	private RateLimitFilter rateLimitFilter;*/
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
