@@ -1,5 +1,6 @@
 package vn.iotstar.configs;
 
+import org.apache.catalina.filters.RateLimitFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,9 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.context.SecurityContextHolderFilter;
-
-import vn.iotstar.services.IUserService;
 
 @Configuration
 @EnableWebSecurity
@@ -44,8 +42,8 @@ public class SecurityConfig {
 						.invalidateHttpSession(true)
 						.clearAuthentication(true)
 						.permitAll())
-//				.addFilterBefore(rateLimitFilter, UsernamePasswordAuthenticationFilter.class)
 				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+//				.addFilterBefore(rateLimitFilter, UsernamePasswordAuthenticationFilter.class)
 				.headers(headers -> headers
 						.contentSecurityPolicy(csp -> csp
 								.policyDirectives(
