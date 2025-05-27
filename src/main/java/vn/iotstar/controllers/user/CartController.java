@@ -2,11 +2,9 @@ package vn.iotstar.controllers.user;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,11 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import jakarta.servlet.http.HttpSession;
 import vn.iotstar.entity.Cart;
 import vn.iotstar.entity.CartMilkTea;
 import vn.iotstar.entity.MilkTea;
-import vn.iotstar.entity.MilkTeaType;
 import vn.iotstar.entity.Sizes;
 import vn.iotstar.entity.User;
 
@@ -42,7 +38,6 @@ public class CartController {
 	@Autowired
 	private ISizeService sizeServ;
 
-
 	public static User getCurrentUser() {
       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
       if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
@@ -52,8 +47,8 @@ public class CartController {
   	}
 
 	@GetMapping("/addToCart")
-	public String addToCart(@RequestParam int id, @RequestParam int quantity, @RequestParam String size,
-			HttpSession session, Model model) {
+	public String addToCart(@RequestParam int id, @RequestParam int quantity, @RequestParam String size, Model model) {
+		
 		User user = getCurrentUser();
   		if (user == null) return "redirect:/login";
 
@@ -109,29 +104,7 @@ public class CartController {
 	}
 
 	@GetMapping({ "", "/" })
-	public String cartGet(HttpSession session, Model model) {
-		/*
-		 * // Lấy thông tin User từ session User user = (User)
-		 * session.getAttribute("account");
-		 * 
-		 * if (user == null) { // Nếu không có user trong session, chuyển hướng đến
-		 * trang đăng nhập hoặc xử lý // phù hợp return "redirect:/login"; }
-		 * 
-		 * // Tìm kiếm Cart bằng User ID Optional<Cart> cartOptional =
-		 * cartServ.findByUserId(user.getUserID()); Cart cart;
-		 * 
-		 * if (cartOptional.isPresent()) { // Nếu Cart tồn tại cart =
-		 * cartOptional.get(); } else { // Nếu không tìm thấy Cart, tạo mới Cart cart =
-		 * new Cart(); cart.setUser(user); cart.setMilkTeas(new ArrayList<>());
-		 * cartServ.save(cart); // Lưu Cart mới vào cơ sở dữ liệu }
-		 * 
-		 * // Thêm danh sách MilkTeas vào model model.addAttribute("listCart",
-		 * cart.getMilkTeas());
-		 * 
-		 * // Tính tổng giá tiền và thêm vào model BigDecimal totalPrice =
-		 * cmilkTeaServ.calculateTotalPrice(cart.getCartID());
-		 * cart.setTotalCost(totalPrice); model.addAttribute("total", totalPrice);
-		 */
+	public String cartGet(Model model) {
 
 		User user = getCurrentUser();
 
@@ -156,37 +129,6 @@ public class CartController {
 			cartServ.save(cart); // Lưu Cart mới vào cơ sở dữ liệu
 		}
 
-		/*
-		 * // Tạo Size giả Sizes size = new Sizes(); size.setSizeID(1);
-		 * size.setSizeName("L"); size.setExtraCost(new BigDecimal("10.00")); // Giá
-		 * thêm của Size // Tạo giả MilkTea MilkTea milkTea1 = new MilkTea();
-		 * milkTea1.setMilkTeaID(1); milkTea1.setMilkTeaName("Matcha Milk Tea");
-		 * milkTea1.setPrice(BigDecimal.valueOf(50.00));
-		 * 
-		 * MilkTea milkTea2 = new MilkTea(); milkTea2.setMilkTeaID(2);
-		 * milkTea2.setMilkTeaName("Chocolate Milk Tea");
-		 * milkTea2.setPrice(BigDecimal.valueOf(60.00));
-		 * 
-		 * // Tạo giả CartMilkTea CartMilkTea cartMilkTea1 = new CartMilkTea();
-		 * cartMilkTea1.setId(1); cartMilkTea1.setMilkTea(milkTea1);
-		 * cartMilkTea1.setQuantityMilkTea(2); // 2 ly cartMilkTea1.setSize(size);
-		 * cartMilkTea1.setTotalPrice(cartMilkTea1.getTotalPrice()); // Tính tổng giá
-		 * 
-		 * CartMilkTea cartMilkTea2 = new CartMilkTea(); cartMilkTea2.setId(2);
-		 * cartMilkTea2.setMilkTea(milkTea2); cartMilkTea2.setQuantityMilkTea(1); // 1
-		 * ly cartMilkTea2.setSize(size);
-		 * cartMilkTea2.setTotalPrice(cartMilkTea2.getTotalPrice()); // Tính tổng giá
-		 * 
-		 * // Tạo giả Cart
-		 * 
-		 * cart.setCartID(1); cart.setUser(user); cart.setMilkTeas(List.of(cartMilkTea1,
-		 * cartMilkTea2)); // Gắn danh sách MilkTeas cart.setTotalCost(
-		 * cartMilkTea1.getTotalPrice().add(cartMilkTea2.getTotalPrice()) // Tổng tiền
-		 * );
-		 * 
-		 * //System.out.println("Cart: " + cart);
-		 * //System.out.println("List Cart MilkTea: " + cart.getMilkTeas());
-		 */
 		// Đưa dữ liệu giả vào model
 		model.addAttribute("listCart", cart.getMilkTeas());
 		model.addAttribute("total", cart.getTotalCost());
@@ -195,7 +137,7 @@ public class CartController {
 	}
 
 	@GetMapping("/remove/{id}")
-	public String removeItem(@PathVariable("id") int id, HttpSession session) {
+	public String removeItem(@PathVariable("id") int id) {
 
 		User user = getCurrentUser();
   		if (user == null) return "redirect:/login";

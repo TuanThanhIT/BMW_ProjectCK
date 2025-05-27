@@ -120,26 +120,18 @@ public class LoginController {
 	            
 	            // Tạo Access Token
                 String accessToken = jwtTokenProvider.generateAccessToken(username);
-                /*Cookie jwtCookie = new Cookie("JWT_TOKEN", accessToken);
-                jwtCookie.setHttpOnly(true);
-                jwtCookie.setSecure(request.isSecure());
-                jwtCookie.setPath("/");
-                jwtCookie.setMaxAge((int)(accessTokenExpiration / 1000)); 
-                jwtCookie.setAttribute("SameSite", "Strict");*/
+
 				String jwtCookieValue = "JWT_TOKEN=" + accessToken +
 						"; Path=/; HttpOnly; Secure; Max-Age=" + (accessTokenExpiration / 1000) +
 						"; SameSite=Strict";
 				response.addHeader("Set-Cookie", jwtCookieValue);
 	            
                 // Tạo và lưu Refresh Token
+				String ip = request.getRemoteAddr();
+				String userAgent = request.getHeader("User-Agent");
                 String refreshToken = jwtTokenProvider.generateRefreshToken(username);
-                refreshTokenService.createRefreshToken(username, refreshToken);
-                /*Cookie refreshCookie = new Cookie("REFRESH_TOKEN", refreshToken);
-                refreshCookie.setHttpOnly(true);
-                refreshCookie.setSecure(request.isSecure());
-                refreshCookie.setPath("/");
-                refreshCookie.setMaxAge((int)(refreshTokenExpiration / 1000)); 
-                refreshCookie.setAttribute("SameSite", "Strict");*/
+                refreshTokenService.createRefreshToken(username, refreshToken, ip , userAgent);
+
 				String refreshCookieValue = "REFRESH_TOKEN=" + refreshToken +
 						"; Path=/; HttpOnly; Secure; Max-Age=" + (refreshTokenExpiration / 1000) +
 						"; SameSite=Strict";
@@ -173,12 +165,6 @@ public class LoginController {
 
 	    rememberMeService.saveToken(username, token, expiryDate); // Lưu vào DB
 
-	    /*Cookie cookie = new Cookie("REMEMBER_ME_TOKEN", token);
-	    cookie.setHttpOnly(true); // Chỉ có thể truy cập cookie từ server, không từ JavaScript
-	    cookie.setSecure(true);   // Cookie chỉ được gửi qua kết nối HTTPS
-	    cookie.setMaxAge(7 * 24 * 60 * 60); // Cookie sống 7 ngày
-	    cookie.setAttribute("SameSite", "Strict"); // Nếu có
-	    cookie.setPath("/"); // Áp dụng cho toàn bộ các URL trong domain*/
 		String cookieValue = "REMEMBER_ME_TOKEN=" + token +
 				"; Path=/; HttpOnly; Secure; Max-Age=" + (7 * 24 * 60 * 60) +
 				"; SameSite=Strict";
@@ -188,12 +174,7 @@ public class LoginController {
 
 	// Xóa cookie khi không chọn "Nhớ mật khẩu"
 	private void deleteRememberMeCookie(HttpServletResponse response) {
-		/*Cookie cookie = new Cookie("REMEMBER_ME_TOKEN", "");
-	    cookie.setMaxAge(0); // Xóa cookie ngay lập tức
-	    cookie.setPath("/");
-	    cookie.setHttpOnly(true); // Bổ sung!
-	    cookie.setSecure(true);   // Bổ sung nếu dùng HTTPS!
-	    cookie.setAttribute("SameSite", "Strict"); // Nếu có*/
+
 		String cookieValue = "REMEMBER_ME_TOKEN=; Path=/; HttpOnly; Secure; Max-Age=0; SameSite=Strict";
 		response.addHeader("Set-Cookie", cookieValue);
 	}

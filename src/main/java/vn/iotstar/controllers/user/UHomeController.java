@@ -39,6 +39,14 @@ public class UHomeController {
 	
 	@Autowired
 	private IBranchMilkTeaService branchMilkTeaService;
+
+    public static User getCurrentUser() {
+      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+      if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
+          return null;
+      }
+      return (User) auth.getPrincipal();
+  	}
     
     @GetMapping("home")
     public String index(Model model) {
@@ -62,8 +70,8 @@ public class UHomeController {
     }
     
     @PostMapping("/account/{id}")
-    public String editAccount(Model model, @PathVariable("id") Integer userId, @ModelAttribute User updatedUser, HttpSession session) {
-    	User loggedInUser = (User) session.getAttribute("account");
+    public String editAccount(Model model, @PathVariable("id") Integer userId, @ModelAttribute User updatedUser) {
+        User loggedInUser = getCurrentUser();
         // Kiểm tra nếu người dùng hiện tại có quyền truy cập và sửa đổi thông tin
         if (!userId.equals(loggedInUser.getUserID())) {
             model.addAttribute("message", "Bạn không có quyền sửa thông tin của người khác!");

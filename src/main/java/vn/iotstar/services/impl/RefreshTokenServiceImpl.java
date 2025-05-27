@@ -20,13 +20,15 @@ public class RefreshTokenServiceImpl implements IRefreshTokenService {
     private long refreshTokenExpiration;
 
     @Override
-    public RefreshToken createRefreshToken(String username, String token) {
+    public RefreshToken createRefreshToken(String username, String token, String ip, String userAgent) {    
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setToken(token);
         refreshToken.setUsername(username);
         refreshToken.setExpiryDate(new Date(System.currentTimeMillis() + refreshTokenExpiration)); // 7 ngày
         refreshToken.setRevoked(false);
         refreshToken.setCreatedAt(new Date());
+        refreshToken.setIp(ip);
+        refreshToken.setUserAgent(userAgent);
         return refreshTokenRepository.save(refreshToken);
     }
 
@@ -41,11 +43,13 @@ public class RefreshTokenServiceImpl implements IRefreshTokenService {
     }
 
     @Override
-    public boolean validateRefreshToken(String token) {
+    public boolean validateRefreshToken(String token, String ip, String userAgent) {
         Optional<RefreshToken> refreshTokenOpt = refreshTokenRepository.findByToken(token);
         if (refreshTokenOpt.isPresent()) {
             RefreshToken refreshToken = refreshTokenOpt.get();
-            return !refreshToken.isRevoked() && refreshToken.getExpiryDate().after(new Date());
+            if (refreshToken.getIp().equals(ip) && refreshToken.getUserAgent().equals(userAgent)) {
+                return !refreshToken.isRevoked() && refreshToken.getExpiryDate().after(new Date());
+            }
         }
         return false;
     }
