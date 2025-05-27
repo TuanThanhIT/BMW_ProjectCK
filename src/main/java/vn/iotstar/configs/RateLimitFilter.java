@@ -22,7 +22,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-@Component
+/*@Component
 public class RateLimitFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(RateLimitFilter.class);
 
@@ -73,6 +73,9 @@ public class RateLimitFilter extends OncePerRequestFilter {
             return xfHeader.split(",")[0].trim();
         }
         return request.getRemoteAddr();
+<<<<<<< HEAD
+    }*/
+=======
     }
 
     private void addRateLimitHeaders(HttpServletResponse response, ConsumptionProbe probe) {
@@ -109,3 +112,4 @@ public class RateLimitFilter extends OncePerRequestFilter {
         super.destroy();
     }
 }
+>>>>>>> 91b64db7a67ba3e79e60667632b5e8160dae6c44

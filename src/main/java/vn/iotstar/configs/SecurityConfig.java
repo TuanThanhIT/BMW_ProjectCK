@@ -21,8 +21,9 @@ public class SecurityConfig {
 	@Autowired
 	private IUserService userService;
 
-	@Autowired
-	private RateLimitFilter rateLimitFilter;
+	/*
+	 * @Autowired private RateLimitFilter rateLimitFilter;
+	 */
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -44,7 +45,7 @@ public class SecurityConfig {
 						.invalidateHttpSession(true)
 						.clearAuthentication(true)
 						.permitAll())
-				.addFilterBefore(rateLimitFilter, UsernamePasswordAuthenticationFilter.class)
+				
 				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 				.headers(headers -> headers
 						.contentSecurityPolicy(csp -> csp
