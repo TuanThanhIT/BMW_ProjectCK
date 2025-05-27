@@ -1052,6 +1052,7 @@ org.springframework.web.servlet.resource.NoResourceFoundException: No static res
 				HikariPool-1 - Shutdown initiated...
 2025-05-25 20:32:57 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource -
 				HikariPool-1 - Shutdown completed.
+<<<<<<< HEAD
 2025-05-25 21:21:50 [background-preinit] INFO  o.h.validator.internal.util.Version -
 				HV000001: Hibernate Validator 8.0.1.Final
 2025-05-25 21:21:50 [restartedMain] INFO  vn.iotstar.AloTraApplication -
@@ -2348,3 +2349,5 @@ Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'JW
 	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
 	... 69 common frames omitted
+=======
+>>>>>>> 91b64db7a67ba3e79e60667632b5e8160dae6c44
