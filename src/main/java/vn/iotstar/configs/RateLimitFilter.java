@@ -26,14 +26,6 @@ import java.util.concurrent.TimeUnit;
 public class RateLimitFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(RateLimitFilter.class);
 
-    // Sử dụng Set cho whitelist hiệu quả hơn
-    private static final Set<String> WHITELIST_PATHS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-            "/api/auth/login",
-            "/api/auth/register",
-            "/api/auth/forgot-password",
-            "/api/auth/reset-password",
-            "/api/public"
-    )));
 
     private final Map<String, Bucket> ipBuckets = new ConcurrentHashMap<>();
 
@@ -55,10 +47,6 @@ public class RateLimitFilter extends OncePerRequestFilter {
 
         final String path = request.getRequestURI();
 
-        if (isWhitelisted(path)) {
-            filterChain.doFilter(request, response);
-            return;
-        }
 
         final String ip = getClientIP(request);
         final Bucket bucket = ipBuckets.computeIfAbsent(ip, this::createBucket);
@@ -72,9 +60,6 @@ public class RateLimitFilter extends OncePerRequestFilter {
         }
     }
 
-    private boolean isWhitelisted(String path) {
-        return WHITELIST_PATHS.stream().anyMatch(path::startsWith);
-    }
 
     private Bucket createBucket(String ip) {
         return Bucket.builder()
