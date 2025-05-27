@@ -45,7 +45,6 @@ public class SecurityConfig {
 						.invalidateHttpSession(true)
 						.clearAuthentication(true)
 						.permitAll())
-				
 				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 				.headers(headers -> headers
 						.contentSecurityPolicy(csp -> csp

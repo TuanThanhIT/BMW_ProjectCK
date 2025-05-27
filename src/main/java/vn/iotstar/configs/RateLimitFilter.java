@@ -73,10 +73,6 @@ public class RateLimitFilter extends OncePerRequestFilter {
             return xfHeader.split(",")[0].trim();
         }
         return request.getRemoteAddr();
-<<<<<<< HEAD
-    }*/
-=======
-    }
 
     private void addRateLimitHeaders(HttpServletResponse response, ConsumptionProbe probe) {
         response.setHeader("X-Rate-Limit-Remaining", String.valueOf(probe.getRemainingTokens()));
@@ -112,4 +108,4 @@ public class RateLimitFilter extends OncePerRequestFilter {
         super.destroy();
     }
 }
->>>>>>> 91b64db7a67ba3e79e60667632b5e8160dae6c44
+*/
