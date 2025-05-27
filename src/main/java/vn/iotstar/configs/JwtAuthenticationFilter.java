@@ -59,6 +59,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } else {
+
+            String currentIp = request.getRemoteAddr();
+            String currentUserAgent = request.getHeader("User-Agent");
         	// Kiểm tra và xử lý Refresh Token nếu có
             String refreshToken = null;
             if (cookies != null) {
@@ -69,7 +72,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
 
-            if (refreshToken != null && refreshTokenService.validateRefreshToken(refreshToken)) {
+            if (refreshToken != null && refreshTokenService.validateRefreshToken(refreshToken, currentIp, currentUserAgent)) {
                 String username = refreshTokenService.findByToken(refreshToken).get().getUsername();
                 String newAccessToken = jwtTokenProvider.generateAccessToken(username);
 
@@ -77,7 +80,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 refreshTokenService.revokeRefreshToken(refreshToken);
                 // Sinh refresh token mới
                 String newRefreshToken = jwtTokenProvider.generateRefreshToken(username);
-                refreshTokenService.createRefreshToken(username, newRefreshToken);
+                String ip = request.getRemoteAddr();
+				String userAgent = request.getHeader("User-Agent");
+                refreshTokenService.createRefreshToken(username, newRefreshToken, ip, userAgent);
 
                 // Gửi lại JWT mới cho client
                 Cookie jwtCookie = new Cookie("JWT_TOKEN", newAccessToken);

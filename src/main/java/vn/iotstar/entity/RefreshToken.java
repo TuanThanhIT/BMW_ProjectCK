@@ -28,4 +28,7 @@ public class RefreshToken {
     @Column(name = "CreatedAt", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
+    private String ip;
+    private String userAgent;
 }
