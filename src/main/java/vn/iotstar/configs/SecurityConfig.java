@@ -41,8 +41,8 @@ public class SecurityConfig {
 						.invalidateHttpSession(true)
 						.clearAuthentication(true)
 						.permitAll())
+				.addFilterBefore(rateLimitFilter, UsernamePasswordAuthenticationFilter.class)
 				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-//				.addFilterBefore(rateLimitFilter, UsernamePasswordAuthenticationFilter.class)
 				.headers(headers -> headers
 						.contentSecurityPolicy(csp -> csp
 								.policyDirectives(
