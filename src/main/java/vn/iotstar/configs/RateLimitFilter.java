@@ -22,7 +22,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-/*@Component
+@Component
 public class RateLimitFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(RateLimitFilter.class);
 
@@ -73,6 +73,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
             return xfHeader.split(",")[0].trim();
         }
         return request.getRemoteAddr();
+    }
 
     private void addRateLimitHeaders(HttpServletResponse response, ConsumptionProbe probe) {
         response.setHeader("X-Rate-Limit-Remaining", String.valueOf(probe.getRemainingTokens()));
@@ -80,7 +81,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
 
     private void handleRateLimitExceeded(HttpServletResponse response, ConsumptionProbe probe, String ip, String path)
             throws IOException {
-if (logger.isWarnEnabled()) {
+    	if (logger.isWarnEnabled()) {
             logger.warn("Rate limit exceeded - IP: {}, Path: {}, Retry After: {}s",
                     ip, path, probe.getNanosToWaitForRefill() / 1_000_000_000);
         }
@@ -108,4 +109,3 @@ if (logger.isWarnEnabled()) {
         super.destroy();
     }
 }
-*/
