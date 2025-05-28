@@ -81,7 +81,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
 
     private void handleRateLimitExceeded(HttpServletResponse response, ConsumptionProbe probe, String ip, String path)
             throws IOException {
-if (logger.isWarnEnabled()) {
+    	if (logger.isWarnEnabled()) {
             logger.warn("Rate limit exceeded - IP: {}, Path: {}, Retry After: {}s",
                     ip, path, probe.getNanosToWaitForRefill() / 1_000_000_000);
         }
