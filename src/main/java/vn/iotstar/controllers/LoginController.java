@@ -213,6 +213,13 @@ public class LoginController {
             model.addAttribute("email", email);
             return "verify-otp-pass";  // Quay lại trang nhập OTP
         }
+        
+        String message2 = "";
+		if (!isPasswordStrong(newPassword)) {
+			message2 = "Mật khẩu cần ít nhất 8 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt.";
+			model.addAttribute("alert", message2);
+			return "verify-otp-pass";
+		}
 
         // Cập nhật mật khẩu mới
         User user = userService.findByEmail(email);
@@ -224,4 +231,10 @@ public class LoginController {
         return "login";  // Chuyển đến trang đăng nhập
     }
 	
+
+	// Hàm kiểm tra mật khẩu mạnh
+	private boolean isPasswordStrong(String password) {
+		String pattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/]).{8,}$";
+		return password.matches(pattern);
+	}
 }
