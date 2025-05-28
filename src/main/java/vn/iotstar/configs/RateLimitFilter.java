@@ -29,10 +29,10 @@ public class RateLimitFilter extends OncePerRequestFilter {
 
     private final Map<String, Bucket> ipBuckets = new ConcurrentHashMap<>();
 
-    @Value("${rate.limit.capacity:1000}")
+    @Value("${rate.limit.capacity:5}")
     private int capacity;
 
-    @Value("${rate.limit.duration.minutes:5}")
+    @Value("${rate.limit.duration.minutes:1}")
     private int durationMinutes;
 
     private final ScheduledExecutorService cleanupExecutor = Executors.newSingleThreadScheduledExecutor();

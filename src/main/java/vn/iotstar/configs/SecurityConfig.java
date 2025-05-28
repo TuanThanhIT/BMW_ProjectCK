@@ -16,8 +16,8 @@ public class SecurityConfig {
 	@Autowired
 	private JwtAuthenticationFilter jwtAuthenticationFilter;
 
-	/*@Autowired
-	private RateLimitFilter rateLimitFilter;*/
+	@Autowired
+	private RateLimitFilter rateLimitFilter;
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
