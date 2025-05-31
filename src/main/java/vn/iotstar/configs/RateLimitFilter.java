@@ -29,10 +29,10 @@ public class RateLimitFilter extends OncePerRequestFilter {
 
     private final Map<String, Bucket> ipBuckets = new ConcurrentHashMap<>();
 
-    @Value("${rate.limit.capacity:1000}")
+    @Value("${rate.limit.capacity:5}")
     private int capacity;
 
-    @Value("${rate.limit.duration.minutes:5}")
+    @Value("${rate.limit.duration.minutes:1}")
     private int durationMinutes;
 
     private final ScheduledExecutorService cleanupExecutor = Executors.newSingleThreadScheduledExecutor();
@@ -81,7 +81,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
 
     private void handleRateLimitExceeded(HttpServletResponse response, ConsumptionProbe probe, String ip, String path)
             throws IOException {
-if (logger.isWarnEnabled()) {
+    	if (logger.isWarnEnabled()) {
             logger.warn("Rate limit exceeded - IP: {}, Path: {}, Retry After: {}s",
                     ip, path, probe.getNanosToWaitForRefill() / 1_000_000_000);
         }

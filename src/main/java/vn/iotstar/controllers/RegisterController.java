@@ -170,6 +170,11 @@ public class RegisterController {
 
 		if (userService.existsByEmail(userDto.getEmail())) {
 			model.addAttribute("alert", "Email đã tồn tại.");
+			model.addAttribute("recaptchaError", "Vui lòng xác thực reCAPTCHA");
+			model.addAttribute("userDto", userDto);
+			model.addAttribute("recaptchaSiteKey", recaptchaSiteKey);
+			List<Role> list = roleService.findByRoleNameNot("Admin");
+			model.addAttribute("listRole", list);
 			return "register";
 		}
 
