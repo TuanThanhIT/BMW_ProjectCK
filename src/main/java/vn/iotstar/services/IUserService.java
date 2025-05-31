@@ -47,4 +47,6 @@ public interface IUserService extends UserDetailsService {
 	User loadUserByUsername(String username);
 	boolean checkEmailPattern(String email);
 
+	Optional<User> findByUserName(String username);
+
 }

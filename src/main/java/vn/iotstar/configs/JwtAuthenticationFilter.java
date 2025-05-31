@@ -17,14 +17,14 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.iotstar.services.IRefreshTokenService;
-import vn.iotstar.services.impl.UserServiceImpl;
+import vn.iotstar.services.IUserService;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
     @Autowired
-    private UserServiceImpl userDetailsService;
+    private IUserService userDetailsService;
     @Autowired
     private IRefreshTokenService refreshTokenService;
     

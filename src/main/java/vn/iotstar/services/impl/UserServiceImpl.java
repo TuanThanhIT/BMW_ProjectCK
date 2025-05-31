@@ -36,7 +36,11 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 	public List<User> findAll(Sort sort) {
 		return userRepository.findAll(sort);
 	}
-
+	
+	@Override
+	public Optional<User> findByUserName(String username){
+		return userRepository.findByUserName(username);
+	}
 	public Page<User> findAll(Pageable pageable) {
 		return userRepository.findAll(pageable);
 	}
@@ -56,6 +60,7 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 	public void deleteAll() {
 		userRepository.deleteAll();
 	}
+	
 
 
 //	@Override
@@ -75,7 +80,7 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 	
 	@Override
 	public User getUserByUsername(String username) {
-		return userRepository.findByUserName(username).orElse(null); // Trả về null nếu không tìm thấy người dùng
+		return userRepository.findByUserName(username).orElse(null);
 	}
 
 	@Override
