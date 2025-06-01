@@ -1,325 +1,68 @@
-2025-05-22 12:39:28 [restartedMain] INFO  vn.iotstar.AloTraApplication -
-				Starting AloTraApplication using Java 22.0.2 with PID 23600 (C:\Users\Admin\Downloads\BMW_ProjectCK\target\classes started by Admin in C:\Users\Admin\Downloads\BMW_ProjectCK)
-2025-05-22 12:39:28 [restartedMain] INFO  vn.iotstar.AloTraApplication -
-				No active profile set, falling back to 1 default profile: "default"
-2025-05-22 12:39:28 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
-				Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-05-22 12:39:28 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
-				Finished Spring Data repository scanning in 56 ms. Found 17 JPA repository interfaces.
-2025-05-22 12:39:28 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
-				Tomcat initialized with port 8443 (https)
-2025-05-22 12:39:28 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol -
-				Initializing ProtocolHandler ["https-jsse-nio-8443"]
-2025-05-22 12:39:28 [restartedMain] INFO  o.a.catalina.core.StandardService -
-				Starting service [Tomcat]
-2025-05-22 12:39:28 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
-				Starting Servlet engine: [Apache Tomcat/10.1.31]
-2025-05-22 12:39:28 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
-				Initializing Spring embedded WebApplicationContext
-2025-05-22 12:39:28 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
-				Root WebApplicationContext: initialization completed in 533 ms
-2025-05-22 12:39:28 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
-				HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-05-22 12:39:28 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
-				HHH000026: Second-level cache disabled
-2025-05-22 12:39:28 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
-				No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-05-22 12:39:28 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
-				HikariPool-4 - Starting...
-2025-05-22 12:39:28 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
-				HikariPool-4 - Added connection ConnectionID:31 ClientConnectionId: 99592ed9-cda8-4d13-a0ad-90c657570192
-2025-05-22 12:39:28 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
-				HikariPool-4 - Start completed.
-2025-05-22 12:39:28 [restartedMain] WARN  org.hibernate.orm.deprecation -
-				HHH90000025: SQLServerDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-05-22 12:39:28 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
-				HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-05-22 12:39:29 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
-				Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-05-22 12:39:29 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
-				spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-05-22 12:39:29 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration -
-				
-
-Using generated security password: c91f2e76-6925-4ee3-847e-2f7755cac4f4
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-05-22 12:39:29 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer -
-				Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2025-05-22 12:39:29 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol -
-				Starting ProtocolHandler ["https-jsse-nio-8443"]
-2025-05-22 12:39:29 [restartedMain] INFO  o.a.t.u.net.NioEndpoint.certificate -
-				Connector [https-jsse-nio-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [C:\Users\Admin\.keystore] using alias [mycert] with trust store [null]
-2025-05-22 12:39:29 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
-				Tomcat started on port 8443 (https) with context path '/'
-2025-05-22 12:39:29 [restartedMain] INFO  vn.iotstar.AloTraApplication -
-				Started AloTraApplication in 1.651 seconds (process running for 1012.063)
-2025-05-22 12:39:29 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener -
-				Condition evaluation unchanged
-2025-05-22 12:39:33 [RMI TCP Connection(29)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin -
-				Application shutdown requested.
-2025-05-22 12:39:33 [RMI TCP Connection(29)-127.0.0.1] INFO  o.a.coyote.http11.Http11NioProtocol -
-				Stopping ProtocolHandler ["https-jsse-nio-8443"]
-2025-05-22 12:39:33 [RMI TCP Connection(29)-127.0.0.1] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
-				Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-05-22 12:39:33 [RMI TCP Connection(29)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource -
-				HikariPool-4 - Shutdown initiated...
-2025-05-22 12:39:33 [RMI TCP Connection(29)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource -
-				HikariPool-4 - Shutdown completed.
-2025-05-22 12:39:35 [background-preinit] INFO  o.h.validator.internal.util.Version -
+2025-05-27 22:40:06 [background-preinit] INFO  o.h.validator.internal.util.Version -
 				HV000001: Hibernate Validator 8.0.1.Final
-2025-05-22 12:39:35 [restartedMain] INFO  vn.iotstar.AloTraApplication -
-				Starting AloTraApplication using Java 22.0.2 with PID 2740 (C:\Users\Admin\Downloads\BMW_ProjectCK\target\classes started by Admin in C:\Users\Admin\Downloads\BMW_ProjectCK)
-2025-05-22 12:39:35 [restartedMain] INFO  vn.iotstar.AloTraApplication -
+2025-05-27 22:40:06 [restartedMain] INFO  vn.iotstar.AloTraApplication -
+				Starting AloTraApplication using Java 22.0.2 with PID 12216 (D:\BAOMATWEB\BMW_ProjectCK\target\classes started by Admin in D:\BAOMATWEB\BMW_ProjectCK)
+2025-05-27 22:40:06 [restartedMain] INFO  vn.iotstar.AloTraApplication -
 				No active profile set, falling back to 1 default profile: "default"
-2025-05-22 12:39:35 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+2025-05-27 22:40:06 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
 				Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-05-22 12:39:35 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
+2025-05-27 22:40:06 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
 				For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-05-22 12:39:36 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+2025-05-27 22:40:08 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
 				Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-05-22 12:39:36 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
-				Finished Spring Data repository scanning in 107 ms. Found 17 JPA repository interfaces.
-2025-05-22 12:39:37 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+2025-05-27 22:40:08 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+				Finished Spring Data repository scanning in 200 ms. Found 18 JPA repository interfaces.
+2025-05-27 22:40:10 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
 				Tomcat initialized with port 8443 (https)
-2025-05-22 12:39:37 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol -
+2025-05-27 22:40:10 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol -
 				Initializing ProtocolHandler ["https-jsse-nio-8443"]
-2025-05-22 12:39:37 [restartedMain] INFO  o.a.catalina.core.StandardService -
+2025-05-27 22:40:10 [restartedMain] INFO  o.a.catalina.core.StandardService -
 				Starting service [Tomcat]
-2025-05-22 12:39:37 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+2025-05-27 22:40:10 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
 				Starting Servlet engine: [Apache Tomcat/10.1.31]
-2025-05-22 12:39:37 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
+2025-05-27 22:40:10 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
 				Initializing Spring embedded WebApplicationContext
-2025-05-22 12:39:37 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
-				Root WebApplicationContext: initialization completed in 1661 ms
-2025-05-22 12:39:37 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+2025-05-27 22:40:10 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+				Root WebApplicationContext: initialization completed in 3521 ms
+2025-05-27 22:40:10 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
 				HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-05-22 12:39:37 [restartedMain] INFO  org.hibernate.Version -
+2025-05-27 22:40:10 [restartedMain] INFO  org.hibernate.Version -
 				HHH000412: Hibernate ORM core version 6.5.3.Final
-2025-05-22 12:39:37 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+2025-05-27 22:40:10 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
 				HHH000026: Second-level cache disabled
-2025-05-22 12:39:37 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+2025-05-27 22:40:10 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
 				No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-05-22 12:39:37 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+2025-05-27 22:40:10 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
 				HikariPool-1 - Starting...
-2025-05-22 12:39:37 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
-				HikariPool-1 - Added connection ConnectionID:1 ClientConnectionId: 1ac55fef-763b-496e-968f-fdaa6e6d19af
-2025-05-22 12:39:37 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+2025-05-27 22:40:11 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+				HikariPool-1 - Added connection ConnectionID:1 ClientConnectionId: 9df386d5-9900-4263-9614-303d1c0863a0
+2025-05-27 22:40:11 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
 				HikariPool-1 - Start completed.
-2025-05-22 12:39:37 [restartedMain] WARN  org.hibernate.orm.deprecation -
+2025-05-27 22:40:11 [restartedMain] WARN  org.hibernate.orm.deprecation -
 				HHH90000025: SQLServerDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-05-22 12:39:39 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+2025-05-27 22:40:14 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
 				HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-05-22 12:39:39 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+2025-05-27 22:40:16 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
 				Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-05-22 12:39:39 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory -
+2025-05-27 22:40:17 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory -
 				Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-05-22 12:39:40 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
-				spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-05-22 12:39:40 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration -
-				
-
-Using generated security password: 81aeeaa5-dc79-48be-84d0-181d14bee64e
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-05-22 12:39:40 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer -
-				Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2025-05-22 12:39:41 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol -
-				Starting ProtocolHandler ["https-jsse-nio-8443"]
-2025-05-22 12:39:41 [restartedMain] INFO  o.a.t.u.net.NioEndpoint.certificate -
-				Connector [https-jsse-nio-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [C:\Users\Admin\.keystore] using alias [mycert] with trust store [null]
-2025-05-22 12:39:41 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
-				Tomcat started on port 8443 (https) with context path '/'
-2025-05-22 12:39:41 [restartedMain] INFO  vn.iotstar.AloTraApplication -
-				Started AloTraApplication in 6.503 seconds (process running for 7.064)
-2025-05-22 12:40:03 [RMI TCP Connection(6)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin -
-				Application shutdown requested.
-2025-05-22 12:40:03 [RMI TCP Connection(6)-127.0.0.1] INFO  o.a.coyote.http11.Http11NioProtocol -
-				Stopping ProtocolHandler ["https-jsse-nio-8443"]
-2025-05-22 12:40:03 [RMI TCP Connection(6)-127.0.0.1] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+2025-05-27 22:40:19 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext -
+				Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'milkTeaTypeController': Lookup method resolution failed
+2025-05-27 22:40:19 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
 				Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-05-22 12:40:03 [RMI TCP Connection(6)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource -
+2025-05-27 22:40:19 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
 				HikariPool-1 - Shutdown initiated...
-2025-05-22 12:40:03 [RMI TCP Connection(6)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource -
+2025-05-27 22:40:19 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
 				HikariPool-1 - Shutdown completed.
-2025-05-22 12:48:58 [background-preinit] INFO  o.h.validator.internal.util.Version -
-				HV000001: Hibernate Validator 8.0.1.Final
-2025-05-22 12:48:58 [restartedMain] INFO  vn.iotstar.AloTraApplication -
-				Starting AloTraApplication using Java 22.0.2 with PID 10288 (C:\Users\Admin\Downloads\BMW_ProjectCK\target\classes started by Admin in C:\Users\Admin\Downloads\BMW_ProjectCK)
-2025-05-22 12:48:58 [restartedMain] INFO  vn.iotstar.AloTraApplication -
-				No active profile set, falling back to 1 default profile: "default"
-2025-05-22 12:48:58 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
-				Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-05-22 12:48:58 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
-				For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-05-22 12:48:59 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
-				Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-05-22 12:48:59 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
-				Finished Spring Data repository scanning in 94 ms. Found 17 JPA repository interfaces.
-2025-05-22 12:48:59 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
-				Tomcat initialized with port 8443 (https)
-2025-05-22 12:48:59 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol -
-				Initializing ProtocolHandler ["https-jsse-nio-8443"]
-2025-05-22 12:48:59 [restartedMain] INFO  o.a.catalina.core.StandardService -
-				Starting service [Tomcat]
-2025-05-22 12:48:59 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
-				Starting Servlet engine: [Apache Tomcat/10.1.31]
-2025-05-22 12:48:59 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
-				Initializing Spring embedded WebApplicationContext
-2025-05-22 12:48:59 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
-				Root WebApplicationContext: initialization completed in 1457 ms
-2025-05-22 12:49:00 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
-				HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-05-22 12:49:00 [restartedMain] INFO  org.hibernate.Version -
-				HHH000412: Hibernate ORM core version 6.5.3.Final
-2025-05-22 12:49:00 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
-				HHH000026: Second-level cache disabled
-2025-05-22 12:49:00 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
-				No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-05-22 12:49:00 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
-				HikariPool-1 - Starting...
-2025-05-22 12:49:00 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
-				HikariPool-1 - Added connection ConnectionID:1 ClientConnectionId: 03db1350-aa79-4fd6-94d7-12172482a5bc
-2025-05-22 12:49:00 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
-				HikariPool-1 - Start completed.
-2025-05-22 12:49:00 [restartedMain] WARN  org.hibernate.orm.deprecation -
-				HHH90000025: SQLServerDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-05-22 12:49:01 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
-				HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-05-22 12:49:02 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
-				Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-05-22 12:49:02 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory -
-				Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-05-22 12:49:03 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
-				spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-05-22 12:49:03 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration -
-				
-
-Using generated security password: 1723dced-b204-4b89-a428-7a37edba18d8
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-05-22 12:49:03 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer -
-				Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2025-05-22 12:49:03 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol -
-				Starting ProtocolHandler ["https-jsse-nio-8443"]
-2025-05-22 12:49:04 [restartedMain] INFO  o.a.t.u.net.NioEndpoint.certificate -
-				Connector [https-jsse-nio-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [C:\Users\Admin\.keystore] using alias [mycert] with trust store [null]
-2025-05-22 12:49:04 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
-				Tomcat started on port 8443 (https) with context path '/'
-2025-05-22 12:49:04 [restartedMain] INFO  vn.iotstar.AloTraApplication -
-				Started AloTraApplication in 6.203 seconds (process running for 6.755)
-2025-05-22 12:49:38 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener -
-				Restarting due to 361 class path changes (0 additions, 245 deletions, 116 modifications)
-2025-05-22 12:49:38 [Thread-1] INFO  o.a.coyote.http11.Http11NioProtocol -
-				Stopping ProtocolHandler ["https-jsse-nio-8443"]
-2025-05-22 12:49:38 [Thread-1] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
-				Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-05-22 12:49:38 [Thread-1] INFO  com.zaxxer.hikari.HikariDataSource -
-				HikariPool-1 - Shutdown initiated...
-2025-05-22 12:49:38 [Thread-1] INFO  com.zaxxer.hikari.HikariDataSource -
-				HikariPool-1 - Shutdown completed.
-2025-05-22 12:55:21 [restartedMain] INFO  vn.iotstar.AloTraApplication -
-				Starting AloTraApplication using Java 22.0.2 with PID 10288 (C:\Users\Admin\Downloads\BMW_ProjectCK\target\classes started by Admin in C:\Users\Admin\Downloads\BMW_ProjectCK)
-2025-05-22 12:55:21 [restartedMain] INFO  vn.iotstar.AloTraApplication -
-				No active profile set, falling back to 1 default profile: "default"
-2025-05-22 12:55:21 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
-				Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-05-22 12:55:21 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
-				Finished Spring Data repository scanning in 53 ms. Found 18 JPA repository interfaces.
-2025-05-22 12:55:21 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
-				Tomcat initialized with port 8443 (https)
-2025-05-22 12:55:21 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol -
-				Initializing ProtocolHandler ["https-jsse-nio-8443"]
-2025-05-22 12:55:21 [restartedMain] INFO  o.a.catalina.core.StandardService -
-				Starting service [Tomcat]
-2025-05-22 12:55:21 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
-				Starting Servlet engine: [Apache Tomcat/10.1.31]
-2025-05-22 12:55:21 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
-				Initializing Spring embedded WebApplicationContext
-2025-05-22 12:55:21 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
-				Root WebApplicationContext: initialization completed in 500 ms
-2025-05-22 12:55:21 [restartedMain] ERROR o.s.b.w.e.tomcat.TomcatStarter -
-				Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'jwtAuthenticationFilter': Unsatisfied dependency expressed through field 'jwtTokenProvider': Error creating bean with name 'jwtTokenProvider': Lookup method resolution failed
-2025-05-22 12:55:21 [restartedMain] INFO  o.a.catalina.core.StandardService -
+2025-05-27 22:40:19 [restartedMain] INFO  o.a.catalina.core.StandardService -
 				Stopping service [Tomcat]
-2025-05-22 12:55:21 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext -
-				Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
-2025-05-22 12:55:21 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger -
+2025-05-27 22:40:19 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger -
 				
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2025-05-22 12:55:21 [restartedMain] ERROR o.s.boot.SpringApplication -
+2025-05-27 22:40:19 [restartedMain] ERROR o.s.boot.SpringApplication -
 				Application run failed
-org.springframework.context.ApplicationContextException: Unable to start web server
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:165)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:619)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
-	at vn.iotstar.AloTraApplication.main(AloTraApplication.java:14)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:147)
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:107)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:516)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:222)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:188)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162)
-	... 11 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtAuthenticationFilter': Unsatisfied dependency expressed through field 'jwtTokenProvider': Error creating bean with name 'jwtTokenProvider': Lookup method resolution failed
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:788)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1439)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:211)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:174)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:169)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:154)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:87)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:266)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:240)
-	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:52)
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4412)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
-	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:772)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
-	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:203)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:415)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:870)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:437)
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:128)
-	... 16 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jwtTokenProvider': Lookup method resolution failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'milkTeaTypeController': Lookup method resolution failed
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.checkLookupMethods(AutowiredAnnotationBeanPostProcessor.java:498)
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:368)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors(AbstractAutowireCapableBeanFactory.java:1314)
@@ -330,23 +73,31 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
-	... 58 common frames omitted
-Caused by: java.lang.IllegalStateException: Failed to introspect Class [vn.iotstar.configs.JwtTokenProvider] from ClassLoader [org.springframework.boot.devtools.restart.classloader.RestartClassLoader@38159389]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:971)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at vn.iotstar.AloTraApplication.main(AloTraApplication.java:14)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: java.lang.IllegalStateException: Failed to introspect Class [vn.iotstar.controllers.admin.MilkTeaTypeController] from ClassLoader [org.springframework.boot.devtools.restart.classloader.RestartClassLoader@e493c34]
 	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:483)
 	at org.springframework.util.ReflectionUtils.doWithLocalMethods(ReflectionUtils.java:320)
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.checkLookupMethods(AutowiredAnnotationBeanPostProcessor.java:476)
-	... 71 common frames omitted
-Caused by: java.lang.NoClassDefFoundError: io/jsonwebtoken/ExpiredJwtException
+	... 22 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: vn/iotstar/model/MilkTeaTypeModel
 	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
 	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3601)
 	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2686)
 	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:465)
-	... 73 common frames omitted
-Caused by: java.lang.ClassNotFoundException: io.jsonwebtoken.ExpiredJwtException
+	... 24 common frames omitted
+Caused by: java.lang.ClassNotFoundException: vn.iotstar.model.MilkTeaTypeModel
 	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
 	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
 	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
@@ -355,410 +106,4 @@ Caused by: java.lang.ClassNotFoundException: io.jsonwebtoken.ExpiredJwtException
 	at java.base/java.lang.Class.forName(Class.java:508)
 	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:121)
 	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
-	... 77 common frames omitted
-2025-05-22 12:55:25 [background-preinit] INFO  o.h.validator.internal.util.Version -
-				HV000001: Hibernate Validator 8.0.1.Final
-2025-05-22 12:55:25 [restartedMain] INFO  vn.iotstar.AloTraApplication -
-				Starting AloTraApplication using Java 22.0.2 with PID 21060 (C:\Users\Admin\Downloads\BMW_ProjectCK\target\classes started by Admin in C:\Users\Admin\Downloads\BMW_ProjectCK)
-2025-05-22 12:55:25 [restartedMain] INFO  vn.iotstar.AloTraApplication -
-				No active profile set, falling back to 1 default profile: "default"
-2025-05-22 12:55:25 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
-				Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-05-22 12:55:25 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -
-				For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-05-22 12:55:26 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
-				Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-05-22 12:55:26 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
-				Finished Spring Data repository scanning in 98 ms. Found 18 JPA repository interfaces.
-2025-05-22 12:55:26 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
-				Tomcat initialized with port 8443 (https)
-2025-05-22 12:55:26 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol -
-				Initializing ProtocolHandler ["https-jsse-nio-8443"]
-2025-05-22 12:55:26 [restartedMain] INFO  o.a.catalina.core.StandardService -
-				Starting service [Tomcat]
-2025-05-22 12:55:26 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
-				Starting Servlet engine: [Apache Tomcat/10.1.31]
-2025-05-22 12:55:26 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] -
-				Initializing Spring embedded WebApplicationContext
-2025-05-22 12:55:26 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
-				Root WebApplicationContext: initialization completed in 1371 ms
-2025-05-22 12:55:27 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
-				HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-05-22 12:55:27 [restartedMain] INFO  org.hibernate.Version -
-				HHH000412: Hibernate ORM core version 6.5.3.Final
-2025-05-22 12:55:27 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
-				HHH000026: Second-level cache disabled
-2025-05-22 12:55:27 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
-				No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-05-22 12:55:27 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
-				HikariPool-1 - Starting...
-2025-05-22 12:55:28 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper -
-				SQL Error: 18456, SQLState: S0001
-2025-05-22 12:55:28 [restartedMain] ERROR o.h.e.jdbc.spi.SqlExceptionHelper -
-				Login failed for user 'sa'. ClientConnectionId:e2e511fc-6760-422f-8b55-a5a170a069c2
-2025-05-22 12:55:28 [restartedMain] WARN  o.h.e.j.e.i.JdbcEnvironmentInitiator -
-				HHH000342: Could not obtain connection to query metadata
-org.hibernate.exception.SQLGrammarException: unable to obtain isolated JDBC connection [Login failed for user 'sa'. ClientConnectionId:e2e511fc-6760-422f-8b55-a5a170a069c2] [n/a]
-	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:91)
-	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
-	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
-	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94)
-	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:116)
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:292)
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:124)
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:78)
-	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
-	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45)
-	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:221)
-	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:189)
-	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:171)
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1431)
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1502)
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1802)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:682)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:509)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1355)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1185)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1705)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1454)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:904)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:782)
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:237)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1375)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1212)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1439)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:211)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:174)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:169)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:154)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:87)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:266)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:240)
-	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:52)
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4412)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
-	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:772)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
-	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:203)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:415)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:870)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:437)
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:128)
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:107)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:516)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:222)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:188)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:619)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
-	at vn.iotstar.AloTraApplication.main(AloTraApplication.java:14)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Login failed for user 'sa'. ClientConnectionId:e2e511fc-6760-422f-8b55-a5a170a069c2
-	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:261)
-	at com.microsoft.sqlserver.jdbc.TDSTokenHandler.onEOF(tdsparser.java:305)
-	at com.microsoft.sqlserver.jdbc.TDSParser.parse(tdsparser.java:137)
-	at com.microsoft.sqlserver.jdbc.TDSParser.parse(tdsparser.java:42)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection.sendLogon(SQLServerConnection.java:6864)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection.logon(SQLServerConnection.java:5411)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection$LogonCommand.doExecute(SQLServerConnection.java:5343)
-	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7718)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:4393)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connectHelper(SQLServerConnection.java:3830)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection.login(SQLServerConnection.java:3355)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connectInternal(SQLServerConnection.java:3180)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connect(SQLServerConnection.java:1963)
-	at com.microsoft.sqlserver.jdbc.SQLServerDriver.connect(SQLServerDriver.java:1259)
-	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:137)
-	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:360)
-	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202)
-	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:461)
-	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:550)
-	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:98)
-	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
-	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:439)
-	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:61)
-	... 124 common frames omitted
-2025-05-22 12:55:28 [restartedMain] WARN  org.hibernate.orm.deprecation -
-				HHH90000025: SQLServerDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-05-22 12:55:29 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
-				HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-05-22 12:55:29 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
-				HikariPool-1 - Starting...
-2025-05-22 12:55:30 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper -
-				SQL Error: 18456, SQLState: S0001
-2025-05-22 12:55:30 [restartedMain] ERROR o.h.e.jdbc.spi.SqlExceptionHelper -
-				Login failed for user 'sa'. ClientConnectionId:0b5b257a-ce22-4b86-88c5-7c5f97290a3c
-2025-05-22 12:55:30 [restartedMain] ERROR o.s.o.j.LocalContainerEntityManagerFactoryBean -
-				Failed to initialize JPA EntityManagerFactory: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.SQLGrammarException: Unable to open JDBC Connection for DDL execution [Login failed for user 'sa'. ClientConnectionId:0b5b257a-ce22-4b86-88c5-7c5f97290a3c] [n/a]
-2025-05-22 12:55:30 [restartedMain] ERROR o.s.b.w.e.tomcat.TomcatStarter -
-				Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'jwtAuthenticationFilter': Unsatisfied dependency expressed through field 'userDetailsService': Error creating bean with name 'userServiceImpl' defined in file [C:\Users\Admin\Downloads\BMW_ProjectCK\target\classes\vn\iotstar\services\impl\UserServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in vn.iotstar.repository.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
-2025-05-22 12:55:30 [restartedMain] INFO  o.a.catalina.core.StandardService -
-				Stopping service [Tomcat]
-2025-05-22 12:55:30 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext -
-				Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
-2025-05-22 12:55:30 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger -
-				
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2025-05-22 12:55:30 [restartedMain] ERROR o.s.boot.SpringApplication -
-				Application run failed
-org.springframework.context.ApplicationContextException: Unable to start web server
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:165)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:619)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
-	at vn.iotstar.AloTraApplication.main(AloTraApplication.java:14)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:147)
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:107)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:516)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:222)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:188)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162)
-	... 11 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtAuthenticationFilter': Unsatisfied dependency expressed through field 'userDetailsService': Error creating bean with name 'userServiceImpl' defined in file [C:\Users\Admin\Downloads\BMW_ProjectCK\target\classes\vn\iotstar\services\impl\UserServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in vn.iotstar.repository.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:788)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1439)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:211)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:174)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:169)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:154)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:87)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:266)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:240)
-	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:52)
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4412)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
-	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:772)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
-	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:203)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:415)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:870)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:437)
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:128)
-	... 16 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userServiceImpl' defined in file [C:\Users\Admin\Downloads\BMW_ProjectCK\target\classes\vn\iotstar\services\impl\UserServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in vn.iotstar.repository.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:795)
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:237)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1375)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1212)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
-	... 58 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in vn.iotstar.repository.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1705)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1454)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:904)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:782)
-	... 71 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaSharedEM_entityManagerFactory': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:682)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:509)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1355)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1185)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365)
-	... 85 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.SQLGrammarException: Unable to open JDBC Connection for DDL execution [Login failed for user 'sa'. ClientConnectionId:0b5b257a-ce22-4b86-88c5-7c5f97290a3c] [n/a]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1806)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365)
-	... 97 common frames omitted
-Caused by: jakarta.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.SQLGrammarException: Unable to open JDBC Connection for DDL execution [Login failed for user 'sa'. ClientConnectionId:0b5b257a-ce22-4b86-88c5-7c5f97290a3c] [n/a]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:421)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1802)
-	... 104 common frames omitted
-Caused by: org.hibernate.exception.SQLGrammarException: Unable to open JDBC Connection for DDL execution [Login failed for user 'sa'. ClientConnectionId:0b5b257a-ce22-4b86-88c5-7c5f97290a3c] [n/a]
-	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:91)
-	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
-	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
-	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94)
-	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:74)
-	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:39)
-	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcConnection(ImprovedExtractionContextImpl.java:63)
-	at org.hibernate.tool.schema.extract.spi.ExtractionContext.getQueryResults(ExtractionContext.java:43)
-	at org.hibernate.tool.schema.extract.internal.SequenceInformationExtractorLegacyImpl.extractMetadata(SequenceInformationExtractorLegacyImpl.java:39)
-	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.initializeSequences(DatabaseInformationImpl.java:66)
-	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.<init>(DatabaseInformationImpl.java:60)
-	at org.hibernate.tool.schema.internal.Helper.buildDatabaseInformation(Helper.java:185)
-	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:100)
-	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:280)
-	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144)
-	at java.base/java.util.HashMap.forEach(HashMap.java:1429)
-	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141)
-	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
-	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
-	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:322)
-	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:457)
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1506)
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
-	... 108 common frames omitted
-Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Login failed for user 'sa'. ClientConnectionId:0b5b257a-ce22-4b86-88c5-7c5f97290a3c
-	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:261)
-	at com.microsoft.sqlserver.jdbc.TDSTokenHandler.onEOF(tdsparser.java:305)
-	at com.microsoft.sqlserver.jdbc.TDSParser.parse(tdsparser.java:137)
-	at com.microsoft.sqlserver.jdbc.TDSParser.parse(tdsparser.java:42)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection.sendLogon(SQLServerConnection.java:6864)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection.logon(SQLServerConnection.java:5411)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection$LogonCommand.doExecute(SQLServerConnection.java:5343)
-	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7718)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:4393)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connectHelper(SQLServerConnection.java:3830)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection.login(SQLServerConnection.java:3355)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connectInternal(SQLServerConnection.java:3180)
-	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connect(SQLServerConnection.java:1963)
-	at com.microsoft.sqlserver.jdbc.SQLServerDriver.connect(SQLServerDriver.java:1259)
-	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:137)
-	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:360)
-	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202)
-	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:461)
-	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:550)
-	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:98)
-	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
-	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:439)
-	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:46)
-	... 128 common frames omitted
+	... 28 common frames omitted

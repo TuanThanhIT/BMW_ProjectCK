@@ -63,3 +63,5 @@ public class SecurityConfig {
 		return http.build();
 	}
 }
+
+// Có thể xóa unsafe-inline nếu không cần thiết để chống XSS
